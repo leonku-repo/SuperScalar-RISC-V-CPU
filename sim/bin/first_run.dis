@@ -1,0 +1,41 @@
+
+/home/leon/RTL_Design/err_cpu/bin/../sim/bin/first_run.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+60000000 <_start>:
+60000000:	00100093          	li	x1,1
+60000004:	00200113          	li	x2,2
+60000008:	002081b3          	add	x3,x1,x2
+6000000c:	00218233          	add	x4,x3,x2
+60000010:	fff00293          	li	x5,-1
+60000014:	00001337          	lui	x6,0x1
+60000018:	00000a17          	auipc	x20,0x0
+6000001c:	03ca0a13          	addi	x20,x20,60 # 60000054 <_text_vma_end>
+60000020:	02a00a93          	li	x21,42
+60000024:	015a2023          	sw	x21,0(x20)
+60000028:	000a2383          	lw	x7,0(x20)
+6000002c:	00100413          	li	x8,1
+60000030:	00208e63          	beq	x1,x2,6000004c <wrong_branch>
+60000034:	00000493          	li	x9,0
+60000038:	00108663          	beq	x1,x1,60000044 <branch_target>
+6000003c:	00000493          	li	x9,0
+60000040:	f0002013          	slti	x0,x0,-256
+
+60000044 <branch_target>:
+60000044:	06300493          	li	x9,99
+60000048:	f0002013          	slti	x0,x0,-256
+
+6000004c <wrong_branch>:
+6000004c:	00000413          	li	x8,0
+60000050:	f0002013          	slti	x0,x0,-256
+
+Disassembly of section .data:
+
+60000060 <_data_vma_start-0xa0>:
+	...
+
+60000100 <_data_vma_start>:
+60000100:	0000                	.insn	2, 0x
+	...

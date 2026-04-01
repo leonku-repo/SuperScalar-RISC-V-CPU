@@ -1,0 +1,49 @@
+
+/home/leon/Out-Of-Order-master/mp_ooo/RTL_TEMPLATE/bin/../sim/bin/easycase.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+60000000 <_start>:
+60000000:	00000297          	auipc	x5,0x0
+60000004:	10028293          	addi	x5,x5,256 # 60000100 <_data_vma_start>
+60000008:	600045b7          	lui	x11,0x60004
+6000000c:	37458593          	addi	x11,x11,884 # 60004374 <_bss_vma_end+0x4254>
+60000010:	000026b7          	lui	x13,0x2
+60000014:	42468693          	addi	x13,x13,1060 # 2424 <_start-0x5fffdbdc>
+60000018:	600048b7          	lui	x17,0x60004
+6000001c:	44c88893          	addi	x17,x17,1100 # 6000444c <_bss_vma_end+0x432c>
+60000020:	60004837          	lui	x16,0x60004
+60000024:	41080813          	addi	x16,x16,1040 # 60004410 <_bss_vma_end+0x42f0>
+60000028:	01700e93          	li	x29,23
+6000002c:	10800f93          	li	x31,264
+60000030:	00d2a023          	sw	x13,0(x5)
+60000034:	00d29223          	sh	x13,4(x5)
+60000038:	00d28323          	sb	x13,6(x5)
+6000003c:	0002a303          	lw	x6,0(x5)
+60000040:	00429383          	lh	x7,4(x5)
+60000044:	00628403          	lb	x8,6(x5)
+60000048:	00839463          	bne	x7,x8,60000050 <no_match>
+6000004c:	f0002013          	slti	x0,x0,-256
+
+60000050 <no_match>:
+60000050:	00168693          	addi	x13,x13,1
+60000054:	00d2a023          	sw	x13,0(x5)
+60000058:	00188893          	addi	x17,x17,1
+6000005c:	0112a423          	sw	x17,8(x5)
+60000060:	0082a483          	lw	x9,8(x5)
+60000064:	01f49863          	bne	x9,x31,60000074 <skip>
+60000068:	00148493          	addi	x9,x9,1
+6000006c:	0092a423          	sw	x9,8(x5)
+60000070:	f0002013          	slti	x0,x0,-256
+
+60000074 <skip>:
+60000074:	f0002013          	slti	x0,x0,-256
+
+Disassembly of section .data:
+
+60000080 <_data_vma_start-0x80>:
+	...
+
+60000100 <_data_vma_start>:
+	...

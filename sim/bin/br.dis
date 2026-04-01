@@ -1,0 +1,32 @@
+
+/home/leon/Out-Of-Order-master/mp_ooo/RTL_TEMPLATE/bin/../sim/bin/br.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+60000000 <_start>:
+60000000:	00400093          	li	x1,4
+60000004:	00400113          	li	x2,4
+60000008:	00800193          	li	x3,8
+6000000c:	024003ef          	jal	x7,60000030 <subroutine>
+60000010:	06400413          	li	x8,100
+60000014:	00208663          	beq	x1,x2,60000020 <label_equal>
+60000018:	00308863          	beq	x1,x3,60000028 <label_not_equal>
+6000001c:	f0002013          	slti	x0,x0,-256
+
+60000020 <label_equal>:
+60000020:	0cf00393          	li	x7,207
+60000024:	f0002013          	slti	x0,x0,-256
+
+60000028 <label_not_equal>:
+60000028:	0ce00393          	li	x7,206
+6000002c:	f0002013          	slti	x0,x0,-256
+
+60000030 <subroutine>:
+60000030:	05a00493          	li	x9,90
+60000034:	000387e7          	jalr	x15,x7
+
+Disassembly of section .data:
+
+60000038 <_data_vma_end-0xc8>:
+	...

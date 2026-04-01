@@ -1,0 +1,212 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Tue Mar 24 05:19:49 2026
+[*]
+[dumpfile] "/home/leon/RTL_Design/err_cpu/sim/wave.vcd"
+[dumpfile_mtime] "Tue Mar 24 05:10:11 2026"
+[dumpfile_size] 3508991
+[savefile] "/home/leon/RTL_Design/err_cpu/sim/signals.gtkw"
+[timestart] 381
+[size] 2560 1333
+[pos] -27 -24
+*-1.000000 386 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.top_tb.
+[treeopen] TOP.top_tb.dut.
+[treeopen] TOP.top_tb.dut.cpu_commit.
+[treeopen] TOP.top_tb.dut.cpu_commit.arat.
+[treeopen] TOP.top_tb.dut.cpu_execute.
+[treeopen] TOP.top_tb.dut.cpu_execute.alu.
+[treeopen] TOP.top_tb.dut.cpu_execute.mem.
+[treeopen] TOP.top_tb.dut.cpu_execute.mem.ROB_data_o.
+[treeopen] TOP.top_tb.dut.cpu_frontend.fetch_queue.branch_taken_fifo.
+[treeopen] TOP.top_tb.dut.cpu_midcore.decode.
+[treeopen] TOP.top_tb.dut.cpu_midcore.rename2.
+[treeopen] TOP.top_tb.dut.cpu_midcore.srat.
+[sst_width] 377
+[signals_width] 345
+[sst_expanded] 1
+[sst_vpaned_height] 661
+@24
+TOP.top_tb.dut.monitor_order[63:0]
+@22
+TOP.top_tb.dut.monitor_pc_rdata[31:0]
+TOP.top_tb.dut.monitor_inst[31:0]
+@24
+TOP.top_tb.dut.monitor_rd_addr[4:0]
+@22
+TOP.top_tb.dut.monitor_rd_wdata[31:0]
+@24
+TOP.top_tb.dut.monitor_rs1_addr[4:0]
+@22
+TOP.top_tb.dut.monitor_rs1_rdata[31:0]
+@24
+TOP.top_tb.dut.monitor_rs2_addr[4:0]
+@22
+TOP.top_tb.dut.monitor_rs2_rdata[31:0]
+@28
+TOP.top_tb.dut.monitor_valid
+TOP.top_tb.dut.cpu_commit.commit
+TOP.top_tb.dut.cpu_commit.rob.rd_en
+@24
+TOP.top_tb.dut.cpu_commit.rob.rdPtr_o[3:0]
+@200
+-
+@28
+TOP.top_tb.dut.cpu_frontend.fetch.clk
+TOP.top_tb.dut.cpu_frontend.fetch.rst
+TOP.top_tb.dut.cpu_frontend.fetch.flush
+@200
+-
+-fetch
+@22
+TOP.top_tb.dut.cpu_frontend.fetch.pc[31:0]
+TOP.top_tb.dut.cpu_frontend.fetch.pc_next[31:0]
+@200
+-
+@28
+TOP.top_tb.dut.cpu_frontend.fetch.imem_read
+@22
+TOP.top_tb.dut.cpu_frontend.fetch.imem_addr[31:0]
+TOP.top_tb.dut.cpu_frontend.fetch.imem_rdata[31:0]
+@28
+TOP.top_tb.dut.cpu_frontend.fetch.imem_resp
+@200
+-
+-fetch Q
+@28
+TOP.top_tb.dut.cpu_frontend.fetch_queue.rd_en
+@22
+TOP.top_tb.dut.cpu_frontend.fetch_queue.pc_o[31:0]
+TOP.top_tb.dut.cpu_frontend.fetch_queue.inst_o[31:0]
+@200
+-
+@28
+TOP.top_tb.dut.cpu_midcore.stall
+TOP.top_tb.dut.cpu_midcore.stall_alu_full
+TOP.top_tb.dut.cpu_midcore.stall_cmp_full
+TOP.top_tb.dut.cpu_midcore.stall_jump_full
+TOP.top_tb.dut.cpu_midcore.stall_load_full
+TOP.top_tb.dut.cpu_midcore.stall_mul_full
+TOP.top_tb.dut.cpu_midcore.stall_no_free_pr
+TOP.top_tb.dut.cpu_midcore.stall_rob_full
+TOP.top_tb.dut.cpu_midcore.stall_store_full
+TOP.top_tb.dut.cpu_midcore.empty_i
+@200
+-decode_o
+@22
+TOP.top_tb.dut.cpu_midcore.decode.ROB_decode_o.pc[31:0]
+TOP.top_tb.dut.cpu_midcore.decode.imm_o[31:0]
+@28
+TOP.top_tb.dut.cpu_midcore.decode.ROB_decode_o.valid
+@200
+-rename1_reg
+@22
+TOP.top_tb.dut.cpu_midcore.ROB_rename1_reg.pc[31:0]
+@28
+TOP.top_tb.dut.cpu_midcore.ROB_rename1_reg.valid
+@24
+TOP.top_tb.dut.cpu_midcore.MIDCORE_rename1_reg.pr1[5:0]
+TOP.top_tb.dut.cpu_midcore.MIDCORE_rename1_reg.pr2[5:0]
+@200
+-Rename2_o
+@22
+TOP.top_tb.dut.cpu_midcore.ROB_rename2_o.pc[31:0]
+@28
+TOP.top_tb.dut.cpu_midcore.ROB_rename2_o.valid
+@22
+TOP.top_tb.dut.cpu_midcore.ROB_rename2_o.rob_entry[3:0]
+@200
+-rename2_reg
+@800022
+TOP.top_tb.dut.cpu_midcore.ROB_rename2_reg.pc[31:0]
+@1001200
+-group_end
+@22
+TOP.top_tb.dut.cpu_midcore.ROB_rename2_reg.inst[31:0]
+@200
+-
+-ROB_i
+@22
+TOP.top_tb.dut.cpu_commit.rob_data_i.pc[31:0]
+@28
+TOP.top_tb.dut.cpu_commit.rob_data_i.valid
+TOP.top_tb.dut.cpu_commit.rob.full_o
+@200
+-
+-wb_alu
+@28
+TOP.top_tb.dut.cpu_commit.rob.alu_ROB_exec_i.done
+@800024
+TOP.top_tb.dut.cpu_commit.rob.alu_ROB_exec_i.rob_entry[3:0]
+@1001200
+-group_end
+@200
+-
+-wb_cmp
+@28
+TOP.top_tb.dut.cpu_commit.rob.cmp_ROB_exec_i.done
+@22
+TOP.top_tb.dut.cpu_commit.rob.cmp_ROB_exec_i.rob_entry[3:0]
+@200
+-wb_jump
+@28
+TOP.top_tb.dut.cpu_commit.rob.jump_ROB_exec_i.done
+@22
+TOP.top_tb.dut.cpu_commit.rob.jump_ROB_exec_i.rob_entry[3:0]
+@200
+-wb_mem
+@28
+TOP.top_tb.dut.cpu_commit.rob.mem_ROB_exec_i.done
+@22
+TOP.top_tb.dut.cpu_commit.rob.mem_ROB_exec_i.rob_entry[3:0]
+@200
+-
+-
+-mul_rs
+@28
+TOP.top_tb.dut.cpu_execute.mul_rs.wr_en
+@200
+-alu_rs
+@28
+TOP.top_tb.dut.cpu_execute.alu_rs.wr_en
+@22
+TOP.top_tb.dut.cpu_execute.alu_rs.ROB_data_i.pc[31:0]
+@200
+-cmp_rs
+@28
+TOP.top_tb.dut.cpu_execute.cmp_rs.wr_en
+@200
+-jump_rs
+@28
+TOP.top_tb.dut.cpu_execute.jump_rs.wr_en
+@200
+-lsq_rs
+@28
+TOP.top_tb.dut.cpu_execute.lsq.wr_en
+@200
+-mem
+@22
+TOP.top_tb.dut.cpu_execute.mem.ROB_data_i.pc[31:0]
+TOP.top_tb.dut.cpu_execute.mem.ROB_data_i.inst[31:0]
+@28
+TOP.top_tb.dut.cpu_execute.mem.done
+@200
+-
+@28
+TOP.top_tb.dut.cpu_execute.mem.dmem_read
+TOP.top_tb.dut.cpu_execute.mem.dmem_write
+TOP.top_tb.dut.cpu_execute.mem.empty_i
+TOP.top_tb.dut.cpu_execute.mem.READY_i
+TOP.top_tb.dut.cpu_execute.mem.done
+TOP.top_tb.dut.cpu_execute.mem.empty_i
+@29
+TOP.top_tb.dut.cpu_execute.mem.LDorST_i
+@28
+TOP.top_tb.dut.cpu_execute.mem.store_committed
+TOP.top_tb.dut.cpu_execute.mem.dmem_resp
+TOP.top_tb.dut.cpu_execute.mem.store_match
+@200
+-
+[pattern_trace] 1
+[pattern_trace] 0
