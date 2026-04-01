@@ -10,7 +10,7 @@ Verified using the RTL_TEMPLATE Verilator environment with riscv-formal RVFI che
 ### Design Goals
 - Explicit register renaming — eliminate WAR/WAW hazards
 - In-order commit — precise architectural state, correct RVFI reporting
-- Speculative execution with always-not-taken branch prediction
+- Speculative execution with TAGE branch predictor + BTB
 - Single-issue (1-wide) — scalable to multi-issue later
 - Commit-time branch recovery
 - Deterministic rename timing — free bit vector + priority encoder
@@ -34,11 +34,11 @@ Fetch Queue     8 entries — decouples frontend from backend stalls
   Rename 2      allocate PR / ROB / RS or LSQ, update SRAT, BT, free_bits
   + Dispatch
      ↓
-  ┌──────────────────────────┐
-  │ RS (ALU + Branch)        │   LQ / SQ (memory ops)
-  └──────────────────────────┘
+  ┌─────────────────────────────────────────┐
+  │ RS: ALU(4) / CMP(2) / Jump(2) / MUL(4) │   LQ(8) / SQ(8) (memory ops)
+  └─────────────────────────────────────────┘
      ↓  (out-of-order issue from RS; in-order conservative from LSQ)
-  Execute       ALU (1 cycle) / LSU (MEM_DELAY+1 cycles)
+  Execute       ALU/CMP/Jump/MUL (1 cycle) / LSU (MEM_DELAY+1 cycles)
      ↓
  Writeback      PRF write, BT clear, ROB update, RS wakeup
      ↓
@@ -54,7 +54,10 @@ Fetch Queue     8 entries — decouples frontend from backend stalls
 | Fetch Queue (FQ)       | 8       | 3 bits      |
 | Physical Register File | 64      | 6 bits      |
 | Reorder Buffer (ROB)   | 16      | 4 bits      |
-| Reservation Station    | 8       | 3 bits      |
+| ALU Reservation Station | 4      | 2 bits      |
+| CMP Reservation Station | 2      | 1 bit       |
+| Jump Reservation Station| 2      | 1 bit       |
+| MUL Reservation Station | 4      | 2 bits      |
 | Store Queue (SQ)       | 8       | 3 bits      |
 | Load Queue (LQ)        | 8       | 3 bits      |
 | SRAT / ARAT            | 32      | 5 bits (arch reg index) |
@@ -72,7 +75,7 @@ FQEntry {
     valid       : 1
     pc          : 32
     inst        : 32
-    pred_taken  : 1      // always 0 (always-not-taken prediction)
+    pred_taken  : 1      // TAGE prediction: 1=taken, 0=not-taken
 }
 ```
 
@@ -180,11 +183,13 @@ ROBEntry {
     mem_rdata       : 32     // filled when load completes
     mem_wdata       : 32     // filled when store address+data are computed
 
-    // Branch — written at Writeback
-    is_branch       : 1
-    mispredict      : 1      // resolved_taken != pred_taken
-    pred_taken      : 1      // always 0 in current design
-    target_pc       : 32     // resolved correct PC; 0 at dispatch, written at writeback
+    // Branch — set at Decode/Dispatch; resolved at Writeback
+    is_branch            : 1   // instruction is a conditional branch
+    is_jump              : 1   // instruction is JAL or JALR
+    pred_taken           : 1   // prediction from TAGE at fetch time
+    mispredict           : 1   // resolved_taken != pred_taken OR target mismatch
+    target_pc            : 32  // resolved correct PC; 0 at dispatch, written at writeback
+    branch_actual_taken  : 1   // actual branch outcome (written at writeback by CMP/Jump)
 }
 ```
 
@@ -192,16 +197,22 @@ Total: ~330 bits per entry × 16 entries.
 
 ---
 
-### 4.7 Reservation Station (RS)
+### 4.7 Reservation Stations (RS)
 
-Holds ALU and branch instructions only. Memory instructions go to LQ/SQ directly.
+There are four separate RS, one per functional unit. Memory instructions go to LQ/SQ directly.
+
+| RS       | Size | Instructions         |
+|----------|------|----------------------|
+| ALU RS   | 4    | ADD, SUB, LUI, AUIPC, ADDI, etc. |
+| CMP RS   | 2    | BEQ, BNE, BLT, BGE, BLTU, BGEU |
+| Jump RS  | 2    | JAL, JALR            |
+| MUL RS   | 4    | MUL, MULH, DIV, REM, etc. (M-ext) |
+
+All RS share the same entry structure:
 
 ```
 RSEntry {
     valid       : 1
-    op          : 5          // instruction operation (see Section 5)
-    imm         : 32
-
     rob_idx     : 4
 
     src0_valid  : 1          // instruction reads rs1
@@ -214,6 +225,8 @@ RSEntry {
 
     dest_valid  : 1          // instruction writes rd
     dest_tag    : 6          // new_p allocated at rename
+
+    // Plus full ROB_t and MIDCORE_t snapshots for execution
 }
 ```
 
@@ -262,20 +275,37 @@ LQEntry {
 
 ---
 
-## 5. Operation Encoding (op field in RS)
+## 5. Operation Encoding
 
-To be defined in RTL. Must cover:
+### ALU op (4-bit, `alu_ops` enum in types.sv)
 
-| Category | Instructions |
-|----------|-------------|
-| ALU reg-imm | ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI |
-| ALU reg-reg | ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND |
-| Upper imm | LUI, AUIPC |
-| Branch | BEQ, BNE, BLT, BGE, BLTU, BGEU |
-| Jump | JAL, JALR |
+| Value    | Operation |
+|----------|-----------|
+| 4'b0000  | ADD       |
+| 4'b1000  | SUB       |
+| 4'b0001  | SLL       |
+| 4'b0010  | SLT       |
+| 4'b0011  | SLTU      |
+| 4'b0100  | XOR       |
+| 4'b0101  | SRL       |
+| 4'b1101  | SRA       |
+| 4'b0110  | OR        |
+| 4'b0111  | AND       |
 
-Memory instructions (loads/stores) do not need an op in the RS — they go to LQ/SQ.
-The LSU determines access size (byte/half/word) from funct3, stored in LQ/SQ rmask/wmask.
+### Dispatch routing (`dispatch_to` field, set at Decode)
+
+| Value | Functional Unit | Instructions |
+|-------|----------------|--------------|
+| 0     | ALU RS         | op_reg, op_imm, op_lui, op_auipc |
+| 1     | CMP RS         | op_br (conditional branches) |
+| 2     | LQ             | op_load |
+| 3     | SQ             | op_store |
+| 4     | Jump RS        | op_jal |
+| 5     | Jump RS        | op_jalr |
+| 6     | MUL RS         | op_reg with funct7=7'h01 (M-ext) |
+
+Memory instructions go directly to LQ/SQ — no ALU RS involved.
+Access size (byte/half/word) determined by funct3, stored in rmask/wmask.
 
 ---
 
@@ -305,13 +335,22 @@ FQ              : empty
 imem_addr = pc
 imem_read = 1
 
+// Branch prediction (combinational, zero latency)
+btb_hit, btb_target = BTB.lookup(pc)
+pred_taken          = TAGE.lookup(pc)        // MSB of TAGE counter
+branch_valid        = btb_hit && pred_taken
+
 on imem_resp:
-    push FQEntry { pc, imem_rdata, pred_taken=0 }
-    pc = pc + 4
+    push FQEntry { pc, imem_rdata, pred_taken }
+    if (branch_valid):
+        pc = btb_target    // redirect to predicted target
+    else:
+        pc = pc + 4
 ```
 
-Fetch stalls if FQ is full.
-Branch recovery overrides PC (Section 9).
+Fetch stalls if FQ is full (freeze).
+Branch recovery overrides PC with `recover_pc` from commit stage (Section 9).
+TAGE FIFO push is gated on `imem_resp && btb_hit` — only tracks BTB-hit fetches.
 
 ---
 
@@ -395,7 +434,8 @@ ROB[tail] = {
     rs1_rdata, rs2_rdata,
     rd_wdata=0,
     mem_addr=0, mem_rmask=0, mem_wmask=0, mem_rdata=0, mem_wdata=0,
-    is_branch, mispredict=0, pred_taken=0, target_pc=0
+    is_branch, is_jump, pred_taken,    // pred_taken from fetch-time TAGE
+    mispredict=0, target_pc=0, branch_actual_taken=0
 }
 rob_idx = tail
 tail = (tail + 1) % 16
@@ -533,10 +573,11 @@ BT[dest_tag] = 0
 ROB[rob_idx].done     = 1
 ROB[rob_idx].rd_wdata = result          // if rd_valid
 
-// Branch: record misprediction and resolved PC
-if (is_branch):
-    ROB[rob_idx].mispredict  = mispredict
-    ROB[rob_idx].target_pc   = resolved_target
+// Branch/Jump: record misprediction, resolved PC, and actual outcome
+if (is_branch || is_jump):
+    ROB[rob_idx].mispredict           = mispredict
+    ROB[rob_idx].target_pc            = resolved_target
+    ROB[rob_idx].branch_actual_taken  = br_en   // CMP: branch condition result; Jump: always 1
 
 // Load: record RVFI memory fields
 if (is_load):
@@ -671,11 +712,12 @@ For non-memory instructions: `mem_addr/rmask/wmask/rdata/wdata = 0`.
 
 | Instruction | Condition | pc_wdata |
 |-------------|-----------|----------|
-| Non-branch | — | pc + 4 |
-| Conditional branch not taken | pred correct | pc + 4 |
-| Conditional branch taken | mispredicted | target_pc |
-| JAL | always mispredicted | target_pc |
-| JALR | always mispredicted | target_pc |
+| Non-branch/jump | — | pc + 4 |
+| Conditional branch not taken | correctly predicted | pc + 4 |
+| Conditional branch taken | correctly predicted | target_pc |
+| Any branch/jump | mispredicted | target_pc |
+| JAL/JALR | BTB hit + correct prediction | target_pc (no mispredict) |
+| JAL/JALR | BTB miss or wrong prediction | target_pc (mispredict → recovery) |
 
 ---
 
@@ -711,11 +753,19 @@ This avoids memory ordering violations and eliminates the need for a violation
 detection and replay mechanism. Stores commit the actual memory write only after
 the ROB commits the store instruction (committed flag in SQ).
 
-### Always-Not-Taken Branch Prediction
-Simplest possible predictor. Fetch always continues at PC+4. All taken branches
-(conditional and unconditional) are mispredictions and incur a commit-time recovery
-penalty. JAL and JALR are always mispredicted. Acceptable for correctness verification;
-upgrade to decode-time JAL redirect and BTB/BHT when performance matters.
+### TAGE Branch Predictor + BTB
+Frontend uses a TAGE (TAgged GEometric history length) predictor combined with a BTB
+(Branch Target Buffer). TAGE maintains one bimodal base table (T0, 128 entries) and four
+tagged tables (T1–T4, 64 entries each) with geometrically increasing history lengths.
+The BTB (16 sets, direct-mapped) provides branch targets. A prediction is only acted on
+when both BTB hits and TAGE predicts taken (`branch_valid = btb_hit && branch_taken`).
+
+TAGE update feedback comes from commit: `update_valid = commit_is_branch || commit_is_jump`.
+A 16-entry FIFO carries per-fetch metadata (which TAGE table/entry made the prediction)
+from fetch to commit. PC-matching at pop time (`data_o.pc == commit_pc`) ensures the FIFO
+entry corresponds to the correct branch, tolerating BTB-miss branches that were never pushed.
+On mispredict, the FIFO is flushed (`wrPtr = rdPtr`) and the mispredicting branch's entry
+is still used for training before the flush.
 
 ---
 
@@ -723,8 +773,9 @@ upgrade to decode-time JAL redirect and BTB/BHT when performance matters.
 
 | Limitation | Impact | Future Fix |
 |------------|--------|------------|
-| Always-not-taken prediction | Every JAL/JALR mispredicts; high penalty | Decode-time JAL redirect; BTB+BHT |
 | Commit-time branch recovery | Full ROB depth wasted after misprediction | Execute-time recovery |
+| TAGE FIFO uses BTB-hit as push gate | BTB-miss branches not trained in tagged tables; falls back to T0 bimodal | ROB-indexed TAGE metadata storage |
+| Small TAGE tables (T0=128, T1-T4=64) | Aliasing on dense branch workloads (e.g. coremark) | Larger tables, better hash functions |
 | Single-issue | One instruction/cycle max | 2-wide with intra-group rename bypass |
 | In-order conservative LSQ | Loads blocked by any unresolved older store address | Speculative loads with violation detection |
 | No instruction cache | Uses RTL_TEMPLATE magic memory | Add I$/D$ with configurable latency |
