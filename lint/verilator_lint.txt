@@ -1,0 +1,18 @@
+%Error-PKGNODECL: ../rtl/golden_cpu/golden_alu.sv:2:8: Package/class 'golden_rv32i_types' not found, and needs to be predeclared (IEEE 1800-2017 26.3)
+    2 | import golden_rv32i_types::*;
+      |        ^~~~~~~~~~~~~~~~~~
+                  ... For error description see https://verilator.org/warn/PKGNODECL?v=5.020
+%Error: ../rtl/golden_cpu/golden_alu.sv:2:8: Importing from missing package 'golden_rv32i_types'
+    2 | import golden_rv32i_types::*;
+      |        ^~~~~~~~~~~~~~~~~~
+%Error: ../rtl/golden_cpu/golden_cmp.sv:2:8: Importing from missing package 'golden_rv32i_types'
+    2 | import golden_rv32i_types::*;
+      |        ^~~~~~~~~~~~~~~~~~
+%Error: ../rtl/golden_cpu/golden_cpu.sv:2:8: Importing from missing package 'golden_rv32i_types'
+    2 | import golden_rv32i_types::*;
+      |        ^~~~~~~~~~~~~~~~~~
+%Error: ../rtl/golden_cpu/golden_ir.sv:2:8: Importing from missing package 'golden_rv32i_types'
+    2 | import golden_rv32i_types::*;
+      |        ^~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 5 error(s)
+        ... See the manual at https://verilator.org/verilator_doc.html for more assistance.

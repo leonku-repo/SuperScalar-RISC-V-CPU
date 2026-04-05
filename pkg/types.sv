@@ -77,6 +77,8 @@ package rv32i_types;
     localparam int unsigned PRF_IDX          = $clog2(PRF_SIZE);
     localparam int unsigned ROB_SIZE         = 16;
     localparam int unsigned ROB_IDX          = $clog2(ROB_SIZE);
+    localparam int unsigned CP_SIZE          = CMP_RS_SIZE + JUMP_RS_SIZE; // 4 checkpoint slots
+    localparam int unsigned CP_IDX           = $clog2(CP_SIZE);            // 2 bits
 
     typedef enum bit [6:0] {
         op_lui   = 7'b0110111, // load upper immediate (U type)
@@ -172,6 +174,8 @@ package rv32i_types;
         logic                   pred_taken;
         logic   [31:0]          target_pc;
         logic                   branch_actual_taken;
+        // Checkpoint — written at dispatch, used for early recovery
+        logic   [CP_IDX-1:0]    checkpoint_id;  // which checkpoint slot owns this branch/jump
     } rob_t;
 
     typedef struct packed {

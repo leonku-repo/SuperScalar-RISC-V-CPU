@@ -18,8 +18,12 @@ import rv32i_types::*;
     input   logic                       clk,
     input   logic                       rst,
 
+    // from branch_recover (execute-time mispredict)
+    input   logic                       exec_mispredict,
+    input   logic       [ROB_IDX-1:0]   exec_mispredict_rob_idx,
+    input   logic       [ROB_IDX-1:0]   rdPtr_i,            // ROB rdPtr for age comparison
+
     // from commit
-    input   logic                       mispredict,
     input   logic                       commit,
     input   logic       [31:0]          commit_pc,          // check if pc match with top store in lsq
     input   logic       [31:0]          commit_inst,        // check if inst match with top store in lsq
@@ -58,6 +62,9 @@ import rv32i_types::*;
     output  rob_t                       jump_ROB_exec_o,
     output  rob_t                       mem_ROB_exec_o,
     output  rob_t                       mul_ROB_exec_o,
+    // Valid flags for branch_recover.sv
+    output  logic                       cmp_valid_o,
+    output  logic                       jump_valid_o,
 
     // send to DMEM
     output  logic       [31:0]          dmem_addr,
@@ -78,6 +85,9 @@ import rv32i_types::*;
     rob_t       alu_ROB_data_i,     cmp_ROB_data_i,     mem_ROB_data_i,     jump_ROB_data_i,     mul_ROB_data_i;
     midcore_t   alu_MIDCORE_data_i, cmp_MIDCORE_data_i, mem_MIDCORE_data_i, jump_MIDCORE_data_i, mul_MIDCORE_data_i;
     logic       alu_empty_i,        cmp_empty_i,        mem_empty_i,        jump_empty_i,        mul_empty_i;
+
+    assign cmp_valid_o  = cmp_valid;
+    assign jump_valid_o = jump_valid;
 
     assign wb_alu       = alu_valid   &&  alu_ROB_exec_o.rd_valid;
     assign wb_load      = load_valid  &&  mem_ROB_exec_o.rd_valid;
@@ -154,7 +164,9 @@ import rv32i_types::*;
         .rst(rst),
         .wr_en(ROB_midcore_i.valid && (MIDCORE_midcore_i.dispatch_to == 3'd0)),
         .rd_en(alu_valid),
-        .flush(mispredict),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr(rdPtr_i),
         .ROB_data_i(ROB_midcore_i),
         .MIDCORE_data_i(MIDCORE_midcore_i),
         .wb_alu(wb_alu),
@@ -192,7 +204,9 @@ import rv32i_types::*;
         .rst(rst),
         .wr_en(ROB_midcore_i.valid && (MIDCORE_midcore_i.dispatch_to == 3'd1)),
         .rd_en(cmp_valid),
-        .flush(mispredict),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr(rdPtr_i),
         .ROB_data_i(ROB_midcore_i),
         .MIDCORE_data_i(MIDCORE_midcore_i),
         .wb_alu(wb_alu),
@@ -230,7 +244,9 @@ import rv32i_types::*;
         .rst(rst),
         .wr_en(ROB_midcore_i.valid && ((MIDCORE_midcore_i.dispatch_to == 3'd4) || (MIDCORE_midcore_i.dispatch_to == 3'd5))),
         .rd_en(jump_valid),
-        .flush(mispredict),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr(rdPtr_i),
         .ROB_data_i(ROB_midcore_i),
         .MIDCORE_data_i(MIDCORE_midcore_i),
         .wb_alu(wb_alu),
@@ -270,7 +286,12 @@ import rv32i_types::*;
         .rst(rst),
         .wr_en(ROB_midcore_i.valid && ((MIDCORE_midcore_i.dispatch_to == 3'd2) || (MIDCORE_midcore_i.dispatch_to == 3'd3))),
         .rd_en(load_valid || store_valid),
-        .flush(mispredict),
+        .commit_i(commit),
+        .commit_rob_entry_i(commit_rob_entry),
+        .commit_pc_i(commit_pc),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rob_rdPtr_i(rdPtr_i),
         .ROB_data_i(ROB_midcore_i),
         .MIDCORE_data_i(MIDCORE_midcore_i),
         .wb_alu(wb_alu),
@@ -328,7 +349,9 @@ import rv32i_types::*;
         .rst(rst),
         .wr_en(ROB_midcore_i.valid && (MIDCORE_midcore_i.dispatch_to == 3'd6)),
         .rd_en(mul_valid),
-        .flush(mispredict),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr(rdPtr_i),
         .ROB_data_i(ROB_midcore_i),
         .MIDCORE_data_i(MIDCORE_midcore_i),
         .wb_alu(wb_alu),

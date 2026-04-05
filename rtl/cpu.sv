@@ -54,7 +54,7 @@ import rv32i_types::*;
     rob_t                       mul_ROB_exec_o;
     // commit
     logic   [PRF_IDX-1:0]       arat_o [32];
-    logic                       mispredict;
+    logic                       monitor_mispredict;
     logic   [31:0]              recover_pc;
     logic                       rob_full;
     logic                       commit;
@@ -65,7 +65,37 @@ import rv32i_types::*;
     logic                       commit_is_jump;
     logic                       commit_branch_actual_taken;
     logic   [31:0]              commit_pc;
+    // Execute-time recovery
+    logic                       exec_mispredict;
+    logic   [31:0]              exec_recover_pc;
+    logic   [ROB_IDX-1:0]       exec_mispredict_rob_idx;
+    logic   [CP_IDX-1:0]        exec_checkpoint_id;
+    // CMP/Jump valid flags (execute → commit)
+    logic                       cmp_valid;
+    logic                       jump_valid;
+    // Checkpoint slot release
+    logic                       cmp_resolved;
+    logic   [CP_IDX-1:0]        cmp_checkpoint_id_o;
+    logic                       jump_resolved;
+    logic   [CP_IDX-1:0]        jump_checkpoint_id_o;
+    // ROB busy-table rebuild (commit → midcore)
+    logic   [PRF_SIZE-1:0]      bt_rebuild;
+    // Checkpoint recovery outputs → midcore
+    logic                       checkpoint_full;
+    logic   [CP_IDX-1:0]        cp_checkpoint_id;
+    logic   [PRF_IDX-1:0]       recover_srat        [32];
+    logic   [PRF_SIZE-1:0]      recover_alloc_list;
+    // Midcore → checkpoint dispatch
+    logic                       cp_dispatch_valid;
+    logic   [ROB_IDX-1:0]       cp_dispatch_rob_idx;
+    logic   [PRF_IDX-1:0]       cp_dispatch_srat    [32];
+    logic                       cp_rename_update;
+    logic   [PRF_IDX-1:0]       cp_rename_update_pr;
+    // Commit-time TAGE/BTB training (new)
+    logic                       commit_mispredict;
+    logic   [31:0]              commit_target_pc;
 
+    logic   [ROB_IDX-1:0]       unused;
 
     cpu_frontend cpu_frontend(
         .clk(clk),
@@ -74,8 +104,10 @@ import rv32i_types::*;
         .imem_read(imem_read),
         .imem_rdata(imem_rdata),
         .imem_resp(imem_resp),
-        .branch_mispredict(mispredict),
-        .recover_pc(recover_pc),
+        .exec_mispredict(exec_mispredict),
+        .exec_recover_pc(exec_recover_pc),
+        .commit_mispredict(commit_mispredict),
+        .commit_target_pc(commit_target_pc),
         .commit_is_branch(commit_is_branch),
         .commit_is_jump(commit_is_jump),
         .commit_branch_actual_taken(commit_branch_actual_taken),
@@ -91,8 +123,14 @@ import rv32i_types::*;
     cpu_midcore cpu_midcore(
         .clk(clk),
         .rst(rst),
-        .mispredict(mispredict),
-        .mispredict_arat(arat_o),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr_i(rob_rd_idx),
+        .recover_srat_i(recover_srat),
+        .recover_alloc_list_i(recover_alloc_list),
+        .bt_rebuild_i(bt_rebuild),
+        .checkpoint_full(checkpoint_full),
+        .cp_checkpoint_id_i(cp_checkpoint_id),
         .decode_request(decode_request),
         .empty_i(fetch_empty),
         .branch_taken_i(fetch_branch_taken),
@@ -120,13 +158,20 @@ import rv32i_types::*;
         .commit_update_old_p(commit_rob_o.old_p),
         .allocate_rob_entry(rob_wr_idx),
         .ROB_midcore_o(ROB_midcore_o),
-        .MIDCORE_midcore_o(MIDCORE_midcore_o)
+        .MIDCORE_midcore_o(MIDCORE_midcore_o),
+        .cp_dispatch_valid(cp_dispatch_valid),
+        .cp_dispatch_rob_idx(cp_dispatch_rob_idx),
+        .cp_dispatch_srat(cp_dispatch_srat),
+        .cp_rename_update_o(cp_rename_update),
+        .cp_rename_update_pr_o(cp_rename_update_pr)
     );
 
     cpu_execute cpu_execute(
         .clk(clk),
         .rst(rst),
-        .mispredict(mispredict),
+        .exec_mispredict(exec_mispredict),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .rdPtr_i(rob_rd_idx),
         .commit(commit),
         .commit_pc(commit_rob_o.pc),
         .commit_inst(commit_rob_o.inst),
@@ -156,6 +201,8 @@ import rv32i_types::*;
         .jump_ROB_exec_o(jump_ROB_exec_o),
         .mem_ROB_exec_o(mem_ROB_exec_o),
         .mul_ROB_exec_o(mul_ROB_exec_o),
+        .cmp_valid_o(cmp_valid),
+        .jump_valid_o(jump_valid),
         .dmem_addr(dmem_addr),
         .dmem_read(dmem_read),
         .dmem_write(dmem_write),
@@ -174,18 +221,51 @@ import rv32i_types::*;
         .jump_ROB_exec_i(jump_ROB_exec_o),
         .mem_ROB_exec_i(mem_ROB_exec_o),
         .mul_ROB_exec_i(mul_ROB_exec_o),
+        .cmp_valid_i(cmp_valid),
+        .jump_valid_i(jump_valid),
         .rob_wr_idx(rob_wr_idx),
         .rob_rd_idx(rob_rd_idx),
         .rob_full(rob_full),
         .commit(commit),
-        .commit_rob_o(commit_rob_o),   
-        .mispredict(mispredict),
-        .recover_pc(recover_pc),
+        .commit_rob_o(commit_rob_o),
+        .exec_mispredict(exec_mispredict),
+        .exec_recover_pc(exec_recover_pc),
+        .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .exec_checkpoint_id(exec_checkpoint_id),
+        .cmp_resolved(cmp_resolved),
+        .cmp_checkpoint_id_o(cmp_checkpoint_id_o),
+        .jump_resolved(jump_resolved),
+        .jump_checkpoint_id_o(jump_checkpoint_id_o),
+        .bt_rebuild_o(bt_rebuild),
         .commit_is_branch(commit_is_branch),
         .commit_is_jump(commit_is_jump),
         .commit_branch_actual_taken(commit_branch_actual_taken),
         .commit_branch_pc(commit_pc),
+        .commit_mispredict(commit_mispredict),
+        .commit_target_pc(commit_target_pc),
         .arat_o(arat_o)
+    );
+
+    checkpoint checkpoint(
+        .clk(clk),
+        .rst(rst),
+        .dispatch_valid(cp_dispatch_valid),
+        .dispatch_rob_idx(cp_dispatch_rob_idx),
+        .dispatch_srat(cp_dispatch_srat),
+        .checkpoint_id_o(cp_checkpoint_id),
+        .checkpoint_full(checkpoint_full),
+        .rename_update(cp_rename_update),
+        .rename_update_pr(cp_rename_update_pr),
+        .cmp_resolved(cmp_resolved),
+        .cmp_checkpoint_id(cmp_checkpoint_id_o),
+        .jump_resolved(jump_resolved),
+        .jump_checkpoint_id(jump_checkpoint_id_o),
+        .exec_mispredict(exec_mispredict),
+        .exec_checkpoint_id(exec_checkpoint_id),
+        .rdPtr(rob_rd_idx),
+        .recover_srat(recover_srat),
+        .recover_alloc_list(recover_alloc_list),
+        .recover_rob_idx(unused)   // redundant with exec_mispredict_rob_idx from branch_recover
     );
 
     logic   [63:0]  order;
@@ -233,5 +313,6 @@ import rv32i_types::*;
     assign monitor_mem_wmask = commit_rob_o.mem_wmask;
     assign monitor_mem_rdata = commit_rob_o.mem_rdata;
     assign monitor_mem_wdata = commit_rob_o.mem_wdata;
+    assign monitor_mispredict = commit_rob_o.mispredict;
 
 endmodule : cpu

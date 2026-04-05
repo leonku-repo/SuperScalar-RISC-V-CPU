@@ -6245,164 +6245,6 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__2(Vtop_tb_top_tb* 
     vlSymsp->TOP__top_tb__mon_itf.__PVT__order[5U] = 0ULL;
     vlSymsp->TOP__top_tb__mon_itf.__PVT__order[6U] = 0ULL;
     vlSymsp->TOP__top_tb__mon_itf.__PVT__order[7U] = 0ULL;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[0U] 
-        = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                   >> 9U));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
-            << 0x13U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                         >> 0xdU));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
-            << 3U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
-                      >> 0x1dU));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[0U] 
-        = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                   >> 5U));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
-            << 0x1bU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[1U] 
-                         >> 5U));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[5U] 
-            << 0x13U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
-                         >> 0xdU));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-            << 0x1bU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
-                         >> 5U));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[7U] = 0U;
-    if ((0x8000000U & vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U])) {
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[0U] 
-            = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[6U] 
-                << 0xfU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[5U] 
-                            >> 0x11U));
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[0U] 
-            = (0x1fU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
-                        >> 0x11U));
-    } else {
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[0U] = 0U;
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[0U] = 0U;
-    }
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[0U] 
-        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
-            << 3U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
-                      >> 0x1dU));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[7U] = 0U;
-    if ((0x10000000U & vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U])) {
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[0U] 
-            = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
-                << 0xfU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[6U] 
-                            >> 0x11U));
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[0U] 
-            = (0x1fU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
-                        >> 0x16U));
-    } else {
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[0U] = 0U;
-        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[0U] = 0U;
-    }
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[0U] = 
-        ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
-          << 3U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
-                    >> 0x1dU));
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[7U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[0U] 
-        = vlSymsp->TOP__top_tb__dut.__PVT__monitor_rd_addr;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[1U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[2U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[3U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[4U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[5U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[6U] = 0U;
-    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[7U] = 0U;
     vlSelf->__PVT__monitor__DOT__rvfi_order[0U] = (IData)(
                                                           vlSymsp->TOP__top_tb__mon_itf.__PVT__order
                                                           [0U]);
@@ -6459,6 +6301,180 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__2(Vtop_tb_top_tb* 
                                                             (vlSymsp->TOP__top_tb__mon_itf.__PVT__order
                                                              [7U] 
                                                              >> 0x20U));
+}
+
+VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__3(Vtop_tb_top_tb* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+      Vtop_tb_top_tb___nba_sequent__TOP__top_tb__3\n"); );
+    // Body
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[0U] 
+        = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
+                   >> 0xbU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rmask[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
+            << 0x11U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
+                         >> 0xfU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_addr[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
+            << 1U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
+                      >> 0x1fU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_wdata[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[0U] 
+        = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
+                   >> 7U));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wmask[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
+            << 0x19U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[1U] 
+                         >> 7U));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_wdata[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[5U] 
+            << 0x11U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
+                         >> 0xfU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
+            << 0x19U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
+                         >> 7U));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__mem_rdata[7U] = 0U;
+    if ((0x20000000U & vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U])) {
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[0U] 
+            = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[6U] 
+                << 0xdU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[5U] 
+                            >> 0x13U));
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[0U] 
+            = (0x1fU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
+                        >> 0x13U));
+    } else {
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[0U] = 0U;
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[0U] = 0U;
+    }
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_rdata[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs2_addr[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[0U] 
+        = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
+            << 1U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
+                      >> 0x1fU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__pc_rdata[7U] = 0U;
+    if ((0x40000000U & vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U])) {
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[0U] 
+            = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
+                << 0xdU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[6U] 
+                            >> 0x13U));
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[0U] 
+            = (0x1fU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
+                        >> 0x18U));
+    } else {
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[0U] = 0U;
+        vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[0U] = 0U;
+    }
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_rdata[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rs1_addr[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[0U] = 
+        ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
+          << 1U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
+                    >> 0x1fU));
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__inst[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[0U] 
+        = vlSymsp->TOP__top_tb__dut.__PVT__monitor_rd_addr;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr[7U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[0U] 
+        = vlSymsp->TOP__top_tb__dut.__PVT__monitor_valid;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[1U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[2U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[3U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[4U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[5U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[6U] = 0U;
+    vlSymsp->TOP__top_tb__mon_itf.__PVT__valid[7U] = 0U;
     vlSelf->__PVT__monitor__DOT__rvfi_mem_rmask = (
                                                    (0xfffff000U 
                                                     & vlSelf->__PVT__monitor__DOT__rvfi_mem_rmask) 
@@ -6938,4 +6954,33 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__2(Vtop_tb_top_tb* 
         = ((0U != vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_addr
             [7U]) ? vlSymsp->TOP__top_tb__mon_itf.__PVT__rd_wdata
            [7U] : 0U);
+    vlSelf->__PVT__monitor__DOT__rvfi_valid = ((0xf8U 
+                                                & (IData)(vlSelf->__PVT__monitor__DOT__rvfi_valid)) 
+                                               | ((vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                   [2U] 
+                                                   << 2U) 
+                                                  | ((vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                      [1U] 
+                                                      << 1U) 
+                                                     | vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                     [0U])));
+    vlSelf->__PVT__monitor__DOT__rvfi_valid = ((0xc7U 
+                                                & (IData)(vlSelf->__PVT__monitor__DOT__rvfi_valid)) 
+                                               | ((vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                   [5U] 
+                                                   << 5U) 
+                                                  | ((vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                      [4U] 
+                                                      << 4U) 
+                                                     | (vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                        [3U] 
+                                                        << 3U))));
+    vlSelf->__PVT__monitor__DOT__rvfi_valid = ((0x3fU 
+                                                & (IData)(vlSelf->__PVT__monitor__DOT__rvfi_valid)) 
+                                               | ((vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                   [7U] 
+                                                   << 7U) 
+                                                  | (vlSymsp->TOP__top_tb__mon_itf.__PVT__valid
+                                                     [6U] 
+                                                     << 6U)));
 }

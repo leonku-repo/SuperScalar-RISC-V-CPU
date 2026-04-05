@@ -12,10 +12,16 @@ VL_ATTR_COLD void Vtop_tb_cpu_midcore___ctor_var_reset(Vtop_tb_cpu_midcore* vlSe
     // Body
     vlSelf->__PVT__clk = VL_RAND_RESET_I(1);
     vlSelf->__PVT__rst = VL_RAND_RESET_I(1);
-    vlSelf->__PVT__mispredict = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__exec_mispredict = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__exec_mispredict_rob_idx = VL_RAND_RESET_I(4);
+    vlSelf->__PVT__rdPtr_i = VL_RAND_RESET_I(4);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
-        vlSelf->__PVT__mispredict_arat[__Vi0] = VL_RAND_RESET_I(6);
+        vlSelf->__PVT__recover_srat_i[__Vi0] = VL_RAND_RESET_I(6);
     }
+    vlSelf->__PVT__recover_alloc_list_i = VL_RAND_RESET_Q(64);
+    vlSelf->__PVT__bt_rebuild_i = VL_RAND_RESET_Q(64);
+    vlSelf->__PVT__checkpoint_full = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__cp_checkpoint_id_i = VL_RAND_RESET_I(2);
     vlSelf->__PVT__decode_request = VL_RAND_RESET_I(1);
     vlSelf->__PVT__empty_i = VL_RAND_RESET_I(1);
     vlSelf->__PVT__branch_taken_i = VL_RAND_RESET_I(1);
@@ -42,8 +48,15 @@ VL_ATTR_COLD void Vtop_tb_cpu_midcore___ctor_var_reset(Vtop_tb_cpu_midcore* vlSe
     vlSelf->__PVT__commit_update = VL_RAND_RESET_I(1);
     vlSelf->__PVT__commit_update_old_p = VL_RAND_RESET_I(6);
     vlSelf->__PVT__allocate_rob_entry = VL_RAND_RESET_I(4);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_midcore_o);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_midcore_o);
     vlSelf->__PVT__MIDCORE_midcore_o = VL_RAND_RESET_Q(58);
+    vlSelf->__PVT__cp_dispatch_valid = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__cp_dispatch_rob_idx = VL_RAND_RESET_I(4);
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+        vlSelf->__PVT__cp_dispatch_srat[__Vi0] = VL_RAND_RESET_I(6);
+    }
+    vlSelf->__PVT__cp_rename_update_o = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__cp_rename_update_pr_o = VL_RAND_RESET_I(6);
     vlSelf->__PVT__stall = VL_RAND_RESET_I(1);
     vlSelf->stall_rob_full = VL_RAND_RESET_I(1);
     vlSelf->stall_alu_full = VL_RAND_RESET_I(1);
@@ -53,11 +66,12 @@ VL_ATTR_COLD void Vtop_tb_cpu_midcore___ctor_var_reset(Vtop_tb_cpu_midcore* vlSe
     vlSelf->stall_jump_full = VL_RAND_RESET_I(1);
     vlSelf->stall_mul_full = VL_RAND_RESET_I(1);
     vlSelf->stall_no_free_pr = VL_RAND_RESET_I(1);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_decode_o);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_rename1_o);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_rename2_o);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_rename1_reg);
-    VL_RAND_RESET_W(369, vlSelf->__PVT__ROB_rename2_reg);
+    vlSelf->stall_checkpoint_full = VL_RAND_RESET_I(1);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_decode_o);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_rename1_o);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_rename2_o);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_rename1_reg);
+    VL_RAND_RESET_W(371, vlSelf->__PVT__ROB_rename2_reg);
     vlSelf->__PVT__MIDCORE_decode_o = VL_RAND_RESET_Q(58);
     vlSelf->__PVT__MIDCORE_rename1_o = VL_RAND_RESET_Q(58);
     vlSelf->__PVT__MIDCORE_rename2_o = VL_RAND_RESET_Q(58);
@@ -65,11 +79,13 @@ VL_ATTR_COLD void Vtop_tb_cpu_midcore___ctor_var_reset(Vtop_tb_cpu_midcore* vlSe
     vlSelf->__PVT__MIDCORE_rename2_reg = VL_RAND_RESET_Q(58);
     vlSelf->__PVT__MIDCORE_rename2_wb_updated = VL_RAND_RESET_Q(58);
     vlSelf->__PVT__srat_lookup_rs1 = VL_RAND_RESET_I(5);
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+        vlSelf->__PVT__srat_o[__Vi0] = VL_RAND_RESET_I(6);
+    }
     vlSelf->__PVT__free_pr = VL_RAND_RESET_I(6);
     vlSelf->__PVT__free_pr_valid = VL_RAND_RESET_I(1);
-    vlSelf->__PVT__rename_update_pr = VL_RAND_RESET_I(6);
     vlSelf->__PVT__rename_update_ar = VL_RAND_RESET_I(5);
-    vlSelf->__Vcellinp__busy_table__rename_update = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__is_br_or_jump = VL_RAND_RESET_I(1);
     vlSelf->__PVT__decode__DOT__i_imm = VL_RAND_RESET_I(32);
     vlSelf->__PVT__decode__DOT__rs1_valid = VL_RAND_RESET_I(1);
     vlSelf->__PVT__decode__DOT__rs2_valid = VL_RAND_RESET_I(1);
@@ -89,7 +105,6 @@ VL_ATTR_COLD void Vtop_tb_cpu_midcore___ctor_var_reset(Vtop_tb_cpu_midcore* vlSe
     vlSelf->__PVT__busy_table__DOT__bt_next = VL_RAND_RESET_Q(64);
     vlSelf->__PVT__free_list__DOT__free_list = VL_RAND_RESET_Q(64);
     vlSelf->__PVT__free_list__DOT__free_list_next = VL_RAND_RESET_Q(64);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery = VL_RAND_RESET_Q(64);
     vlSelf->__PVT__rename2__DOT__pr1_busy_tmp = VL_RAND_RESET_I(1);
     vlSelf->__PVT__rename2__DOT__pr2_busy_tmp = VL_RAND_RESET_I(1);
 }

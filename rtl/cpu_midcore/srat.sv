@@ -15,9 +15,11 @@ import rv32i_types::*;
     input   logic                   rename_update,
     input   logic   [4:0]           rename_update_ar,
     input   logic   [PRF_IDX-1:0]   rename_update_pr,
-    // update when mispredict: clear all because all register flushed
-    input   logic                   mispredict_update,
-    input   logic   [PRF_IDX-1:0]   mispredict_update_arat [32]
+    // update when execute-time mispredict: restore from checkpoint snapshot
+    input   logic                   exec_mispredict,
+    input   logic   [PRF_IDX-1:0]   recover_srat    [32],
+    // full registered SRAT array — forwarded to checkpoint.sv as dispatch_srat
+    output  logic   [PRF_IDX-1:0]   srat_o          [32]
 );
     logic [PRF_IDX-1:0] srat [32];
     logic [PRF_IDX-1:0] srat_next [32];
@@ -28,8 +30,8 @@ import rv32i_types::*;
                 srat[i] <= i[PRF_IDX-1:0];
             end
         end
-        else if(mispredict_update) begin 
-            srat <= mispredict_update_arat;
+        else if(exec_mispredict) begin
+            srat <= recover_srat;
         end
         else if(rename_update) begin
             srat <= srat_next;
@@ -43,6 +45,9 @@ import rv32i_types::*;
         srat_next = srat;
         if(rename_update)   srat_next[rename_update_ar] = rename_update_pr;
     end
+
+    // full array output for checkpoint snapshot
+    assign srat_o = srat;
 
     // add SRAT bypass
     assign pr1_o = (rename_update && (rs1_i == rename_update_ar)) ? rename_update_pr : srat[rs1_i];

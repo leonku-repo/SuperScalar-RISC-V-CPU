@@ -8,7 +8,13 @@ import rv32i_types::*;
     input   logic                       rst,
     input   logic                       wr_en,
     input   logic                       rd_en,
-    input   logic                       flush,
+    input   logic                       commit_i,           // store committed from ROB (sets committed flag)
+    input   logic   [ROB_IDX-1:0]       commit_rob_entry_i, // ROB entry index of committing instruction
+    input   logic   [31:0]              commit_pc_i,        // PC of committing instruction
+    // Execute-time mispredict: partial flush + wrPtr rollback
+    input   logic                       exec_mispredict,
+    input   logic   [ROB_IDX-1:0]       exec_mispredict_rob_idx,
+    input   logic   [ROB_IDX-1:0]       rob_rdPtr_i,            // ROB rdPtr for age comparison
     input   rob_t                       ROB_data_i,
     input   midcore_t                   MIDCORE_data_i,
     // from wb
@@ -54,13 +60,62 @@ import rv32i_types::*;
         end
     end
 
-    //set ptr 
-    always_ff @( posedge clk ) begin 
-        if(rst || flush) begin
+    // New wrPtr after partial flush: rdPtrNext + number of surviving entries.
+    // Position i=0 is the oldest entry (at rdPtrNext slot), i=1 next oldest, etc.
+    // One-hot: bit[slot] set means that slot holds a store that committed from ROB
+    // but is still waiting for dmem_resp. At most one bit can be set at any time.
+    logic [LSQ_SIZE-1:0]    committed;
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            committed <= '0;
+        end else begin
+            // rd_en: entry consumed — clear its committed bit (priority over set below)
+            if (rd_en && !empty_o)
+                committed[rdPtr[PTR_SIZE-1:0]] <= 1'b0;
+            // commit_i: store just retired from ROB — set its committed bit
+            // triple-check: must be a store, rob_entry and PC must match LSQ head
+            else if (commit_i && !empty_o && LDorST[rdPtr[PTR_SIZE-1:0]] &&
+                     commit_rob_entry_i == rob_rs[rdPtr[PTR_SIZE-1:0]].rob_entry &&
+                     commit_pc_i        == rob_rs[rdPtr[PTR_SIZE-1:0]].pc)
+                committed[rdPtr[PTR_SIZE-1:0]] <= 1'b1;
+        end
+    end
+
+    logic [LSQ_SIZE-1:0]    exec_occupied;
+    logic [LSQ_SIZE-1:0]    exec_old_enough;
+    logic [LSQ_SIZE-1:0]    exec_survivor;
+    logic [ROB_IDX-1:0]     exec_entry_age  [LSQ_SIZE]; // relative age of each position
+    logic [ROB_IDX-1:0]     exec_mispredict_age;         // threshold for comparison
+    logic [PTR_SIZE:0]       exec_new_wrPtr;
+
+    always_comb begin
+        exec_mispredict_age = ROB_IDX'(exec_mispredict_rob_idx - rob_rdPtr_i);
+
+        for (int i = 0; i < LSQ_SIZE; i++) begin
+            exec_entry_age[i]  = ROB_IDX'(rob_rs[PTR_SIZE'(rdPtrNext[PTR_SIZE-1:0] + PTR_SIZE'(i))].rob_entry - rob_rdPtr_i);
+            exec_occupied[i]   = {1'b0, PTR_SIZE'(i)} < (wrPtr - rdPtrNext);
+            exec_old_enough[i] = (i == 0 && committed[rdPtrNext[PTR_SIZE-1:0]]) ||
+                                 (exec_entry_age[i] <= exec_mispredict_age);
+            exec_survivor[i]   = exec_occupied[i] && exec_old_enough[i];
+        end
+
+        exec_new_wrPtr = rdPtrNext;
+        for (int i = 0; i < LSQ_SIZE; i++) begin
+            if (exec_survivor[i])
+                exec_new_wrPtr = exec_new_wrPtr + 1;
+        end
+    end
+
+    //set ptr
+    always_ff @( posedge clk ) begin
+        if (rst) begin
             wrPtr <= '0;
             rdPtr <= '0;
-        end
-        else begin
+        end else if (exec_mispredict) begin
+            wrPtr <= exec_new_wrPtr;
+            rdPtr <= rdPtrNext;  // rd_en may still fire same cycle
+        end else begin
             wrPtr <= wrPtrNext;
             rdPtr <= rdPtrNext;
         end
@@ -123,8 +178,8 @@ import rv32i_types::*;
 
     // enque data into fifo
     always_ff @( posedge clk ) begin
-        if(rst || flush) begin
-            for(int i=0; i<LSQ_SIZE; i++) begin : rst_init
+        if (rst) begin
+            for (int i = 0; i < LSQ_SIZE; i++) begin : rst_init
                 LDorST[i]      <= '0;
                 rob_rs[i]      <= '0;
                 midcore_rs[i]  <= '0;
@@ -132,7 +187,7 @@ import rv32i_types::*;
                 pr2_ready [i]  <= '0;
             end
         end
-        else if (!full_o && wr_en) begin
+        else if (!full_o && wr_en && !exec_mispredict) begin
             LDorST[wrPtr[PTR_SIZE-1:0]]      <= (MIDCORE_data_i.dispatch_to == 3'd3);
             rob_rs[wrPtr[PTR_SIZE-1:0]]      <= ROB_data_i;
             midcore_rs[wrPtr[PTR_SIZE-1:0]]  <= MIDCORE_data_i;

@@ -28,11 +28,10 @@ VM_CLASSES_FAST += \
 	Vtop_tb___024root__DepSet_h6b5a2dfc__0 \
 	Vtop_tb_top_tb__DepSet_h13c6320b__0 \
 	Vtop_tb_top_tb__DepSet_h13c6320b__1 \
-	Vtop_tb_top_tb__DepSet_h13c6320b__2 \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__0 \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__1 \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__2 \
-	Vtop_tb_cpu__DepSet_hc4e33ac7__0 \
+	Vtop_tb_cpu__DepSet_h51eb2ee3__3 \
 	Vtop_tb_cpu_midcore__DepSet_h3ea54ecb__0 \
 	Vtop_tb_mon_itf__DepSet_h0df3ada0__0 \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__0 \
@@ -50,6 +49,7 @@ VM_CLASSES_SLOW += \
 	Vtop_tb_top_tb__DepSet_h82b6562f__0__Slow \
 	Vtop_tb_cpu__Slow \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__0__Slow \
+	Vtop_tb_cpu__DepSet_h51eb2ee3__1__Slow \
 	Vtop_tb_cpu__DepSet_hc4e33ac7__0__Slow \
 	Vtop_tb_cpu_midcore__Slow \
 	Vtop_tb_cpu_midcore__DepSet_h3ea54ecb__0__Slow \
@@ -57,9 +57,6 @@ VM_CLASSES_SLOW += \
 	Vtop_tb_mon_itf__Slow \
 	Vtop_tb_mon_itf__DepSet_h0df3ada0__0__Slow \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__Slow \
-	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__0__Slow \
-	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__1__Slow \
-	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__2__Slow \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_h49b66ef2__0__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
@@ -76,6 +73,7 @@ VM_SUPPORT_SLOW += \
 	Vtop_tb__TraceDecls__0__Slow \
 	Vtop_tb__Trace__1__Slow \
 	Vtop_tb__Trace__2__Slow \
+	Vtop_tb__Trace__3__Slow \
 
 # Global classes, need linked once per executable, fast-path, compile with highest optimization
 VM_GLOBAL_FAST += \

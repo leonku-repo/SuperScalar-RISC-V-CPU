@@ -131,18 +131,5 @@ VL_ATTR_COLD void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___ctor_var_reset
     vlSelf->insn_lw__DOT____VdfgTmp_hac1c962f__0 = 0;
     vlSelf->__PVT__insn_sb__DOT__addr = VL_RAND_RESET_I(32);
     vlSelf->insn_sw__DOT____VdfgTmp_h889c0e76__0 = 0;
-    vlSelf->__VdfgTmp_h99712243__0 = 0;
-    vlSelf->__VdfgTmp_h6fe23079__0 = 0;
-    vlSelf->__VdfgTmp_hfe94040f__0 = 0;
-    vlSelf->__VdfgTmp_he8004ba4__0 = 0;
-    vlSelf->__VdfgTmp_ha890dbb4__0 = 0;
-    vlSelf->__VdfgTmp_h8436152c__0 = 0;
-    vlSelf->__VdfgTmp_h8376ce6a__0 = 0;
-    vlSelf->__VdfgTmp_h98724db5__0 = 0;
-    vlSelf->__VdfgTmp_ha33ffdac__0 = 0;
-    vlSelf->__VdfgTmp_h6ef3123b__0 = 0;
-    vlSelf->__VdfgTmp_hd187bcaf__0 = 0;
-    vlSelf->__VdfgTmp_h2ff1ede7__0 = 0;
-    vlSelf->__VdfgTmp_ha4e42b33__0 = 0;
     vlSelf->__VdfgTmp_hb1a4827e__0 = 0;
 }

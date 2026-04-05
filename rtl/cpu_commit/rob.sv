@@ -6,9 +6,11 @@ import rv32i_types::*;
 )(
     input   logic                       clk,
     input   logic                       rst,
-    input   logic                       wr_en,      // this is from rename2. allocate a new entry when done renaming
-    input   logic                       rd_en,      // this is if ready to commit, we pop rob entry
-    input   logic                       flush,      // when mispredict
+    input   logic                       wr_en,          // this is from rename2. allocate a new entry when done renaming
+    input   logic                       rd_en,          // this is if ready to commit, we pop rob entry
+    // Execute-time mispredict: partial flush + wrPtr rollback
+    input   logic                       exec_mispredict,
+    input   logic   [ptr_width-1:0]     exec_mispredict_rob_idx, // ROB slot of mispredicting branch
     // from rename2, to allocate new entry
     input   rob_t                       rob_data_i, 
     // from write back, update rob when done execution
@@ -25,7 +27,9 @@ import rv32i_types::*;
     // Out
     output  rob_t                       data_o,
     output  logic                       empty_o,
-    output  logic                       full_o
+    output  logic                       full_o,
+    // Busy-table rebuild: bit p=1 if any surviving entry has rd_valid && !done && new_p==p
+    output  logic   [PRF_SIZE-1:0]      bt_rebuild_o
 );
     //define FIFO
     rob_t   mem         [0:fifo_size-1];
@@ -49,13 +53,18 @@ import rv32i_types::*;
         end
     end
 
-    //set ptr 
-    always_ff @( posedge clk ) begin 
-        if(rst || flush) begin
+    //set ptr
+    always_ff @( posedge clk ) begin
+        if (rst) begin
             wrPtr <= '0;
             rdPtr <= '0;
-        end
-        else begin
+        end else if (exec_mispredict) begin
+            // Partial flush: roll wrPtr back to one past the mispredicting branch.
+            // age_m is the circular distance from rdPtr to exec_mispredict_rob_idx;
+            // rdPtr + age_m + 1 gives the correct (ptr_width+1)-bit wrPtr including MSB.
+            wrPtr <= rdPtr + {1'b0, ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0])} + 1'b1;
+            rdPtr <= rdPtrNext;  // commit may still drain on the same cycle
+        end else begin
             wrPtr <= wrPtrNext;
             rdPtr <= rdPtrNext;
         end
@@ -86,7 +95,7 @@ import rv32i_types::*;
         // dispatch: allocate new entry — copy all fields from rob_data_i,
         // then force writeback fields to clean/zero so stale data from the
         // previous occupant cannot cause a spurious commit.
-        if (wr_en) begin : dispatch
+        if (wr_en && !exec_mispredict) begin : dispatch
             mem_next[wrPtr[ptr_width-1:0]]            = rob_data_i  ;
             mem_next[wrPtr[ptr_width-1:0]].done       = 1'b0        ;
             mem_next[wrPtr[ptr_width-1:0]].rs1_rdata  = '0          ;
@@ -203,22 +212,32 @@ import rv32i_types::*;
         f1 <= '0;
         f2 <= '0;
         f3 <= '0;
-        if(rst || flush) begin
-            for(int i=0; i<fifo_size; i++) begin : rst_init
+        if (rst) begin
+            for (int i = 0; i < fifo_size; i++) begin : rst_init
                 mem[i] <= '0;
-            end :rst_init
+            end : rst_init
             f1 <= '1;
-        end
-        else if ((!full_o && wr_en) || wb_update) begin
-            // mem <= mem_next;
-            for(int i=0; i<fifo_size; i++) begin : update_rob
-                mem[i] <= mem_next[i];
-            end :update_rob
-            f2 <= '1;
-        end
-        else begin
-            mem[wrPtr[ptr_width-1:0]] <= mem[wrPtr[ptr_width-1:0]];
-            f3 <= '1;
+        end else begin
+            // Normal dispatch / writeback updates
+            if ((!full_o && wr_en && !exec_mispredict) || wb_update) begin
+                for (int i = 0; i < fifo_size; i++) begin : update_rob
+                    mem[i] <= mem_next[i];
+                end : update_rob
+                f2 <= '1;
+            end else begin
+                mem[wrPtr[ptr_width-1:0]] <= mem[wrPtr[ptr_width-1:0]];
+                f3 <= '1;
+            end
+
+            // Partial flush: clear every entry younger than exec_mispredict_rob_idx.
+            // Placed after the normal update so it takes priority (last assignment wins).
+            if (exec_mispredict) begin
+                for (int i = 0; i < fifo_size; i++) begin : partial_flush
+                    if (ptr_width'(i - rdPtr[ptr_width-1:0]) >
+                        ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0]))
+                        mem[i] <= '0;
+                end : partial_flush
+            end
         end
     end
 
@@ -233,5 +252,20 @@ import rv32i_types::*;
 
     assign wrPtr_o = wrPtr[ptr_width-1:0];
     assign rdPtr_o = rdPtr[ptr_width-1:0];
+
+    // Busy-table rebuild: combinational, respects partial-flush boundary.
+    // An entry at slot i is surviving if its circular age from rdPtr is <= mispredict age.
+    // When exec_mispredict=0 all valid entries are included (mispredict_age comparison is don't-care).
+    always_comb begin
+        bt_rebuild_o = '0;
+        for (int i = 0; i < fifo_size; i++) begin
+            if (mem[i].valid && mem[i].rd_valid && !mem_next[i].done) begin
+                if (!exec_mispredict ||
+                    ptr_width'(i - rdPtr[ptr_width-1:0]) <=
+                    ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0]))
+                    bt_rebuild_o[mem[i].new_p] = 1'b1;
+            end
+        end
+    end
 
 endmodule

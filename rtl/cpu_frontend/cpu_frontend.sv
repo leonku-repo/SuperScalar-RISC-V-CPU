@@ -12,9 +12,12 @@ import rv32i_types::*;
     input   logic   [31:0]  imem_rdata,
     input   logic           imem_resp,
 
-    // branch misprediction recovery
-    input   logic           branch_mispredict,
-    input   logic   [31:0]  recover_pc,
+    // Execute-time recovery (PC redirect + pipeline flush)
+    input   logic           exec_mispredict,
+    input   logic   [31:0]  exec_recover_pc,
+    // Commit-time TAGE/BTB training
+    input   logic           commit_mispredict,        // ROB-head mispredict flag; for TAGE pred derivation + flush
+    input   logic   [31:0]  commit_target_pc,         // actual target of committing branch; for BTB update_target
     input   logic           commit_is_branch,
     input   logic           commit_is_jump,
     input   logic           commit_branch_actual_taken,
@@ -45,17 +48,17 @@ import rv32i_types::*;
         .branch_valid(branch_valid),
         .commit_is_branch(commit_is_branch),
         .commit_is_jump(commit_is_jump),
-        .commit_mispredict(branch_mispredict),
+        .commit_mispredict(commit_mispredict),
         .commit_branch_actual_taken(commit_branch_actual_taken),
         .commit_pc(commit_pc),
-        .commit_target(recover_pc),
+        .commit_target(commit_target_pc),
         .*
     );
 
     fetch fetch (
         // from frontend control signal
-        .recover_pc(recover_pc),
-        .flush(branch_mispredict),
+        .recover_pc(exec_recover_pc),
+        .flush(exec_mispredict),
         .freeze(fetchq_full),
         // from branch prdictor
         .branch_target(branch_target),
@@ -73,7 +76,7 @@ import rv32i_types::*;
     fetch_queue fetch_queue(
         .wr_en(valid_fetch),
         .rd_en(decode_request),
-        .flush(branch_mispredict),
+        .flush(exec_mispredict),
         .branch_taken_i(branch_taken_i),
         .pc_i(pc_i),
         .pc_next_i(pc_next_i),

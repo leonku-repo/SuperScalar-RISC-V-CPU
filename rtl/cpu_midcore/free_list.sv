@@ -12,30 +12,23 @@ import rv32i_types::*;
     // update when commit done: set to 1 because old_p register is done renaming
     input   logic                   commit_update,
     input   logic   [PRF_IDX-1:0]   commit_update_pr,
-    // update when mispredict: restore from arat
-    input   logic                   mispredict_update,
-    input   logic   [PRF_IDX-1:0]   mispredict_update_arat [32]
+    // update when execute-time mispredict: free wrong-path allocated PRs
+    input   logic                   exec_mispredict,
+    input   logic   [PRF_SIZE-1:0]  recover_alloc_list
 );
     // free bit vector
     logic   [PRF_SIZE-1:0]  free_list, free_list_next;
-    logic   [PRF_SIZE-1:0]  free_list_recovery;
-
-    // rebuild free list from arat: all free except registers currently mapped in arat
-    always_comb begin
-        free_list_recovery = '1;
-        for (int i = 0; i < 32; i++) begin : recovery_loop
-            free_list_recovery[mispredict_update_arat[i]] = 1'b0;
-        end
-    end
 
     always_ff @( posedge clk ) begin
         if(rst)
             free_list <= {{(PRF_SIZE-32){1'b1}}, 32'b0};
-        else if(mispredict_update)
-            free_list <= free_list_recovery;
+        else if(exec_mispredict)
+            // OR in alloc_list to free every PR stolen by the wrong-path renames.
+            // Current free_list already reflects valid commits, so no snapshot needed.
+            free_list <= free_list | recover_alloc_list | (commit_update ? (PRF_SIZE'(1) << commit_update_pr) : '0);
         else if(rename_update || commit_update)
             free_list <= free_list_next;
-        else    
+        else
             free_list <= free_list;
     end
 

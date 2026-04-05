@@ -138,6 +138,7 @@ import rv32i_types::*;
     assign ROB_decode_o.old_p      = '0;
     assign ROB_decode_o.new_p      = '0;
     assign ROB_decode_o.rob_entry  = '0;
+    assign ROB_decode_o.checkpoint_id = '0;
     //execute
     assign ROB_decode_o.rs1_rdata  = '0;
     assign ROB_decode_o.rs2_rdata  = '0;

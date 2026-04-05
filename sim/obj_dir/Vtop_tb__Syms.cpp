@@ -95,6 +95,7 @@ Vtop_tb__Syms::Vtop_tb__Syms(VerilatedContext* contextp, const char* namep, Vtop
     // Setup export functions
     for (int __Vfinal = 0; __Vfinal < 2; ++__Vfinal) {
         __Vscope_top_tb__dut__cpu_midcore.varInsert(__Vfinal,"stall_alu_full", &(TOP__top_tb__dut__cpu_midcore.stall_alu_full), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top_tb__dut__cpu_midcore.varInsert(__Vfinal,"stall_checkpoint_full", &(TOP__top_tb__dut__cpu_midcore.stall_checkpoint_full), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top_tb__dut__cpu_midcore.varInsert(__Vfinal,"stall_cmp_full", &(TOP__top_tb__dut__cpu_midcore.stall_cmp_full), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top_tb__dut__cpu_midcore.varInsert(__Vfinal,"stall_jump_full", &(TOP__top_tb__dut__cpu_midcore.stall_jump_full), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top_tb__dut__cpu_midcore.varInsert(__Vfinal,"stall_load_full", &(TOP__top_tb__dut__cpu_midcore.stall_load_full), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);

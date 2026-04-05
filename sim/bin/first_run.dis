@@ -1,5 +1,5 @@
 
-/home/leon/RTL_Design/err_cpu/bin/../sim/bin/first_run.elf:     file format elf32-littleriscv
+/home/leon/RTL_Design/cpu-design/SuperScalar-RISC-V-CPU/bin/../sim/bin/first_run.elf:     file format elf32-littleriscv
 
 
 Disassembly of section .text:

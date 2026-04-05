@@ -6,7 +6,7 @@
 #include "Vtop_tb__Syms.h"
 #include "Vtop_tb_cpu_midcore.h"
 
-extern const VlWide<12>/*383:0*/ Vtop_tb__ConstPool__CONST_h7f9a7980_0;
+extern const VlWide<12>/*383:0*/ Vtop_tb__ConstPool__CONST_h3c5fcb02_0;
 
 VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midcore__0(Vtop_tb_cpu_midcore* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -20,7 +20,9 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                      | ((IData)(vlSelf->stall_store_full) 
                                         | ((IData)(vlSelf->stall_jump_full) 
                                            | ((IData)(vlSelf->stall_mul_full) 
-                                              | (IData)(vlSelf->stall_no_free_pr))))))));
+                                              | ((IData)(vlSelf->stall_no_free_pr) 
+                                                 | ((IData)(vlSelf->stall_checkpoint_full) 
+                                                    | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__exec_mispredict))))))))));
     vlSelf->__PVT__rename2__DOT__pr1_busy_tmp = (1U 
                                                  & ((IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename1_reg 
@@ -45,34 +47,34 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 8U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                   >> 3U)))) 
+                                                   >> 5U)))) 
                                   | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                      & ((0x3fU & (IData)(
                                                          (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                           >> 8U))) 
                                         == (0x3fU & 
                                             (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                             >> 3U))))) 
+                                             >> 5U))))) 
                                  | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                     & ((0x3fU & (IData)(
                                                         (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                          >> 8U))) 
                                        == (0x3fU & 
                                            (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                            >> 3U))))) 
+                                            >> 5U))))) 
                                 | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                    & ((0x3fU & (IData)(
                                                        (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                         >> 8U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                   & ((0x3fU & (IData)(
                                                       (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                        >> 8U))) 
                                      == (0x3fU & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                  >> 3U))))))) {
+                                                  >> 5U))))))) {
         vlSelf->__PVT__rename2__DOT__pr1_busy_tmp = 0U;
     }
     vlSelf->__PVT__rename2__DOT__pr2_busy_tmp = (1U 
@@ -99,54 +101,54 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 2U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                   >> 3U)))) 
+                                                   >> 5U)))) 
                                   | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                      & ((0x3fU & (IData)(
                                                          (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                           >> 2U))) 
                                         == (0x3fU & 
                                             (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                             >> 3U))))) 
+                                             >> 5U))))) 
                                  | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                     & ((0x3fU & (IData)(
                                                         (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                          >> 2U))) 
                                        == (0x3fU & 
                                            (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                            >> 3U))))) 
+                                            >> 5U))))) 
                                 | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                    & ((0x3fU & (IData)(
                                                        (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                         >> 2U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                   & ((0x3fU & (IData)(
                                                       (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                        >> 2U))) 
                                      == (0x3fU & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                  >> 3U))))))) {
+                                                  >> 5U))))))) {
         vlSelf->__PVT__rename2__DOT__pr2_busy_tmp = 0U;
     }
     vlSelf->__PVT__decode_request = (1U & ((~ (IData)(vlSelf->__PVT__stall)) 
                                            & (~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__fetch_empty))));
-    vlSelf->__Vcellinp__busy_table__rename_update = 
-        ((~ (IData)(vlSelf->__PVT__stall)) & (0x14000U 
-                                              == (0x14000U 
-                                                  & vlSelf->__PVT__ROB_rename1_reg[0xbU])));
-    vlSelf->__PVT__ROB_midcore_o[0U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0U];
-    vlSelf->__PVT__ROB_midcore_o[1U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[1U];
-    vlSelf->__PVT__ROB_midcore_o[2U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[2U];
-    vlSelf->__PVT__ROB_midcore_o[3U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[3U];
-    vlSelf->__PVT__ROB_midcore_o[4U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[4U];
-    vlSelf->__PVT__ROB_midcore_o[5U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[5U];
-    vlSelf->__PVT__ROB_midcore_o[6U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[6U];
-    vlSelf->__PVT__ROB_midcore_o[7U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[7U];
-    vlSelf->__PVT__ROB_midcore_o[8U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[8U];
-    vlSelf->__PVT__ROB_midcore_o[9U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[9U];
-    vlSelf->__PVT__ROB_midcore_o[0xaU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xaU];
-    vlSelf->__PVT__ROB_midcore_o[0xbU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xbU];
+    vlSelf->__PVT__cp_rename_update_o = ((~ (IData)(vlSelf->__PVT__stall)) 
+                                         & (0x50000U 
+                                            == (0x50000U 
+                                                & vlSelf->__PVT__ROB_rename1_reg[0xbU])));
+    vlSelf->__PVT__ROB_midcore_o[0U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0U];
+    vlSelf->__PVT__ROB_midcore_o[1U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[1U];
+    vlSelf->__PVT__ROB_midcore_o[2U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[2U];
+    vlSelf->__PVT__ROB_midcore_o[3U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[3U];
+    vlSelf->__PVT__ROB_midcore_o[4U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[4U];
+    vlSelf->__PVT__ROB_midcore_o[5U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[5U];
+    vlSelf->__PVT__ROB_midcore_o[6U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[6U];
+    vlSelf->__PVT__ROB_midcore_o[7U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[7U];
+    vlSelf->__PVT__ROB_midcore_o[8U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[8U];
+    vlSelf->__PVT__ROB_midcore_o[9U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[9U];
+    vlSelf->__PVT__ROB_midcore_o[0xaU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xaU];
+    vlSelf->__PVT__ROB_midcore_o[0xbU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xbU];
     vlSelf->__PVT__MIDCORE_midcore_o = 0ULL;
     if ((1U & (~ (IData)(vlSelf->__PVT__stall)))) {
         vlSelf->__PVT__ROB_midcore_o[0U] = vlSelf->__PVT__ROB_rename2_reg[0U];
@@ -161,6 +163,11 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
         vlSelf->__PVT__ROB_midcore_o[9U] = vlSelf->__PVT__ROB_rename2_reg[9U];
         vlSelf->__PVT__ROB_midcore_o[0xaU] = vlSelf->__PVT__ROB_rename2_reg[0xaU];
         vlSelf->__PVT__ROB_midcore_o[0xbU] = vlSelf->__PVT__ROB_rename2_reg[0xbU];
+        if (vlSelf->__PVT__is_br_or_jump) {
+            vlSelf->__PVT__ROB_midcore_o[0U] = ((0xfffffffcU 
+                                                 & vlSelf->__PVT__ROB_midcore_o[0U]) 
+                                                | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cp_checkpoint_id));
+        }
         vlSelf->__PVT__MIDCORE_midcore_o = vlSelf->__PVT__MIDCORE_rename2_reg;
     }
     vlSelf->__PVT__MIDCORE_rename2_wb_updated = vlSelf->__PVT__MIDCORE_rename2_reg;
@@ -172,7 +179,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                             >> 8U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                 >> 3U)))) 
+                                                 >> 5U)))) 
                                       | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                          & ((0x3fU 
                                              & (IData)(
@@ -180,28 +187,28 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 8U))) 
                                             == (0x3fU 
                                                 & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                      | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                         & ((0x3fU & (IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                              >> 8U))) 
                                            == (0x3fU 
                                                & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                  >> 3U))))) 
+                                                  >> 5U))))) 
                                     | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                        & ((0x3fU & (IData)(
                                                            (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                             >> 8U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                 >> 3U))))) 
+                                                 >> 5U))))) 
                                    | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                       & ((0x3fU & (IData)(
                                                           (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                            >> 8U))) 
                                          == (0x3fU 
                                              & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                >> 3U))))))) {
+                                                >> 5U))))))) {
             vlSelf->__PVT__MIDCORE_rename2_wb_updated 
                 = (0x3fffffffffffffdULL & vlSelf->__PVT__MIDCORE_rename2_wb_updated);
         }
@@ -212,7 +219,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                             >> 2U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                 >> 3U)))) 
+                                                 >> 5U)))) 
                                       | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                          & ((0x3fU 
                                              & (IData)(
@@ -220,28 +227,28 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 2U))) 
                                             == (0x3fU 
                                                 & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                      | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                         & ((0x3fU & (IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                              >> 2U))) 
                                            == (0x3fU 
                                                & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                  >> 3U))))) 
+                                                  >> 5U))))) 
                                     | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                        & ((0x3fU & (IData)(
                                                            (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                             >> 2U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                 >> 3U))))) 
+                                                 >> 5U))))) 
                                    | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                       & ((0x3fU & (IData)(
                                                           (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                            >> 2U))) 
                                          == (0x3fU 
                                              & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                >> 3U))))))) {
+                                                >> 5U))))))) {
             vlSelf->__PVT__MIDCORE_rename2_wb_updated 
                 = (0x3fffffffffffffeULL & vlSelf->__PVT__MIDCORE_rename2_wb_updated);
         }
@@ -318,11 +325,11 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__srat__DOT__srat_next[0x1fU] = vlSelf->__PVT__srat__DOT__srat
         [0x1fU];
     vlSelf->__PVT__free_list__DOT__free_list_next = vlSelf->__PVT__free_list__DOT__free_list;
-    if (vlSelf->__Vcellinp__busy_table__rename_update) {
+    if (vlSelf->__PVT__cp_rename_update_o) {
         vlSelf->__PVT__srat__DOT__srat_next[vlSelf->__PVT__rename_update_ar] 
-            = vlSelf->__PVT__rename_update_pr;
+            = vlSelf->__PVT__cp_rename_update_pr_o;
         vlSelf->__PVT__free_list__DOT__free_list_next 
-            = ((~ (1ULL << (IData)(vlSelf->__PVT__rename_update_pr))) 
+            = ((~ (1ULL << (IData)(vlSelf->__PVT__cp_rename_update_pr_o))) 
                & vlSelf->__PVT__free_list__DOT__free_list_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__Vcellinp__cpu_midcore__commit_update) {
@@ -330,9 +337,9 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
             = (vlSelf->__PVT__free_list__DOT__free_list_next 
                | ((QData)((IData)(1U)) << (0x3fU & 
                                            ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xbU] 
-                                             << 3U) 
+                                             << 1U) 
                                             | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
-                                               >> 0x1dU)))));
+                                               >> 0x1fU)))));
     }
     vlSelf->__PVT__ROB_rename1_o[0U] = vlSelf->__PVT__ROB_decode_o[0U];
     vlSelf->__PVT__ROB_rename1_o[1U] = vlSelf->__PVT__ROB_decode_o[1U];
@@ -346,16 +353,16 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__ROB_rename1_o[9U] = vlSelf->__PVT__ROB_decode_o[9U];
     vlSelf->__PVT__ROB_rename1_o[0xaU] = vlSelf->__PVT__ROB_decode_o[0xaU];
     vlSelf->__PVT__ROB_rename1_o[0xbU] = vlSelf->__PVT__ROB_decode_o[0xbU];
-    vlSelf->__PVT__ROB_rename1_o[0xaU] = ((0x1fffffffU 
+    vlSelf->__PVT__ROB_rename1_o[0xaU] = ((0x7fffffffU 
                                            & vlSelf->__PVT__ROB_rename1_o[0xaU]) 
-                                          | (((0x4000U 
+                                          | (((0x10000U 
                                                & vlSelf->__PVT__ROB_decode_o[0xbU])
-                                               ? (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                               ? (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                    & ((0x1fU 
                                                        & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                           >> 7U)) 
                                                       == (IData)(vlSelf->__PVT__rename_update_ar)))
-                                                   ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                   ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                    : 
                                                   vlSelf->__PVT__srat__DOT__srat
                                                   [
@@ -363,19 +370,19 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                    & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                       >> 7U))])
                                                : 0U) 
-                                             << 0x1dU));
-    vlSelf->__PVT__ROB_rename1_o[0xbU] = ((0x1fe00U 
+                                             << 0x1fU));
+    vlSelf->__PVT__ROB_rename1_o[0xbU] = ((0x7f800U 
                                            & vlSelf->__PVT__ROB_rename1_o[0xbU]) 
-                                          | (0x1ffffU 
-                                             & (((0x4000U 
+                                          | (0x7ffffU 
+                                             & (((0x10000U 
                                                   & vlSelf->__PVT__ROB_decode_o[0xbU])
                                                   ? 
-                                                 (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                 (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                    & ((0x1fU 
                                                        & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                           >> 7U)) 
                                                       == (IData)(vlSelf->__PVT__rename_update_ar)))
-                                                   ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                   ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                    : 
                                                   vlSelf->__PVT__srat__DOT__srat
                                                   [
@@ -383,21 +390,21 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                    & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                       >> 7U))])
                                                   : 0U) 
-                                                >> 3U)));
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0x1fU & vlSelf->__PVT__ROB_rename1_o[1U]);
+                                                >> 1U)));
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0x7fU & vlSelf->__PVT__ROB_rename1_o[1U]);
     vlSelf->__PVT__ROB_rename1_o[2U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[3U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[4U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[5U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[6U] = 0U;
-    vlSelf->__PVT__ROB_rename1_o[7U] = (0xfffe0000U 
+    vlSelf->__PVT__ROB_rename1_o[7U] = (0xfff80000U 
                                         & vlSelf->__PVT__ROB_rename1_o[7U]);
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffffbU 
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0xffffffefU 
                                         & vlSelf->__PVT__ROB_rename1_o[1U]);
-    vlSelf->__PVT__ROB_rename1_o[0U] = 0U;
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffffeU 
+    vlSelf->__PVT__ROB_rename1_o[0U] = (3U & vlSelf->__PVT__ROB_rename1_o[0U]);
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffff8U 
                                         & vlSelf->__PVT__ROB_rename1_o[1U]);
-    vlSelf->__PVT__ROB_rename1_o[0xbU] = (0x17fffU 
+    vlSelf->__PVT__ROB_rename1_o[0xbU] = (0x5ffffU 
                                           & vlSelf->__PVT__ROB_rename1_o[0xbU]);
     vlSelf->__PVT__MIDCORE_rename1_o = vlSelf->__PVT__MIDCORE_decode_o;
     vlSelf->__PVT__MIDCORE_rename1_o = ((0x3ffffffffffc003ULL 
@@ -408,10 +415,10 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                                          (vlSelf->__PVT__MIDCORE_decode_o 
                                                                           >> 0xfU)))
                                                                ? 
-                                                              (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                              (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                                 & ((IData)(vlSelf->__PVT__rename_update_ar) 
                                                                    == (IData)(vlSelf->__PVT__srat_lookup_rs1)))
-                                                                ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                                ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                                 : 
                                                                vlSelf->__PVT__srat__DOT__srat
                                                                [vlSelf->__PVT__srat_lookup_rs1])
@@ -422,13 +429,13 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                                           (vlSelf->__PVT__MIDCORE_decode_o 
                                                                            >> 0xeU)))
                                                                 ? 
-                                                               (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                               (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                                  & ((IData)(vlSelf->__PVT__rename_update_ar) 
                                                                     == 
                                                                     (0x1fU 
                                                                      & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                                         >> 0x14U))))
-                                                                 ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                                 ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                                  : 
                                                                 vlSelf->__PVT__srat__DOT__srat
                                                                 [
@@ -440,10 +447,10 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__MIDCORE_rename1_o = (0x3fffffffffffffcULL 
                                         & vlSelf->__PVT__MIDCORE_rename1_o);
     vlSelf->__PVT__busy_table__DOT__bt_next = vlSelf->__PVT__busy_table__DOT__bt;
-    if (vlSelf->__Vcellinp__busy_table__rename_update) {
+    if (vlSelf->__PVT__cp_rename_update_o) {
         vlSelf->__PVT__busy_table__DOT__bt_next = (vlSelf->__PVT__busy_table__DOT__bt_next 
                                                    | ((QData)((IData)(1U)) 
-                                                      << (IData)(vlSelf->__PVT__rename_update_pr)));
+                                                      << (IData)(vlSelf->__PVT__cp_rename_update_pr_o)));
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_alu) {
         vlSelf->__PVT__busy_table__DOT__bt_next = (
@@ -452,7 +459,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_load) {
@@ -462,7 +469,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) {
@@ -472,7 +479,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) {
@@ -482,7 +489,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) {
@@ -492,7 +499,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
 }
@@ -504,10 +511,12 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     Vtop_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+          Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__0\n"); );
     // Init
+    CData/*0:0*/ __VdfgTmp_h18e5b6a6__0;
+    __VdfgTmp_h18e5b6a6__0 = 0;
     CData/*7:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
-    VlWide<12>/*368:0*/ __Vdly__ROB_rename2_reg;
-    VL_ZERO_W(369, __Vdly__ROB_rename2_reg);
+    VlWide<12>/*370:0*/ __Vdly__ROB_rename2_reg;
+    VL_ZERO_W(371, __Vdly__ROB_rename2_reg);
     CData/*0:0*/ __Vdlyvset__srat__DOT__srat__v0;
     __Vdlyvset__srat__DOT__srat__v0 = 0;
     CData/*5:0*/ __Vdlyvval__srat__DOT__srat__v32;
@@ -595,79 +604,87 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     if (vlSymsp->TOP__top_tb.__Vcellinp__dut__rst) {
         vlSelf->__PVT__srat__DOT__unnamedblk1__DOT__i = 0x20U;
         vlSelf->__PVT__busy_table__DOT__bt = 0ULL;
-        __Vdlyvset__srat__DOT__srat__v0 = 1U;
         vlSelf->__PVT__free_list__DOT__free_list = 0xffffffff00000000ULL;
+        __Vdlyvset__srat__DOT__srat__v0 = 1U;
     } else {
-        if (vlSymsp->TOP__top_tb__dut.__PVT__mispredict) {
-            vlSelf->__PVT__busy_table__DOT__bt = 0ULL;
-            __Vdlyvval__srat__DOT__srat__v32 = vlSelf->__PVT__mispredict_arat
-                [0U];
-            __Vdlyvval__srat__DOT__srat__v33 = vlSelf->__PVT__mispredict_arat
-                [1U];
-            __Vdlyvval__srat__DOT__srat__v34 = vlSelf->__PVT__mispredict_arat
-                [2U];
-            __Vdlyvval__srat__DOT__srat__v35 = vlSelf->__PVT__mispredict_arat
-                [3U];
-            __Vdlyvval__srat__DOT__srat__v36 = vlSelf->__PVT__mispredict_arat
-                [4U];
-            __Vdlyvval__srat__DOT__srat__v37 = vlSelf->__PVT__mispredict_arat
-                [5U];
-            __Vdlyvval__srat__DOT__srat__v38 = vlSelf->__PVT__mispredict_arat
-                [6U];
-            __Vdlyvval__srat__DOT__srat__v39 = vlSelf->__PVT__mispredict_arat
-                [7U];
-            __Vdlyvval__srat__DOT__srat__v40 = vlSelf->__PVT__mispredict_arat
-                [8U];
-            __Vdlyvval__srat__DOT__srat__v41 = vlSelf->__PVT__mispredict_arat
-                [9U];
-            __Vdlyvval__srat__DOT__srat__v42 = vlSelf->__PVT__mispredict_arat
-                [0xaU];
-            __Vdlyvval__srat__DOT__srat__v43 = vlSelf->__PVT__mispredict_arat
-                [0xbU];
-            __Vdlyvval__srat__DOT__srat__v44 = vlSelf->__PVT__mispredict_arat
-                [0xcU];
-            __Vdlyvval__srat__DOT__srat__v45 = vlSelf->__PVT__mispredict_arat
-                [0xdU];
-            __Vdlyvval__srat__DOT__srat__v46 = vlSelf->__PVT__mispredict_arat
-                [0xeU];
-            __Vdlyvval__srat__DOT__srat__v47 = vlSelf->__PVT__mispredict_arat
-                [0xfU];
-            __Vdlyvval__srat__DOT__srat__v48 = vlSelf->__PVT__mispredict_arat
-                [0x10U];
-            __Vdlyvval__srat__DOT__srat__v49 = vlSelf->__PVT__mispredict_arat
-                [0x11U];
-            __Vdlyvval__srat__DOT__srat__v50 = vlSelf->__PVT__mispredict_arat
-                [0x12U];
-            __Vdlyvval__srat__DOT__srat__v51 = vlSelf->__PVT__mispredict_arat
-                [0x13U];
-            __Vdlyvval__srat__DOT__srat__v52 = vlSelf->__PVT__mispredict_arat
-                [0x14U];
-            __Vdlyvval__srat__DOT__srat__v53 = vlSelf->__PVT__mispredict_arat
-                [0x15U];
-            __Vdlyvval__srat__DOT__srat__v54 = vlSelf->__PVT__mispredict_arat
-                [0x16U];
-            __Vdlyvval__srat__DOT__srat__v55 = vlSelf->__PVT__mispredict_arat
-                [0x17U];
-            __Vdlyvval__srat__DOT__srat__v56 = vlSelf->__PVT__mispredict_arat
-                [0x18U];
-            __Vdlyvval__srat__DOT__srat__v57 = vlSelf->__PVT__mispredict_arat
-                [0x19U];
-            __Vdlyvval__srat__DOT__srat__v58 = vlSelf->__PVT__mispredict_arat
-                [0x1aU];
-            __Vdlyvval__srat__DOT__srat__v59 = vlSelf->__PVT__mispredict_arat
-                [0x1bU];
-            __Vdlyvval__srat__DOT__srat__v60 = vlSelf->__PVT__mispredict_arat
-                [0x1cU];
-            __Vdlyvval__srat__DOT__srat__v61 = vlSelf->__PVT__mispredict_arat
-                [0x1dU];
-            __Vdlyvval__srat__DOT__srat__v62 = vlSelf->__PVT__mispredict_arat
-                [0x1eU];
-            __Vdlyvval__srat__DOT__srat__v63 = vlSelf->__PVT__mispredict_arat
-                [0x1fU];
+        if (vlSymsp->TOP__top_tb__dut.__PVT__exec_mispredict) {
+            vlSelf->__PVT__busy_table__DOT__bt = vlSymsp->TOP__top_tb__dut.__PVT__bt_rebuild;
             vlSelf->__PVT__free_list__DOT__free_list 
-                = vlSelf->__PVT__free_list__DOT__free_list_recovery;
+                = ((vlSelf->__PVT__free_list__DOT__free_list 
+                    | vlSymsp->TOP__top_tb__dut.__PVT__checkpoint__DOT__cp_alloc_list
+                    [vlSymsp->TOP__top_tb__dut.__PVT__exec_checkpoint_id]) 
+                   | ((IData)(vlSymsp->TOP__top_tb__dut.__Vcellinp__cpu_midcore__commit_update)
+                       ? (1ULL << (0x3fU & ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xbU] 
+                                             << 1U) 
+                                            | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
+                                               >> 0x1fU))))
+                       : 0ULL));
+            __Vdlyvval__srat__DOT__srat__v32 = vlSelf->__PVT__recover_srat_i
+                [0U];
+            __Vdlyvval__srat__DOT__srat__v33 = vlSelf->__PVT__recover_srat_i
+                [1U];
+            __Vdlyvval__srat__DOT__srat__v34 = vlSelf->__PVT__recover_srat_i
+                [2U];
+            __Vdlyvval__srat__DOT__srat__v35 = vlSelf->__PVT__recover_srat_i
+                [3U];
+            __Vdlyvval__srat__DOT__srat__v36 = vlSelf->__PVT__recover_srat_i
+                [4U];
+            __Vdlyvval__srat__DOT__srat__v37 = vlSelf->__PVT__recover_srat_i
+                [5U];
+            __Vdlyvval__srat__DOT__srat__v38 = vlSelf->__PVT__recover_srat_i
+                [6U];
+            __Vdlyvval__srat__DOT__srat__v39 = vlSelf->__PVT__recover_srat_i
+                [7U];
+            __Vdlyvval__srat__DOT__srat__v40 = vlSelf->__PVT__recover_srat_i
+                [8U];
+            __Vdlyvval__srat__DOT__srat__v41 = vlSelf->__PVT__recover_srat_i
+                [9U];
+            __Vdlyvval__srat__DOT__srat__v42 = vlSelf->__PVT__recover_srat_i
+                [0xaU];
+            __Vdlyvval__srat__DOT__srat__v43 = vlSelf->__PVT__recover_srat_i
+                [0xbU];
+            __Vdlyvval__srat__DOT__srat__v44 = vlSelf->__PVT__recover_srat_i
+                [0xcU];
+            __Vdlyvval__srat__DOT__srat__v45 = vlSelf->__PVT__recover_srat_i
+                [0xdU];
+            __Vdlyvval__srat__DOT__srat__v46 = vlSelf->__PVT__recover_srat_i
+                [0xeU];
+            __Vdlyvval__srat__DOT__srat__v47 = vlSelf->__PVT__recover_srat_i
+                [0xfU];
+            __Vdlyvval__srat__DOT__srat__v48 = vlSelf->__PVT__recover_srat_i
+                [0x10U];
+            __Vdlyvval__srat__DOT__srat__v49 = vlSelf->__PVT__recover_srat_i
+                [0x11U];
+            __Vdlyvval__srat__DOT__srat__v50 = vlSelf->__PVT__recover_srat_i
+                [0x12U];
+            __Vdlyvval__srat__DOT__srat__v51 = vlSelf->__PVT__recover_srat_i
+                [0x13U];
+            __Vdlyvval__srat__DOT__srat__v52 = vlSelf->__PVT__recover_srat_i
+                [0x14U];
+            __Vdlyvval__srat__DOT__srat__v53 = vlSelf->__PVT__recover_srat_i
+                [0x15U];
+            __Vdlyvval__srat__DOT__srat__v54 = vlSelf->__PVT__recover_srat_i
+                [0x16U];
+            __Vdlyvval__srat__DOT__srat__v55 = vlSelf->__PVT__recover_srat_i
+                [0x17U];
+            __Vdlyvval__srat__DOT__srat__v56 = vlSelf->__PVT__recover_srat_i
+                [0x18U];
+            __Vdlyvval__srat__DOT__srat__v57 = vlSelf->__PVT__recover_srat_i
+                [0x19U];
+            __Vdlyvval__srat__DOT__srat__v58 = vlSelf->__PVT__recover_srat_i
+                [0x1aU];
+            __Vdlyvval__srat__DOT__srat__v59 = vlSelf->__PVT__recover_srat_i
+                [0x1bU];
+            __Vdlyvval__srat__DOT__srat__v60 = vlSelf->__PVT__recover_srat_i
+                [0x1cU];
+            __Vdlyvval__srat__DOT__srat__v61 = vlSelf->__PVT__recover_srat_i
+                [0x1dU];
+            __Vdlyvval__srat__DOT__srat__v62 = vlSelf->__PVT__recover_srat_i
+                [0x1eU];
+            __Vdlyvval__srat__DOT__srat__v63 = vlSelf->__PVT__recover_srat_i
+                [0x1fU];
         } else {
-            vlSelf->__PVT__busy_table__DOT__bt = (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+            vlSelf->__PVT__busy_table__DOT__bt = (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                    | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_alu) 
                                                       | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                                          | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
@@ -675,7 +692,12 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul))))))
                                                    ? vlSelf->__PVT__busy_table__DOT__bt_next
                                                    : vlSelf->__PVT__busy_table__DOT__bt);
-            if (vlSelf->__Vcellinp__busy_table__rename_update) {
+            vlSelf->__PVT__free_list__DOT__free_list 
+                = (((IData)(vlSelf->__PVT__cp_rename_update_o) 
+                    | (IData)(vlSymsp->TOP__top_tb__dut.__Vcellinp__cpu_midcore__commit_update))
+                    ? vlSelf->__PVT__free_list__DOT__free_list_next
+                    : vlSelf->__PVT__free_list__DOT__free_list);
+            if (vlSelf->__PVT__cp_rename_update_o) {
                 __Vdlyvval__srat__DOT__srat__v32 = 
                     vlSelf->__PVT__srat__DOT__srat_next
                     [0U];
@@ -838,11 +860,6 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                 __Vdlyvval__srat__DOT__srat__v63 = 
                     vlSelf->__PVT__srat__DOT__srat[0x1fU];
             }
-            vlSelf->__PVT__free_list__DOT__free_list 
-                = (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
-                    | (IData)(vlSymsp->TOP__top_tb__dut.__Vcellinp__cpu_midcore__commit_update))
-                    ? vlSelf->__PVT__free_list__DOT__free_list_next
-                    : vlSelf->__PVT__free_list__DOT__free_list);
         }
         __Vdlyvset__srat__DOT__srat__v32 = 1U;
     }
@@ -887,32 +904,32 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                       (0x7fU 
                                                        & vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst)));
     if (((IData)(vlSymsp->TOP__top_tb.__Vcellinp__dut__rst) 
-         | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__mispredict))) {
+         | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__exec_mispredict))) {
         vlSelf->__PVT__MIDCORE_rename1_reg = 0ULL;
-        __Vtemp_3[1U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[1U];
-        __Vtemp_3[2U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[2U];
-        __Vtemp_3[3U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[3U];
-        __Vtemp_3[4U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[4U];
-        __Vtemp_3[5U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[5U];
-        __Vtemp_3[6U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[6U];
-        __Vtemp_3[7U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[7U];
-        __Vtemp_3[8U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[8U];
-        __Vtemp_3[9U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[9U];
-        __Vtemp_3[0xaU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xaU];
-        __Vtemp_3[0xbU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xbU];
-        vlSelf->__PVT__ROB_rename1_reg[0U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0U];
-        __Vdly__ROB_rename2_reg[0U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0U];
-        __Vdly__ROB_rename2_reg[1U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[1U];
-        __Vdly__ROB_rename2_reg[2U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[2U];
-        __Vdly__ROB_rename2_reg[3U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[3U];
-        __Vdly__ROB_rename2_reg[4U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[4U];
-        __Vdly__ROB_rename2_reg[5U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[5U];
-        __Vdly__ROB_rename2_reg[6U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[6U];
-        __Vdly__ROB_rename2_reg[7U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[7U];
-        __Vdly__ROB_rename2_reg[8U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[8U];
-        __Vdly__ROB_rename2_reg[9U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[9U];
-        __Vdly__ROB_rename2_reg[0xaU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xaU];
-        __Vdly__ROB_rename2_reg[0xbU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xbU];
+        __Vtemp_3[1U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[1U];
+        __Vtemp_3[2U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[2U];
+        __Vtemp_3[3U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[3U];
+        __Vtemp_3[4U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[4U];
+        __Vtemp_3[5U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[5U];
+        __Vtemp_3[6U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[6U];
+        __Vtemp_3[7U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[7U];
+        __Vtemp_3[8U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[8U];
+        __Vtemp_3[9U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[9U];
+        __Vtemp_3[0xaU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xaU];
+        __Vtemp_3[0xbU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xbU];
+        vlSelf->__PVT__ROB_rename1_reg[0U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0U];
+        __Vdly__ROB_rename2_reg[0U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0U];
+        __Vdly__ROB_rename2_reg[1U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[1U];
+        __Vdly__ROB_rename2_reg[2U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[2U];
+        __Vdly__ROB_rename2_reg[3U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[3U];
+        __Vdly__ROB_rename2_reg[4U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[4U];
+        __Vdly__ROB_rename2_reg[5U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[5U];
+        __Vdly__ROB_rename2_reg[6U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[6U];
+        __Vdly__ROB_rename2_reg[7U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[7U];
+        __Vdly__ROB_rename2_reg[8U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[8U];
+        __Vdly__ROB_rename2_reg[9U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[9U];
+        __Vdly__ROB_rename2_reg[0xaU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xaU];
+        __Vdly__ROB_rename2_reg[0xbU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xbU];
         vlSelf->__PVT__MIDCORE_rename2_reg = 0ULL;
     } else if (vlSelf->__PVT__stall) {
         vlSelf->__PVT__MIDCORE_rename1_reg = vlSelf->__PVT__MIDCORE_rename1_reg;
@@ -967,15 +984,15 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
         __Vdly__ROB_rename2_reg[9U] = vlSelf->__PVT__ROB_rename2_o[9U];
         __Vdly__ROB_rename2_reg[0xaU] = vlSelf->__PVT__ROB_rename2_o[0xaU];
         __Vdly__ROB_rename2_reg[0xbU] = vlSelf->__PVT__ROB_rename2_o[0xbU];
-        __Vdly__ROB_rename2_reg[5U] = ((0xfffe1fffU 
+        __Vdly__ROB_rename2_reg[5U] = ((0xfff87fffU 
                                         & __Vdly__ROB_rename2_reg[5U]) 
-                                       | (0x1e000U 
+                                       | (0x78000U 
                                           & (((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__rob__DOT__wrPtr) 
                                               + (1U 
                                                  & ((vlSelf->__PVT__ROB_rename2_reg[0xbU] 
-                                                     >> 0x10U) 
-                                                    & (~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__mispredict))))) 
-                                             << 0xdU)));
+                                                     >> 0x12U) 
+                                                    & (~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__exec_mispredict))))) 
+                                             << 0xfU)));
         vlSelf->__PVT__MIDCORE_rename2_reg = vlSelf->__PVT__MIDCORE_rename2_o;
     }
     vlSelf->__PVT__ROB_rename1_reg[1U] = __Vtemp_3[1U];
@@ -1300,7 +1317,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                  == 
                                                                  (0x7fU 
                                                                   & vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst)))) 
-                                                << 0x24U) 
+                                                << 0x26U) 
                                                | (((QData)((IData)(
                                                                    ((0x6fU 
                                                                      == 
@@ -1310,19 +1327,19 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                        == 
                                                                        (0x7fU 
                                                                         & vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst))))) 
-                                                   << 0x23U) 
+                                                   << 0x25U) 
                                                   | ((QData)((IData)(
                                                                      vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__branch_taken_fifo__DOT__mem
                                                                      [
                                                                      (7U 
                                                                       & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__branch_taken_fifo__DOT__rdPtr))])) 
-                                                     << 0x21U))));
+                                                     << 0x23U))));
     vlSelf->__PVT__ROB_decode_o[1U] = (IData)(((((QData)((IData)(
                                                                  (0x63U 
                                                                   == 
                                                                   (0x7fU 
                                                                    & vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst)))) 
-                                                 << 0x24U) 
+                                                 << 0x26U) 
                                                 | (((QData)((IData)(
                                                                     ((0x6fU 
                                                                       == 
@@ -1332,13 +1349,13 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                         == 
                                                                         (0x7fU 
                                                                          & vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst))))) 
-                                                    << 0x23U) 
+                                                    << 0x25U) 
                                                    | ((QData)((IData)(
                                                                       vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__branch_taken_fifo__DOT__mem
                                                                       [
                                                                       (7U 
                                                                        & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__branch_taken_fifo__DOT__rdPtr))])) 
-                                                      << 0x21U))) 
+                                                      << 0x23U))) 
                                                >> 0x20U));
     vlSelf->__PVT__ROB_decode_o[2U] = 0U;
     vlSelf->__PVT__ROB_decode_o[3U] = 0U;
@@ -1346,18 +1363,18 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__ROB_decode_o[5U] = 0U;
     vlSelf->__PVT__ROB_decode_o[6U] = 0U;
     vlSelf->__PVT__ROB_decode_o[7U] = ((vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
-                                        << 0x1dU) | 
+                                        << 0x1fU) | 
                                        (((IData)(vlSelf->__PVT__decode__DOT__rs1_valid) 
-                                         << 0x1cU) 
+                                         << 0x1eU) 
                                         | (((IData)(vlSelf->__PVT__decode__DOT__rs2_valid) 
-                                            << 0x1bU) 
+                                            << 0x1dU) 
                                            | (((IData)(vlSelf->__PVT__srat_lookup_rs1) 
-                                               << 0x16U) 
-                                              | (0x3e0000U 
+                                               << 0x18U) 
+                                              | (0xf80000U 
                                                  & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
-                                                    >> 3U))))));
+                                                    >> 1U))))));
     vlSelf->__PVT__ROB_decode_o[8U] = ((vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
-                                        >> 3U) | ((IData)(
+                                        >> 1U) | ((IData)(
                                                           (((QData)((IData)(
                                                                             vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_fifo__DOT__mem
                                                                             [
@@ -1369,7 +1386,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                              [
                                                                              (7U 
                                                                               & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_next_fifo__DOT__rdPtr))])))) 
-                                                  << 0x1dU));
+                                                  << 0x1fU));
     vlSelf->__PVT__ROB_decode_o[9U] = (((IData)((((QData)((IData)(
                                                                   vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_fifo__DOT__mem
                                                                   [
@@ -1381,7 +1398,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                    [
                                                                    (7U 
                                                                     & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_next_fifo__DOT__rdPtr))])))) 
-                                        >> 3U) | ((IData)(
+                                        >> 1U) | ((IData)(
                                                           ((((QData)((IData)(
                                                                              vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_fifo__DOT__mem
                                                                              [
@@ -1394,7 +1411,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                               (7U 
                                                                                & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_next_fifo__DOT__rdPtr))]))) 
                                                            >> 0x20U)) 
-                                                  << 0x1dU));
+                                                  << 0x1fU));
     vlSelf->__PVT__ROB_decode_o[0xaU] = ((IData)(((
                                                    ((QData)((IData)(
                                                                     vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_fifo__DOT__mem
@@ -1408,10 +1425,10 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                      (7U 
                                                                       & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch_queue__DOT__pc_next_fifo__DOT__rdPtr))]))) 
                                                   >> 0x20U)) 
-                                         >> 3U);
-    vlSelf->__PVT__ROB_decode_o[0xbU] = ((0x10000U 
+                                         >> 1U);
+    vlSelf->__PVT__ROB_decode_o[0xbU] = ((0x40000U 
                                           & ((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__fetch_empty)) 
-                                             << 0x10U)) 
+                                             << 0x12U)) 
                                          | (((((IData)(vlSelf->decode__DOT____VdfgTmp_h90d7ced5__0) 
                                                | ((3U 
                                                    == 
@@ -1431,14 +1448,15 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                  (0x1fU 
                                                   & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                      >> 7U)))) 
-                                             << 0xeU) 
-                                            | (0x3e00U 
+                                             << 0x10U) 
+                                            | (0xf800U 
                                                & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
-                                                  << 2U))));
-    vlSelf->__PVT__rename_update_ar = ((0x4000U & vlSelf->__PVT__ROB_rename1_reg[0xbU])
+                                                  << 4U))));
+    vlSelf->__PVT__rename_update_ar = ((0x10000U & 
+                                        vlSelf->__PVT__ROB_rename1_reg[0xbU])
                                         ? (0x1fU & 
                                            (vlSelf->__PVT__ROB_rename1_reg[0xbU] 
-                                            >> 9U))
+                                            >> 0xbU))
                                         : 0U);
     vlSelf->__PVT__free_pr = 0U;
     if ((1U & (IData)(vlSelf->__PVT__free_list__DOT__free_list))) {
@@ -1949,19 +1967,82 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
         vlSelf->__PVT__free_pr = 0x3fU;
         vlSelf->__PVT__free_pr_valid = 1U;
     }
+    vlSelf->__PVT__srat_o[0U] = vlSelf->__PVT__srat__DOT__srat
+        [0U];
+    vlSelf->__PVT__srat_o[1U] = vlSelf->__PVT__srat__DOT__srat
+        [1U];
+    vlSelf->__PVT__srat_o[2U] = vlSelf->__PVT__srat__DOT__srat
+        [2U];
+    vlSelf->__PVT__srat_o[3U] = vlSelf->__PVT__srat__DOT__srat
+        [3U];
+    vlSelf->__PVT__srat_o[4U] = vlSelf->__PVT__srat__DOT__srat
+        [4U];
+    vlSelf->__PVT__srat_o[5U] = vlSelf->__PVT__srat__DOT__srat
+        [5U];
+    vlSelf->__PVT__srat_o[6U] = vlSelf->__PVT__srat__DOT__srat
+        [6U];
+    vlSelf->__PVT__srat_o[7U] = vlSelf->__PVT__srat__DOT__srat
+        [7U];
+    vlSelf->__PVT__srat_o[8U] = vlSelf->__PVT__srat__DOT__srat
+        [8U];
+    vlSelf->__PVT__srat_o[9U] = vlSelf->__PVT__srat__DOT__srat
+        [9U];
+    vlSelf->__PVT__srat_o[0xaU] = vlSelf->__PVT__srat__DOT__srat
+        [0xaU];
+    vlSelf->__PVT__srat_o[0xbU] = vlSelf->__PVT__srat__DOT__srat
+        [0xbU];
+    vlSelf->__PVT__srat_o[0xcU] = vlSelf->__PVT__srat__DOT__srat
+        [0xcU];
+    vlSelf->__PVT__srat_o[0xdU] = vlSelf->__PVT__srat__DOT__srat
+        [0xdU];
+    vlSelf->__PVT__srat_o[0xeU] = vlSelf->__PVT__srat__DOT__srat
+        [0xeU];
+    vlSelf->__PVT__srat_o[0xfU] = vlSelf->__PVT__srat__DOT__srat
+        [0xfU];
+    vlSelf->__PVT__srat_o[0x10U] = vlSelf->__PVT__srat__DOT__srat
+        [0x10U];
+    vlSelf->__PVT__srat_o[0x11U] = vlSelf->__PVT__srat__DOT__srat
+        [0x11U];
+    vlSelf->__PVT__srat_o[0x12U] = vlSelf->__PVT__srat__DOT__srat
+        [0x12U];
+    vlSelf->__PVT__srat_o[0x13U] = vlSelf->__PVT__srat__DOT__srat
+        [0x13U];
+    vlSelf->__PVT__srat_o[0x14U] = vlSelf->__PVT__srat__DOT__srat
+        [0x14U];
+    vlSelf->__PVT__srat_o[0x15U] = vlSelf->__PVT__srat__DOT__srat
+        [0x15U];
+    vlSelf->__PVT__srat_o[0x16U] = vlSelf->__PVT__srat__DOT__srat
+        [0x16U];
+    vlSelf->__PVT__srat_o[0x17U] = vlSelf->__PVT__srat__DOT__srat
+        [0x17U];
+    vlSelf->__PVT__srat_o[0x18U] = vlSelf->__PVT__srat__DOT__srat
+        [0x18U];
+    vlSelf->__PVT__srat_o[0x19U] = vlSelf->__PVT__srat__DOT__srat
+        [0x19U];
+    vlSelf->__PVT__srat_o[0x1aU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1aU];
+    vlSelf->__PVT__srat_o[0x1bU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1bU];
+    vlSelf->__PVT__srat_o[0x1cU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1cU];
+    vlSelf->__PVT__srat_o[0x1dU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1dU];
+    vlSelf->__PVT__srat_o[0x1eU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1eU];
+    vlSelf->__PVT__srat_o[0x1fU] = vlSelf->__PVT__srat__DOT__srat
+        [0x1fU];
+    __VdfgTmp_h18e5b6a6__0 = ((4U == (7U & (IData)(
+                                                   (vlSelf->__PVT__MIDCORE_rename2_reg 
+                                                    >> 0x17U)))) 
+                              | (5U == (7U & (IData)(
+                                                     (vlSelf->__PVT__MIDCORE_rename2_reg 
+                                                      >> 0x17U)))));
     vlSelf->stall_alu_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__alu_full) 
                               & (0ULL == (0x3800000ULL 
                                           & vlSelf->__PVT__MIDCORE_rename2_reg)));
     vlSelf->stall_cmp_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cmp_full) 
                               & (0x800000ULL == (0x3800000ULL 
                                                  & vlSelf->__PVT__MIDCORE_rename2_reg)));
-    vlSelf->stall_jump_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__jump_full) 
-                               & ((4U == (7U & (IData)(
-                                                       (vlSelf->__PVT__MIDCORE_rename2_reg 
-                                                        >> 0x17U)))) 
-                                  | (5U == (7U & (IData)(
-                                                         (vlSelf->__PVT__MIDCORE_rename2_reg 
-                                                          >> 0x17U))))));
     vlSelf->stall_mul_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__mul_full) 
                               & (0x3000000ULL == (0x3800000ULL 
                                                   & vlSelf->__PVT__MIDCORE_rename2_reg)));
@@ -1971,9 +2052,81 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->stall_store_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__load_full) 
                                 & (0x1800000ULL == 
                                    (0x3800000ULL & vlSelf->__PVT__MIDCORE_rename2_reg)));
-    vlSelf->__PVT__rename_update_pr = ((IData)(vlSelf->__PVT__free_pr_valid)
-                                        ? (IData)(vlSelf->__PVT__free_pr)
-                                        : 0U);
+    vlSelf->__PVT__cp_rename_update_pr_o = ((IData)(vlSelf->__PVT__free_pr_valid)
+                                             ? (IData)(vlSelf->__PVT__free_pr)
+                                             : 0U);
+    vlSelf->__PVT__cp_dispatch_srat[0U] = vlSelf->__PVT__srat_o
+        [0U];
+    vlSelf->__PVT__cp_dispatch_srat[1U] = vlSelf->__PVT__srat_o
+        [1U];
+    vlSelf->__PVT__cp_dispatch_srat[2U] = vlSelf->__PVT__srat_o
+        [2U];
+    vlSelf->__PVT__cp_dispatch_srat[3U] = vlSelf->__PVT__srat_o
+        [3U];
+    vlSelf->__PVT__cp_dispatch_srat[4U] = vlSelf->__PVT__srat_o
+        [4U];
+    vlSelf->__PVT__cp_dispatch_srat[5U] = vlSelf->__PVT__srat_o
+        [5U];
+    vlSelf->__PVT__cp_dispatch_srat[6U] = vlSelf->__PVT__srat_o
+        [6U];
+    vlSelf->__PVT__cp_dispatch_srat[7U] = vlSelf->__PVT__srat_o
+        [7U];
+    vlSelf->__PVT__cp_dispatch_srat[8U] = vlSelf->__PVT__srat_o
+        [8U];
+    vlSelf->__PVT__cp_dispatch_srat[9U] = vlSelf->__PVT__srat_o
+        [9U];
+    vlSelf->__PVT__cp_dispatch_srat[0xaU] = vlSelf->__PVT__srat_o
+        [0xaU];
+    vlSelf->__PVT__cp_dispatch_srat[0xbU] = vlSelf->__PVT__srat_o
+        [0xbU];
+    vlSelf->__PVT__cp_dispatch_srat[0xcU] = vlSelf->__PVT__srat_o
+        [0xcU];
+    vlSelf->__PVT__cp_dispatch_srat[0xdU] = vlSelf->__PVT__srat_o
+        [0xdU];
+    vlSelf->__PVT__cp_dispatch_srat[0xeU] = vlSelf->__PVT__srat_o
+        [0xeU];
+    vlSelf->__PVT__cp_dispatch_srat[0xfU] = vlSelf->__PVT__srat_o
+        [0xfU];
+    vlSelf->__PVT__cp_dispatch_srat[0x10U] = vlSelf->__PVT__srat_o
+        [0x10U];
+    vlSelf->__PVT__cp_dispatch_srat[0x11U] = vlSelf->__PVT__srat_o
+        [0x11U];
+    vlSelf->__PVT__cp_dispatch_srat[0x12U] = vlSelf->__PVT__srat_o
+        [0x12U];
+    vlSelf->__PVT__cp_dispatch_srat[0x13U] = vlSelf->__PVT__srat_o
+        [0x13U];
+    vlSelf->__PVT__cp_dispatch_srat[0x14U] = vlSelf->__PVT__srat_o
+        [0x14U];
+    vlSelf->__PVT__cp_dispatch_srat[0x15U] = vlSelf->__PVT__srat_o
+        [0x15U];
+    vlSelf->__PVT__cp_dispatch_srat[0x16U] = vlSelf->__PVT__srat_o
+        [0x16U];
+    vlSelf->__PVT__cp_dispatch_srat[0x17U] = vlSelf->__PVT__srat_o
+        [0x17U];
+    vlSelf->__PVT__cp_dispatch_srat[0x18U] = vlSelf->__PVT__srat_o
+        [0x18U];
+    vlSelf->__PVT__cp_dispatch_srat[0x19U] = vlSelf->__PVT__srat_o
+        [0x19U];
+    vlSelf->__PVT__cp_dispatch_srat[0x1aU] = vlSelf->__PVT__srat_o
+        [0x1aU];
+    vlSelf->__PVT__cp_dispatch_srat[0x1bU] = vlSelf->__PVT__srat_o
+        [0x1bU];
+    vlSelf->__PVT__cp_dispatch_srat[0x1cU] = vlSelf->__PVT__srat_o
+        [0x1cU];
+    vlSelf->__PVT__cp_dispatch_srat[0x1dU] = vlSelf->__PVT__srat_o
+        [0x1dU];
+    vlSelf->__PVT__cp_dispatch_srat[0x1eU] = vlSelf->__PVT__srat_o
+        [0x1eU];
+    vlSelf->__PVT__cp_dispatch_srat[0x1fU] = vlSelf->__PVT__srat_o
+        [0x1fU];
+    vlSelf->stall_jump_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__jump_full) 
+                               & (IData)(__VdfgTmp_h18e5b6a6__0));
+    vlSelf->__PVT__is_br_or_jump = ((1U == (7U & (IData)(
+                                                         (vlSelf->__PVT__MIDCORE_rename2_reg 
+                                                          >> 0x17U)))) 
+                                    | (IData)(__VdfgTmp_h18e5b6a6__0));
+    vlSelf->stall_checkpoint_full = ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__checkpoint_full) 
+                                     & (IData)(vlSelf->__PVT__is_br_or_jump));
 }
 
 VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__1(Vtop_tb_cpu_midcore* vlSelf) {
@@ -1993,130 +2146,33 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__ROB_rename2_o[9U] = vlSelf->__PVT__ROB_rename1_reg[9U];
     vlSelf->__PVT__ROB_rename2_o[0xaU] = vlSelf->__PVT__ROB_rename1_reg[0xaU];
     vlSelf->__PVT__ROB_rename2_o[0xbU] = vlSelf->__PVT__ROB_rename1_reg[0xbU];
-    vlSelf->__PVT__ROB_rename2_o[0xbU] = ((0x1fe07U 
+    vlSelf->__PVT__ROB_rename2_o[0xbU] = ((0x7f81fU 
                                            & vlSelf->__PVT__ROB_rename2_o[0xbU]) 
-                                          | (0x1ffffU 
+                                          | (0x7ffffU 
                                              & ((((vlSelf->__PVT__ROB_rename1_reg[0xbU] 
-                                                   >> 0xeU) 
+                                                   >> 0x10U) 
                                                   & (IData)(vlSelf->__PVT__free_pr_valid))
                                                   ? (IData)(vlSelf->__PVT__free_pr)
                                                   : 0U) 
-                                                << 3U)));
-    vlSelf->__PVT__ROB_rename2_o[1U] = (0x1fU & vlSelf->__PVT__ROB_rename2_o[1U]);
+                                                << 5U)));
+    vlSelf->__PVT__ROB_rename2_o[1U] = (0x7fU & vlSelf->__PVT__ROB_rename2_o[1U]);
     vlSelf->__PVT__ROB_rename2_o[2U] = 0U;
     vlSelf->__PVT__ROB_rename2_o[3U] = 0U;
     vlSelf->__PVT__ROB_rename2_o[4U] = 0U;
-    vlSelf->__PVT__ROB_rename2_o[5U] = (0x1e000U & 
+    vlSelf->__PVT__ROB_rename2_o[5U] = (0x78000U & 
                                         ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__rob__DOT__wrPtr) 
-                                         << 0xdU));
+                                         << 0xfU));
     vlSelf->__PVT__ROB_rename2_o[6U] = 0U;
-    vlSelf->__PVT__ROB_rename2_o[7U] = (0xfffe0000U 
+    vlSelf->__PVT__ROB_rename2_o[7U] = (0xfff80000U 
                                         & vlSelf->__PVT__ROB_rename2_o[7U]);
-    vlSelf->__PVT__ROB_rename2_o[1U] = (0xfffffffbU 
+    vlSelf->__PVT__ROB_rename2_o[1U] = (0xffffffefU 
                                         & vlSelf->__PVT__ROB_rename2_o[1U]);
-    vlSelf->__PVT__ROB_rename2_o[0U] = 0U;
-    vlSelf->__PVT__ROB_rename2_o[1U] = (0xfffffffeU 
+    vlSelf->__PVT__ROB_rename2_o[0U] = (3U & vlSelf->__PVT__ROB_rename2_o[0U]);
+    vlSelf->__PVT__ROB_rename2_o[1U] = (0xfffffff8U 
                                         & vlSelf->__PVT__ROB_rename2_o[1U]);
-    vlSelf->__PVT__ROB_rename2_o[0xbU] = (0x17fffU 
+    vlSelf->__PVT__ROB_rename2_o[0xbU] = (0x5ffffU 
                                           & vlSelf->__PVT__ROB_rename2_o[0xbU]);
     vlSelf->stall_rob_full = vlSymsp->TOP__top_tb__dut.__PVT__rob_full;
-    vlSelf->__PVT__free_list__DOT__free_list_recovery = 0xffffffffffffffffULL;
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [1U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [2U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [3U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [4U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [5U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [6U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [7U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [8U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [9U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xaU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xbU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xcU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xdU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xeU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0xfU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x10U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x11U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x12U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x13U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x14U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x15U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x16U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x17U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x18U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x19U])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1aU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1bU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1cU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1dU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1eU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
-    vlSelf->__PVT__free_list__DOT__free_list_recovery 
-        = ((~ (1ULL << vlSelf->__PVT__mispredict_arat
-               [0x1fU])) & vlSelf->__PVT__free_list__DOT__free_list_recovery);
     vlSelf->__PVT__rename2__DOT__pr1_busy_tmp = (1U 
                                                  & ((IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename1_reg 
@@ -2141,34 +2197,34 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 8U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                   >> 3U)))) 
+                                                   >> 5U)))) 
                                   | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                      & ((0x3fU & (IData)(
                                                          (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                           >> 8U))) 
                                         == (0x3fU & 
                                             (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                             >> 3U))))) 
+                                             >> 5U))))) 
                                  | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                     & ((0x3fU & (IData)(
                                                         (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                          >> 8U))) 
                                        == (0x3fU & 
                                            (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                            >> 3U))))) 
+                                            >> 5U))))) 
                                 | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                    & ((0x3fU & (IData)(
                                                        (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                         >> 8U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                   & ((0x3fU & (IData)(
                                                       (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                        >> 8U))) 
                                      == (0x3fU & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                  >> 3U))))))) {
+                                                  >> 5U))))))) {
         vlSelf->__PVT__rename2__DOT__pr1_busy_tmp = 0U;
     }
     vlSelf->__PVT__rename2__DOT__pr2_busy_tmp = (1U 
@@ -2195,39 +2251,39 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 2U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                   >> 3U)))) 
+                                                   >> 5U)))) 
                                   | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                      & ((0x3fU & (IData)(
                                                          (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                           >> 2U))) 
                                         == (0x3fU & 
                                             (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                             >> 3U))))) 
+                                             >> 5U))))) 
                                  | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                     & ((0x3fU & (IData)(
                                                         (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                          >> 2U))) 
                                        == (0x3fU & 
                                            (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                            >> 3U))))) 
+                                            >> 5U))))) 
                                 | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                    & ((0x3fU & (IData)(
                                                        (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                         >> 2U))) 
                                       == (0x3fU & (
                                                    vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                   & ((0x3fU & (IData)(
                                                       (vlSelf->__PVT__MIDCORE_rename1_reg 
                                                        >> 2U))) 
                                      == (0x3fU & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                  >> 3U))))))) {
+                                                  >> 5U))))))) {
         vlSelf->__PVT__rename2__DOT__pr2_busy_tmp = 0U;
     }
     vlSelf->stall_no_free_pr = (1U & ((~ (IData)(vlSelf->__PVT__free_pr_valid)) 
                                       & (vlSelf->__PVT__ROB_rename2_o[0xbU] 
-                                         >> 0xeU)));
+                                         >> 0x10U)));
     vlSelf->__PVT__MIDCORE_rename2_o = vlSelf->__PVT__MIDCORE_rename1_reg;
     vlSelf->__PVT__MIDCORE_rename2_o = ((0x3fffffffffffffcULL 
                                          & vlSelf->__PVT__MIDCORE_rename2_o) 
@@ -2242,25 +2298,27 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                      | ((IData)(vlSelf->stall_store_full) 
                                         | ((IData)(vlSelf->stall_jump_full) 
                                            | ((IData)(vlSelf->stall_mul_full) 
-                                              | (IData)(vlSelf->stall_no_free_pr))))))));
+                                              | ((IData)(vlSelf->stall_no_free_pr) 
+                                                 | ((IData)(vlSelf->stall_checkpoint_full) 
+                                                    | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__exec_mispredict))))))))));
     vlSelf->__PVT__decode_request = (1U & ((~ (IData)(vlSelf->__PVT__stall)) 
                                            & (~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__fetch_empty))));
-    vlSelf->__Vcellinp__busy_table__rename_update = 
-        ((~ (IData)(vlSelf->__PVT__stall)) & (0x14000U 
-                                              == (0x14000U 
-                                                  & vlSelf->__PVT__ROB_rename1_reg[0xbU])));
-    vlSelf->__PVT__ROB_midcore_o[0U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0U];
-    vlSelf->__PVT__ROB_midcore_o[1U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[1U];
-    vlSelf->__PVT__ROB_midcore_o[2U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[2U];
-    vlSelf->__PVT__ROB_midcore_o[3U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[3U];
-    vlSelf->__PVT__ROB_midcore_o[4U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[4U];
-    vlSelf->__PVT__ROB_midcore_o[5U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[5U];
-    vlSelf->__PVT__ROB_midcore_o[6U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[6U];
-    vlSelf->__PVT__ROB_midcore_o[7U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[7U];
-    vlSelf->__PVT__ROB_midcore_o[8U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[8U];
-    vlSelf->__PVT__ROB_midcore_o[9U] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[9U];
-    vlSelf->__PVT__ROB_midcore_o[0xaU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xaU];
-    vlSelf->__PVT__ROB_midcore_o[0xbU] = Vtop_tb__ConstPool__CONST_h7f9a7980_0[0xbU];
+    vlSelf->__PVT__cp_rename_update_o = ((~ (IData)(vlSelf->__PVT__stall)) 
+                                         & (0x50000U 
+                                            == (0x50000U 
+                                                & vlSelf->__PVT__ROB_rename1_reg[0xbU])));
+    vlSelf->__PVT__ROB_midcore_o[0U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0U];
+    vlSelf->__PVT__ROB_midcore_o[1U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[1U];
+    vlSelf->__PVT__ROB_midcore_o[2U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[2U];
+    vlSelf->__PVT__ROB_midcore_o[3U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[3U];
+    vlSelf->__PVT__ROB_midcore_o[4U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[4U];
+    vlSelf->__PVT__ROB_midcore_o[5U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[5U];
+    vlSelf->__PVT__ROB_midcore_o[6U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[6U];
+    vlSelf->__PVT__ROB_midcore_o[7U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[7U];
+    vlSelf->__PVT__ROB_midcore_o[8U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[8U];
+    vlSelf->__PVT__ROB_midcore_o[9U] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[9U];
+    vlSelf->__PVT__ROB_midcore_o[0xaU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xaU];
+    vlSelf->__PVT__ROB_midcore_o[0xbU] = Vtop_tb__ConstPool__CONST_h3c5fcb02_0[0xbU];
     vlSelf->__PVT__MIDCORE_midcore_o = 0ULL;
     if ((1U & (~ (IData)(vlSelf->__PVT__stall)))) {
         vlSelf->__PVT__ROB_midcore_o[0U] = vlSelf->__PVT__ROB_rename2_reg[0U];
@@ -2275,6 +2333,11 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
         vlSelf->__PVT__ROB_midcore_o[9U] = vlSelf->__PVT__ROB_rename2_reg[9U];
         vlSelf->__PVT__ROB_midcore_o[0xaU] = vlSelf->__PVT__ROB_rename2_reg[0xaU];
         vlSelf->__PVT__ROB_midcore_o[0xbU] = vlSelf->__PVT__ROB_rename2_reg[0xbU];
+        if (vlSelf->__PVT__is_br_or_jump) {
+            vlSelf->__PVT__ROB_midcore_o[0U] = ((0xfffffffcU 
+                                                 & vlSelf->__PVT__ROB_midcore_o[0U]) 
+                                                | (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cp_checkpoint_id));
+        }
         vlSelf->__PVT__MIDCORE_midcore_o = vlSelf->__PVT__MIDCORE_rename2_reg;
     }
     vlSelf->__PVT__MIDCORE_rename2_wb_updated = vlSelf->__PVT__MIDCORE_rename2_reg;
@@ -2286,7 +2349,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                             >> 8U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                 >> 3U)))) 
+                                                 >> 5U)))) 
                                       | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                          & ((0x3fU 
                                              & (IData)(
@@ -2294,28 +2357,28 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 8U))) 
                                             == (0x3fU 
                                                 & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                      | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                         & ((0x3fU & (IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                              >> 8U))) 
                                            == (0x3fU 
                                                & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                  >> 3U))))) 
+                                                  >> 5U))))) 
                                     | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                        & ((0x3fU & (IData)(
                                                            (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                             >> 8U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                 >> 3U))))) 
+                                                 >> 5U))))) 
                                    | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                       & ((0x3fU & (IData)(
                                                           (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                            >> 8U))) 
                                          == (0x3fU 
                                              & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                >> 3U))))))) {
+                                                >> 5U))))))) {
             vlSelf->__PVT__MIDCORE_rename2_wb_updated 
                 = (0x3fffffffffffffdULL & vlSelf->__PVT__MIDCORE_rename2_wb_updated);
         }
@@ -2326,7 +2389,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                             >> 2U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                 >> 3U)))) 
+                                                 >> 5U)))) 
                                       | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_load) 
                                          & ((0x3fU 
                                              & (IData)(
@@ -2334,28 +2397,28 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                         >> 2U))) 
                                             == (0x3fU 
                                                 & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                   >> 3U))))) 
+                                                   >> 5U))))) 
                                      | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) 
                                         & ((0x3fU & (IData)(
                                                             (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                              >> 2U))) 
                                            == (0x3fU 
                                                & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                  >> 3U))))) 
+                                                  >> 5U))))) 
                                     | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) 
                                        & ((0x3fU & (IData)(
                                                            (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                             >> 2U))) 
                                           == (0x3fU 
                                               & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                 >> 3U))))) 
+                                                 >> 5U))))) 
                                    | ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) 
                                       & ((0x3fU & (IData)(
                                                           (vlSelf->__PVT__MIDCORE_rename2_reg 
                                                            >> 2U))) 
                                          == (0x3fU 
                                              & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                >> 3U))))))) {
+                                                >> 5U))))))) {
             vlSelf->__PVT__MIDCORE_rename2_wb_updated 
                 = (0x3fffffffffffffeULL & vlSelf->__PVT__MIDCORE_rename2_wb_updated);
         }
@@ -2425,11 +2488,11 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__srat__DOT__srat_next[0x1fU] = vlSelf->__PVT__srat__DOT__srat
         [0x1fU];
     vlSelf->__PVT__free_list__DOT__free_list_next = vlSelf->__PVT__free_list__DOT__free_list;
-    if (vlSelf->__Vcellinp__busy_table__rename_update) {
+    if (vlSelf->__PVT__cp_rename_update_o) {
         vlSelf->__PVT__srat__DOT__srat_next[vlSelf->__PVT__rename_update_ar] 
-            = vlSelf->__PVT__rename_update_pr;
+            = vlSelf->__PVT__cp_rename_update_pr_o;
         vlSelf->__PVT__free_list__DOT__free_list_next 
-            = ((~ (1ULL << (IData)(vlSelf->__PVT__rename_update_pr))) 
+            = ((~ (1ULL << (IData)(vlSelf->__PVT__cp_rename_update_pr_o))) 
                & vlSelf->__PVT__free_list__DOT__free_list_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__Vcellinp__cpu_midcore__commit_update) {
@@ -2437,9 +2500,9 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
             = (vlSelf->__PVT__free_list__DOT__free_list_next 
                | ((QData)((IData)(1U)) << (0x3fU & 
                                            ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xbU] 
-                                             << 3U) 
+                                             << 1U) 
                                             | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
-                                               >> 0x1dU)))));
+                                               >> 0x1fU)))));
     }
     vlSelf->__PVT__ROB_rename1_o[0U] = vlSelf->__PVT__ROB_decode_o[0U];
     vlSelf->__PVT__ROB_rename1_o[1U] = vlSelf->__PVT__ROB_decode_o[1U];
@@ -2453,16 +2516,16 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__ROB_rename1_o[9U] = vlSelf->__PVT__ROB_decode_o[9U];
     vlSelf->__PVT__ROB_rename1_o[0xaU] = vlSelf->__PVT__ROB_decode_o[0xaU];
     vlSelf->__PVT__ROB_rename1_o[0xbU] = vlSelf->__PVT__ROB_decode_o[0xbU];
-    vlSelf->__PVT__ROB_rename1_o[0xaU] = ((0x1fffffffU 
+    vlSelf->__PVT__ROB_rename1_o[0xaU] = ((0x7fffffffU 
                                            & vlSelf->__PVT__ROB_rename1_o[0xaU]) 
-                                          | (((0x4000U 
+                                          | (((0x10000U 
                                                & vlSelf->__PVT__ROB_decode_o[0xbU])
-                                               ? (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                               ? (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                    & ((0x1fU 
                                                        & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                           >> 7U)) 
                                                       == (IData)(vlSelf->__PVT__rename_update_ar)))
-                                                   ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                   ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                    : 
                                                   vlSelf->__PVT__srat__DOT__srat
                                                   [
@@ -2470,19 +2533,19 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                    & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                       >> 7U))])
                                                : 0U) 
-                                             << 0x1dU));
-    vlSelf->__PVT__ROB_rename1_o[0xbU] = ((0x1fe00U 
+                                             << 0x1fU));
+    vlSelf->__PVT__ROB_rename1_o[0xbU] = ((0x7f800U 
                                            & vlSelf->__PVT__ROB_rename1_o[0xbU]) 
-                                          | (0x1ffffU 
-                                             & (((0x4000U 
+                                          | (0x7ffffU 
+                                             & (((0x10000U 
                                                   & vlSelf->__PVT__ROB_decode_o[0xbU])
                                                   ? 
-                                                 (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                 (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                    & ((0x1fU 
                                                        & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                           >> 7U)) 
                                                       == (IData)(vlSelf->__PVT__rename_update_ar)))
-                                                   ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                   ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                    : 
                                                   vlSelf->__PVT__srat__DOT__srat
                                                   [
@@ -2490,21 +2553,21 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                    & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                       >> 7U))])
                                                   : 0U) 
-                                                >> 3U)));
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0x1fU & vlSelf->__PVT__ROB_rename1_o[1U]);
+                                                >> 1U)));
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0x7fU & vlSelf->__PVT__ROB_rename1_o[1U]);
     vlSelf->__PVT__ROB_rename1_o[2U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[3U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[4U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[5U] = 0U;
     vlSelf->__PVT__ROB_rename1_o[6U] = 0U;
-    vlSelf->__PVT__ROB_rename1_o[7U] = (0xfffe0000U 
+    vlSelf->__PVT__ROB_rename1_o[7U] = (0xfff80000U 
                                         & vlSelf->__PVT__ROB_rename1_o[7U]);
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffffbU 
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0xffffffefU 
                                         & vlSelf->__PVT__ROB_rename1_o[1U]);
-    vlSelf->__PVT__ROB_rename1_o[0U] = 0U;
-    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffffeU 
+    vlSelf->__PVT__ROB_rename1_o[0U] = (3U & vlSelf->__PVT__ROB_rename1_o[0U]);
+    vlSelf->__PVT__ROB_rename1_o[1U] = (0xfffffff8U 
                                         & vlSelf->__PVT__ROB_rename1_o[1U]);
-    vlSelf->__PVT__ROB_rename1_o[0xbU] = (0x17fffU 
+    vlSelf->__PVT__ROB_rename1_o[0xbU] = (0x5ffffU 
                                           & vlSelf->__PVT__ROB_rename1_o[0xbU]);
     vlSelf->__PVT__MIDCORE_rename1_o = vlSelf->__PVT__MIDCORE_decode_o;
     vlSelf->__PVT__MIDCORE_rename1_o = ((0x3ffffffffffc003ULL 
@@ -2515,10 +2578,10 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                          (vlSelf->__PVT__MIDCORE_decode_o 
                                                                           >> 0xfU)))
                                                                ? 
-                                                              (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                              (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                                 & ((IData)(vlSelf->__PVT__rename_update_ar) 
                                                                    == (IData)(vlSelf->__PVT__srat_lookup_rs1)))
-                                                                ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                                ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                                 : 
                                                                vlSelf->__PVT__srat__DOT__srat
                                                                [vlSelf->__PVT__srat_lookup_rs1])
@@ -2529,13 +2592,13 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                                           (vlSelf->__PVT__MIDCORE_decode_o 
                                                                            >> 0xeU)))
                                                                 ? 
-                                                               (((IData)(vlSelf->__Vcellinp__busy_table__rename_update) 
+                                                               (((IData)(vlSelf->__PVT__cp_rename_update_o) 
                                                                  & ((IData)(vlSelf->__PVT__rename_update_ar) 
                                                                     == 
                                                                     (0x1fU 
                                                                      & (vlSymsp->TOP__top_tb__dut.__PVT__fetch_inst 
                                                                         >> 0x14U))))
-                                                                 ? (IData)(vlSelf->__PVT__rename_update_pr)
+                                                                 ? (IData)(vlSelf->__PVT__cp_rename_update_pr_o)
                                                                  : 
                                                                 vlSelf->__PVT__srat__DOT__srat
                                                                 [
@@ -2547,10 +2610,10 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
     vlSelf->__PVT__MIDCORE_rename1_o = (0x3fffffffffffffcULL 
                                         & vlSelf->__PVT__MIDCORE_rename1_o);
     vlSelf->__PVT__busy_table__DOT__bt_next = vlSelf->__PVT__busy_table__DOT__bt;
-    if (vlSelf->__Vcellinp__busy_table__rename_update) {
+    if (vlSelf->__PVT__cp_rename_update_o) {
         vlSelf->__PVT__busy_table__DOT__bt_next = (vlSelf->__PVT__busy_table__DOT__bt_next 
                                                    | ((QData)((IData)(1U)) 
-                                                      << (IData)(vlSelf->__PVT__rename_update_pr)));
+                                                      << (IData)(vlSelf->__PVT__cp_rename_update_pr_o)));
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_alu) {
         vlSelf->__PVT__busy_table__DOT__bt_next = (
@@ -2559,7 +2622,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__alu_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_load) {
@@ -2569,7 +2632,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__mem_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_jump) {
@@ -2579,7 +2642,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__jump_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_cmp) {
@@ -2589,7 +2652,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__cmp_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
     if (vlSymsp->TOP__top_tb__dut.__PVT__wb_mul) {
@@ -2599,7 +2662,7 @@ VL_INLINE_OPT void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midc
                                                      << 
                                                      (0x3fU 
                                                       & (vlSymsp->TOP__top_tb__dut.__PVT__mul_ROB_exec_o[0xbU] 
-                                                         >> 3U)))) 
+                                                         >> 5U)))) 
                                                    & vlSelf->__PVT__busy_table__DOT__bt_next);
     }
 }

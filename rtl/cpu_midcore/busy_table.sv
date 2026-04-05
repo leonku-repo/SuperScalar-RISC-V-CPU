@@ -24,8 +24,9 @@ import rv32i_types::*;
     input   logic       [PRF_IDX-1:0]   wb_jump_pr,
     input   logic       [PRF_IDX-1:0]   wb_cmp_pr,
     input   logic       [PRF_IDX-1:0]   wb_mul_pr,
-    // update when mispredict: clear all because all register flushed
-    input   logic                   mispredict_update
+    // update when execute-time mispredict: load ROB-derived rebuild vector
+    input   logic                   exec_mispredict,
+    input   logic   [PRF_SIZE-1:0]  bt_rebuild_i
 );
     logic   [PRF_SIZE-1:0]  bt, bt_next;
     logic   wb_update;
@@ -34,8 +35,8 @@ import rv32i_types::*;
     always_ff @( posedge clk ) begin 
         if(rst) 
             bt <= '0;
-        else if(mispredict_update)
-            bt <= '0;
+        else if(exec_mispredict)
+            bt <= bt_rebuild_i;
         else if(rename_update || wb_update)
             bt <= bt_next;
         else    

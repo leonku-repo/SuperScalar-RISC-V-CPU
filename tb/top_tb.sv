@@ -151,7 +151,7 @@ module top_tb (
 
     assign error        = mon_itf.error;
     assign any_commit   = dut.monitor_valid;
-    assign mispredict_o = dut.mispredict;
+    assign mispredict_o = dut.monitor_mispredict;
 
     // DUT commit snapshot
     assign dut_order     = dut.monitor_order;

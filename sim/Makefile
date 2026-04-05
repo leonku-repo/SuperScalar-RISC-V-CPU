@@ -158,6 +158,7 @@ wave:
 
 clean:
 	rm -rf obj_dir wave.vcd progress.ansi commit.log golden_log.bin
+# 	rm -rf obj_dir wave.vcd progress.ansi commit.log
 
 help:
 	@echo -e "$(BOLD)======================================$(RESET)"

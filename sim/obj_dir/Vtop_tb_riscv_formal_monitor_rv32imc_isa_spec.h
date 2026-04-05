@@ -99,19 +99,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec
         CData/*0:0*/ __PVT__insn_blt__DOT__cond;
         CData/*0:0*/ __PVT__insn_bltu__DOT__cond;
         CData/*5:0*/ __PVT__insn_c_slli__DOT__insn_shamt;
-        CData/*0:0*/ __VdfgTmp_h99712243__0;
-        CData/*0:0*/ __VdfgTmp_h6fe23079__0;
-        CData/*0:0*/ __VdfgTmp_hfe94040f__0;
-        CData/*0:0*/ __VdfgTmp_he8004ba4__0;
-        CData/*0:0*/ __VdfgTmp_ha890dbb4__0;
-        CData/*0:0*/ __VdfgTmp_h8436152c__0;
-        CData/*0:0*/ __VdfgTmp_h8376ce6a__0;
-        CData/*0:0*/ __VdfgTmp_h98724db5__0;
-        CData/*0:0*/ __VdfgTmp_ha33ffdac__0;
-        CData/*0:0*/ __VdfgTmp_h6ef3123b__0;
-        CData/*0:0*/ __VdfgTmp_hd187bcaf__0;
-        CData/*0:0*/ __VdfgTmp_h2ff1ede7__0;
-        CData/*0:0*/ __VdfgTmp_ha4e42b33__0;
         SData/*9:0*/ insn_c_addi4spn__DOT____VdfgTmp_hd8719ac1__0;
         VL_IN(__PVT__rvfi_insn,31,0);
         VL_IN(__PVT__rvfi_pc_rdata,31,0);
@@ -146,8 +133,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec
         IData/*31:0*/ __PVT__insn_c_lwsp__DOT__addr;
         IData/*31:0*/ insn_c_lwsp__DOT____VdfgTmp_he0ae363e__0;
         IData/*31:0*/ insn_c_sw__DOT____VdfgTmp_hd44bcdd7__0;
-    };
-    struct {
         IData/*31:0*/ __PVT__insn_c_swsp__DOT__addr;
         IData/*31:0*/ insn_c_swsp__DOT____VdfgTmp_h6c2e5a2b__0;
         IData/*31:0*/ __PVT__insn_lw__DOT__result;

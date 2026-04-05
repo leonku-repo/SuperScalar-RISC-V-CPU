@@ -9,7 +9,10 @@ import rv32i_types::*;
     input   logic                       rst,
     input   logic                       wr_en,
     input   logic                       rd_en,
-    input   logic                       flush,
+    // Execute-time mispredict: partial invalidation
+    input   logic                       exec_mispredict,
+    input   logic   [ROB_IDX-1:0]       exec_mispredict_rob_idx,
+    input   logic   [ROB_IDX-1:0]       rdPtr,
     input   rob_t                       ROB_data_i,
     input   midcore_t                   MIDCORE_data_i,
     // from wb
@@ -151,33 +154,38 @@ import rv32i_types::*;
         end : pr2_dispatch
     end
     // update rs register
-    always_ff @( posedge clk ) begin 
-        if(rst || flush) begin
-            for(int i = 0; i < RS_SIZE; i++) begin : rst_init
+    always_ff @( posedge clk ) begin
+        if (rst) begin
+            for (int i = 0; i < RS_SIZE; i++) begin : rst_init
                 valid[i]      <= '0;
                 rob_rs[i]     <= '0;
                 midcore_rs[i] <= '0;
                 pr1_ready[i]  <= '0;
                 pr2_ready[i]  <= '0;
             end
-        end
-        else if((!empty_o && rd_en) || (!full_o &&wr_en)) begin
-            valid <= valid_next;
-            rob_rs <= rob_rs_next;
-            midcore_rs <= midcore_rs_next;
-            pr1_ready <= pr1_ready_next;
-            pr2_ready <= pr2_ready_next;
-        end
-        else if(wb_alu || wb_load || wb_jump || wb_cmp || wb_mul) begin
-            pr1_ready <= pr1_ready_next;
-            pr2_ready <= pr2_ready_next;
-        end
-        else begin
-            valid <= valid;
-            rob_rs <= rob_rs;
-            midcore_rs <= midcore_rs;
-            pr1_ready <= pr1_ready;
-            pr2_ready <= pr2_ready;
+        end else begin
+            // Normal dispatch / issue / wakeup updates
+            if ((!empty_o && rd_en) || (!full_o && wr_en && !exec_mispredict)) begin
+                valid      <= valid_next;
+                rob_rs     <= rob_rs_next;
+                midcore_rs <= midcore_rs_next;
+                pr1_ready  <= pr1_ready_next;
+                pr2_ready  <= pr2_ready_next;
+            end else if (wb_alu || wb_load || wb_jump || wb_cmp || wb_mul) begin
+                pr1_ready <= pr1_ready_next;
+                pr2_ready <= pr2_ready_next;
+            end
+
+            // Partial invalidation: clear entries younger than exec_mispredict_rob_idx.
+            // Placed after normal update so it takes priority (last assignment wins).
+            if (exec_mispredict) begin
+                for (int i = 0; i < RS_SIZE; i++) begin : partial_flush
+                    if (valid[i] &&
+                        ROB_IDX'(rob_rs[i].rob_entry - rdPtr) >
+                        ROB_IDX'(exec_mispredict_rob_idx - rdPtr))
+                        valid[i] <= 1'b0;
+                end : partial_flush
+            end
         end
     end
 endmodule
