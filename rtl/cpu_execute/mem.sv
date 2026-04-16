@@ -10,6 +10,9 @@ import rv32i_types::*;
     input   logic                       empty_i,
     input   logic                       READY_i,
     // input   logic                       full_i,
+    input   logic                       exec_mispredict,
+    input   logic       [ROB_IDX-1:0]   exec_mispredict_rob_idx,
+    input   logic       [ROB_IDX-1:0]   rdPtr_i,            // ROB rdPtr for age comparison                   
     // from physical register file
     input   logic       [31:0]          lookup_alu_pr1_val,
     input   logic       [31:0]          lookup_alu_pr2_val,
@@ -39,6 +42,17 @@ import rv32i_types::*;
     logic   [31:0]  rd_v;
     logic           done;
     logic           store_committed; // set when store_match fires, cleared when dmem_resp fires
+    logic           flush;
+
+    always_ff @( posedge clk ) begin
+        if(rst) flush <= 1'b0;
+        else if(ROB_data_i.valid && exec_mispredict && dmem_read && 
+            ROB_IDX'(ROB_data_i.rob_entry - rdPtr_i) >=
+            ROB_IDX'(exec_mispredict_rob_idx - rdPtr_i))
+            flush <= 1'b1;
+        else if(dmem_resp) flush <= 1'b0;
+        else flush <= flush;
+    end 
 
     always_ff @(posedge clk) begin
         if (rst || (store_committed && dmem_resp))
@@ -115,8 +129,8 @@ import rv32i_types::*;
     always_comb begin 
         done = '0;
         case(LDorST_i)
-            1'b0:       done = !empty_i && ROB_data_i.valid && READY_i && dmem_resp;    // load  -> load commit only when DMEM responds
-            1'b1:       done = !empty_i && ROB_data_i.valid && READY_i && !store_committed && !store_match; // store -> pulse until commit, then hold off until LSQ pops
+            1'b0:       done = !empty_i && ROB_data_i.valid && READY_i && dmem_resp && !flush;    // load  -> load commit only when DMEM responds
+            1'b1:       done = !empty_i && ROB_data_i.valid && READY_i && !store_committed && !store_match && !flush; // store -> pulse until commit, then hold off until LSQ pops
             default:    done = '0;
         endcase
     end
@@ -139,6 +153,6 @@ import rv32i_types::*;
     end
 
     // for load store queue rd_en
-    assign load_valid  = !empty_i && !LDorST_i && READY_i && dmem_resp;
-    assign store_valid = !empty_i &&  LDorST_i && READY_i && dmem_resp;
+    assign load_valid  = !empty_i && !LDorST_i && READY_i && dmem_resp && !flush;
+    assign store_valid = !empty_i &&  LDorST_i && READY_i && dmem_resp && !flush;
 endmodule

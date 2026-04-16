@@ -122,8 +122,7 @@ VL_INLINE_OPT void Vtop_tb___024root___nba_sequent__TOP__0(Vtop_tb___024root* vl
     vlSelf->dut_order = vlSymsp->TOP__top_tb__dut.__PVT__order;
     vlSelf->imem_read = (1U & (~ ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetchq_full) 
                                   & (IData)(vlSelf->imem_resp))));
-    vlSelf->dmem_read = ((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__LDorST_i)) 
-                         & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0));
+    vlSelf->dmem_read = vlSymsp->TOP__top_tb__dut.__PVT__dmem_read;
 }
 
 VL_INLINE_OPT void Vtop_tb___024root___nba_sequent__TOP__1(Vtop_tb___024root* vlSelf) {

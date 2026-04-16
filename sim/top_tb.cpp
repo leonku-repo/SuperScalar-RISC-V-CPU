@@ -94,12 +94,32 @@ static std::map<uint32_t, uint32_t> golden_dmem_memory;
 static std::map<uint32_t, uint32_t> initial_dmem_memory;
 
 // ---------------------------------------------------------------------------
-// Configurable memory response delays (in posedge cycles after the request).
-//   IMEM_DELAY / DMEM_DELAY = 0 → resp fires end of posedge N   → CPU sees resp posedge N+1
-//   IMEM_DELAY / DMEM_DELAY = 1 → resp fires end of posedge N+1 → CPU sees resp posedge N+2
+// Memory response delays (posedge cycles after the request).
+//   DELAY = N  →  CPU sees resp N+1 posedges after the request.
+//
+// IMEM: fixed (I-cache always hits for small benchmarks).
+//
+// DMEM: set DMEM_PROBABILISTIC = false to use a flat DMEM_DELAY every
+//       transaction, or true to draw a random latency per transaction:
+//   DMEM_L1_PCT %            → DMEM_L1_DELAY ( 4-cycle total,  L1 hit)
+//   DMEM_L2_PCT %            → DMEM_L2_DELAY (12-cycle total,  L2 hit)
+//   100-L1_PCT-L2_PCT %      → DMEM_MM_DELAY (80-cycle total,  DRAM  )
 // ---------------------------------------------------------------------------
-static int IMEM_DELAY = 1;
-static int DMEM_DELAY = 3;
+static int  IMEM_DELAY         = 1;     // fixed: 2-cycle total
+
+static bool DMEM_PROBABILISTIC = true;  // false = constant delay every txn
+static int  DMEM_DELAY         = 3;     // flat delay  (DMEM_PROBABILISTIC=false)
+static int  DMEM_L1_PCT        = 90,  DMEM_L1_DELAY = 3;   // L1: 90% → 4 cyc
+static int  DMEM_L2_PCT        =  8,  DMEM_L2_DELAY = 11;  // L2:  8% → 12 cyc
+static int                            DMEM_MM_DELAY  = 79;  // MM:  2% → 80 cyc
+
+static int sample_dmem_delay() {
+    if (!DMEM_PROBABILISTIC) return DMEM_DELAY;
+    int r = rand() % 100;
+    if (r < DMEM_L1_PCT)                return DMEM_L1_DELAY;
+    if (r < DMEM_L1_PCT + DMEM_L2_PCT) return DMEM_L2_DELAY;
+    return DMEM_MM_DELAY;
+}
 
 // Set to true to enable random testbench mode.
 // imem returns random valid RV32I instructions for any fetch address.
@@ -132,8 +152,9 @@ static int      imem_counter = 0;
 static uint32_t imem_pdata   = 0xDEADBEEFu;
 
 // dmem pipeline state
-static bool     dmem_pending = false;
-static int      dmem_counter = 0;
+static bool     dmem_pending   = false;
+static int      dmem_counter   = 0;
+static int      dmem_cur_delay = 3;   // sampled per transaction
 static uint32_t dmem_pdata   = 0xDEADBEEFu;
 static bool     dmem_pwrite  = false;
 static uint32_t dmem_pwaddr  = 0;
@@ -291,13 +312,14 @@ static void eval_random_tb()
     bool dmem_resp_ready = false;
 
     if ((dut->dmem_read || dut->dmem_write) && !dmem_pending) {
-        dmem_pwrite  = dut->dmem_write;
-        dmem_pdata   = (uint32_t)rand();   // random read data; writes are discarded
-        dmem_pending = true;
-        dmem_counter = 0;
+        dmem_pwrite     = dut->dmem_write;
+        dmem_pdata      = (uint32_t)rand();   // random read data; writes are discarded
+        dmem_cur_delay  = sample_dmem_delay();
+        dmem_pending    = true;
+        dmem_counter    = 0;
     }
     if (dmem_pending) {
-        if (dmem_counter >= DMEM_DELAY) {
+        if (dmem_counter >= dmem_cur_delay) {
             dmem_resp_ready = true;
             dmem_pending    = false;
             dmem_counter    = 0;
@@ -423,12 +445,17 @@ void eval_magic_mem()
             auto it = dmem_memory.find(dut->dmem_addr >> 2);
             dmem_pdata = (it != dmem_memory.end()) ? it->second : 0u;
         }
-        dmem_pending = true;
-        dmem_counter = 0;
+        // if (dut->dmem_write && (dut->dmem_addr >> 2) == (0x7ffffe3cu >> 2)) {
+        //     fprintf(stderr, "[DUT BUS STORE] cycle=%d addr=0x%08x wmask=%x wdata=0x%08x\n",
+        //             (int)(sim_time/2), dut->dmem_addr, dut->dmem_wmask, dut->dmem_wdata);
+        // }
+        dmem_cur_delay = sample_dmem_delay();
+        dmem_pending   = true;
+        dmem_counter   = 0;
     }
 
     if (dmem_pending) {
-        if (dmem_counter >= DMEM_DELAY) {
+        if (dmem_counter >= dmem_cur_delay) {
             dmem_resp_ready = true;
             if (dmem_pwrite) {
                 uint32_t& word = dmem_memory[dmem_pwaddr];
@@ -583,7 +610,7 @@ static void golden_mismatch(uint64_t order, const CommitSnap& d, const CommitSna
         int found = 0;
         for (int64_t i = (int64_t)order - 1; i >= 0 && found < 5; i--) {
             const CommitSnap& s = golden_full_log[i];
-            if (s.mem_wmask != 0 && s.mem_addr == addr) {
+            if (s.mem_wmask != 0 && (s.mem_addr >> 2) == (addr >> 2)) {
                 std::cerr << "  golden order=" << i
                           << "  pc=0x" << std::hex << s.pc
                           << "  wmask=" << s.mem_wmask
@@ -757,6 +784,7 @@ int main(int argc, char** argv)
     mem_path  = argv[1];
     prog_path = argv[2];
     is_rerun  = (argc == 5);
+    srand(42);   // fixed seed — reproducible runs, fair comparison against spec-load CPU
     initmem(argv[1]);
 
     // Parse optional VCD window

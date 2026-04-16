@@ -504,8 +504,9 @@ VL_ATTR_COLD void Vtop_tb_cpu___ctor_var_reset(Vtop_tb_cpu* vlSelf) {
     vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match = VL_RAND_RESET_I(1);
     vlSelf->__PVT__cpu_execute__DOT__mem__DOT__rd_v = VL_RAND_RESET_I(32);
     vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed = VL_RAND_RESET_I(1);
+    vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush = VL_RAND_RESET_I(1);
     vlSelf->__PVT__cpu_execute__DOT__mem__DOT__prf_addr = VL_RAND_RESET_I(32);
-    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0 = 0;
+    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0 = 0;
     vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0 = 0;
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->__PVT__cpu_execute__DOT__mul_rs__DOT__valid[__Vi0] = VL_RAND_RESET_I(1);

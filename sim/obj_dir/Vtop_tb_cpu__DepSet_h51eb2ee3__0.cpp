@@ -20,9 +20,10 @@ VL_INLINE_OPT void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* v
         ((~ ((IData)(vlSelf->__PVT__exec_mispredict) 
              | (IData)(vlSelf->__PVT__cpu_frontend__DOT__fetch__DOT__stale_in_flight))) 
          & (IData)(vlSymsp->TOP.imem_resp));
-    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0 
+    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0 
         = ((IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i) 
-           & (IData)(vlSymsp->TOP.dmem_resp));
+           & ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush)) 
+              & (IData)(vlSymsp->TOP.dmem_resp)));
     vlSelf->__PVT__cpu_execute__DOT__mem__DOT__rd_v = 0U;
     if ((1U & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)))) {
         vlSelf->__PVT__cpu_execute__DOT__mem__DOT__rd_v 
@@ -135,7 +136,7 @@ VL_INLINE_OPT void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* v
     vlSelf->__PVT__cpu_execute__DOT__load_valid = (
                                                    (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
                                                    & ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)) 
-                                                      & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0)));
+                                                      & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0)));
     vlSelf->__PVT__mem_ROB_exec_o[0U] = vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0U];
     vlSelf->__PVT__mem_ROB_exec_o[1U] = vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[1U];
     vlSelf->__PVT__mem_ROB_exec_o[2U] = vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[2U];
@@ -288,24 +289,26 @@ VL_INLINE_OPT void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* v
                                               & (((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)
                                                    ? 
                                                   ((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i) 
-                                                   && (((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
-                                                          & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
-                                                             >> 0x12U)) 
-                                                         & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
-                                                        & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed))) 
-                                                       & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match))))
+                                                   && ((((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
+                                                           & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
+                                                              >> 0x12U)) 
+                                                          & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
+                                                         & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed))) 
+                                                        & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match))) 
+                                                       & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush))))
                                                    : 
-                                                  ((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
-                                                     & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
-                                                        >> 0x12U)) 
-                                                    & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
-                                                   & (IData)(vlSymsp->TOP.dmem_resp))) 
+                                                  (((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
+                                                      & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
+                                                         >> 0x12U)) 
+                                                     & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
+                                                    & (IData)(vlSymsp->TOP.dmem_resp)) 
+                                                   & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush)))) 
                                                  << 0x11U)));
     vlSelf->cpu_execute__DOT____Vcellinp__lsq__rd_en 
         = ((IData)(vlSelf->__PVT__cpu_execute__DOT__load_valid) 
            | ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
               & ((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i) 
-                 & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0))));
+                 & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0))));
     vlSelf->__PVT__cpu_commit__DOT__rob__DOT__wb_update 
         = (1U & ((vlSelf->__PVT__alu_ROB_exec_o[0xbU] 
                   | (vlSelf->__PVT__cmp_ROB_exec_o[0xbU] 

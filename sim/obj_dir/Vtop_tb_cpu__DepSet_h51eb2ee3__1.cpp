@@ -1849,6 +1849,19 @@ VL_INLINE_OPT void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* v
                   & (IData)(vlSymsp->TOP.dmem_resp)))) 
            & ((IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match) 
               | (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed)));
+    vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush 
+        = ((~ (IData)(vlSymsp->TOP__top_tb.__Vcellinp__dut__rst)) 
+           & (((((vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
+                  >> 0x12U) & (IData)(vlSelf->__PVT__exec_mispredict)) 
+                & (IData)(vlSelf->__PVT__dmem_read)) 
+               & ((0xfU & (((vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[5U] 
+                             << 0x11U) | (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[5U] 
+                                          >> 0xfU)) 
+                           - (IData)(vlSelf->__PVT__cpu_commit__DOT__rob__DOT__rdPtr))) 
+                  >= (0xfU & ((IData)(vlSelf->__PVT__exec_mispredict_rob_idx) 
+                              - (IData)(vlSelf->__PVT__cpu_commit__DOT__rob__DOT__rdPtr))))) 
+              | ((~ (IData)(vlSymsp->TOP.dmem_resp)) 
+                 & (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush))));
     if (vlSymsp->TOP__top_tb.__Vcellinp__dut__rst) {
         __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__alloc_ctr__v0 = 1U;
         vlSelf->__PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__prev_idx_T4 = 0U;

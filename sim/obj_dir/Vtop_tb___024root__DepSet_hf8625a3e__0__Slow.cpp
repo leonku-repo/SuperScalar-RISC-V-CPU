@@ -129,10 +129,9 @@ VL_ATTR_COLD void Vtop_tb___024root___stl_sequent__TOP__1(Vtop_tb___024root* vlS
                                   & (IData)(vlSelf->imem_resp))));
     vlSelf->dut_rd_addr = vlSymsp->TOP__top_tb__dut.__PVT__monitor_rd_addr;
     vlSelf->any_commit = vlSymsp->TOP__top_tb__dut.__PVT__monitor_valid;
-    vlSelf->dmem_read = ((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__LDorST_i)) 
-                         & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0));
     vlSelf->dmem_write = ((IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0) 
                           & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__mem__DOT__store_match));
+    vlSelf->dmem_read = vlSymsp->TOP__top_tb__dut.__PVT__dmem_read;
     vlSelf->dmem_wdata = vlSymsp->TOP__top_tb__dut.__PVT__dmem_wdata;
     vlSelf->dmem_addr = vlSymsp->TOP__top_tb__dut.__PVT__dmem_addr;
     vlSelf->dmem_wmask = vlSymsp->TOP__top_tb__dut.__PVT__dmem_wmask;

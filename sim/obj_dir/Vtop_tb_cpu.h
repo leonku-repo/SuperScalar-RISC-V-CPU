@@ -176,7 +176,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*3:0*/ __PVT__cpu_execute__DOT__mem__DOT__dmem_rmask;
         CData/*0:0*/ __PVT__cpu_execute__DOT__mem__DOT__store_match;
         CData/*0:0*/ __PVT__cpu_execute__DOT__mem__DOT__store_committed;
-        CData/*0:0*/ cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0;
+        CData/*0:0*/ __PVT__cpu_execute__DOT__mem__DOT__flush;
+        CData/*0:0*/ cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0;
         CData/*0:0*/ cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0;
         CData/*1:0*/ __PVT__cpu_execute__DOT__mul_rs__DOT__wr_idx;
         CData/*1:0*/ __PVT__cpu_execute__DOT__mul_rs__DOT__rd_idx;
@@ -214,9 +215,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v0;
         CData/*3:0*/ __Vdlyvdim0__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v176;
         CData/*0:0*/ __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v176;
-        CData/*0:0*/ __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v0;
     };
     struct {
+        CData/*0:0*/ __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v0;
         CData/*5:0*/ __Vdlyvdim0__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v64;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v64;
         CData/*0:0*/ __Vdlyvset__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v64;
@@ -280,9 +281,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v119;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v120;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v121;
-        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v122;
     };
     struct {
+        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v122;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v123;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v124;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_table__v125;
@@ -346,9 +347,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v107;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v108;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v109;
-        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v110;
     };
     struct {
+        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v110;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v111;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v112;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_table__v113;
@@ -412,9 +413,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v95;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v96;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v97;
-        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v98;
     };
     struct {
+        CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v98;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v99;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v100;
         CData/*1:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t3_table__v101;
@@ -478,9 +479,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v4;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v5;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v6;
-        CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v7;
     };
     struct {
+        CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v7;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v8;
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v8;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__alu_rs__DOT__pr2_ready__v9;
@@ -544,9 +545,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__rob_rs__v0;
         CData/*3:0*/ __Vdlyvdim0__cpu_execute__DOT__lsq__DOT__rob_rs__v16;
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__rob_rs__v16;
-        CData/*3:0*/ __Vdlyvdim0__cpu_execute__DOT__lsq__DOT__rob_rs__v17;
     };
     struct {
+        CData/*3:0*/ __Vdlyvdim0__cpu_execute__DOT__lsq__DOT__rob_rs__v17;
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__rob_rs__v17;
         CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__midcore_rs__v0;
         CData/*3:0*/ __Vdlyvdim0__cpu_execute__DOT__lsq__DOT__midcore_rs__v16;
@@ -610,9 +611,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v30;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v31;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v32;
-        CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__pr2_ready__v32;
     };
     struct {
+        CData/*0:0*/ __Vdlyvset__cpu_execute__DOT__lsq__DOT__pr2_ready__v32;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v33;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v34;
         CData/*0:0*/ __Vdlyvval__cpu_execute__DOT__lsq__DOT__pr2_ready__v35;
@@ -676,9 +677,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v35;
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v36;
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v37;
-        CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v38;
     };
     struct {
+        CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v38;
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v39;
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v40;
         CData/*0:0*/ __Vdlyvset__cpu_commit__DOT__rob__DOT__mem__v41;
@@ -742,9 +743,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v6;
         CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v7;
         CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v8;
-        CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v9;
     };
     struct {
+        CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v9;
         CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_valid__v10;
         CData/*0:0*/ __Vdlyvset__checkpoint__DOT__cp_valid__v10;
         CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_rob_idx__v4;
@@ -808,9 +809,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         CData/*5:0*/ __Vdlyvval__checkpoint__DOT__cp_srat_snap__v155;
         CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_srat_snap__v156;
         CData/*5:0*/ __Vdlyvval__checkpoint__DOT__cp_srat_snap__v156;
-        CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_srat_snap__v157;
     };
     struct {
+        CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_srat_snap__v157;
         CData/*5:0*/ __Vdlyvval__checkpoint__DOT__cp_srat_snap__v157;
         CData/*1:0*/ __Vdlyvdim0__checkpoint__DOT__cp_srat_snap__v158;
         CData/*5:0*/ __Vdlyvval__checkpoint__DOT__cp_srat_snap__v158;
@@ -874,9 +875,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v109;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v110;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v111;
-        SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v112;
     };
     struct {
+        SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v112;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v113;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v114;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t1_tag__v115;
@@ -940,9 +941,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v108;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v109;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v110;
-        SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v111;
     };
     struct {
+        SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v111;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v112;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v113;
         SData/*8:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__t2_tag__v114;
@@ -1006,9 +1007,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk10__DOT__i;
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk11__DOT__i;
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk12__DOT__i;
-        IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk13__DOT__i;
     };
     struct {
+        IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk13__DOT__i;
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk14__DOT__i;
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk15__DOT__i;
         IData/*31:0*/ __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__unnamedblk16__DOT__i;
@@ -1072,9 +1073,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         IData/*31:0*/ __Vdlyvval__cpu_frontend__DOT__branch_predict__DOT__btb__DOT__btb_tag__v0;
         IData/*31:0*/ __Vdly__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__ghist;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v0;
-        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v1;
     };
     struct {
+        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v1;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v2;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v3;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v4;
@@ -1138,9 +1139,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v62;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v63;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v64;
-        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v65;
     };
     struct {
+        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v65;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v66;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v67;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v68;
@@ -1204,9 +1205,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v126;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v127;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v128;
-        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v129;
     };
     struct {
+        IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v129;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v130;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v131;
         IData/*31:0*/ __Vdlyvlsb__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mem__v132;
@@ -1270,9 +1271,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v77;
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v78;
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v79;
-        IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v80;
     };
     struct {
+        IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v80;
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v81;
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v82;
         IData/*31:0*/ __Vdlyvval__cpu_execute__DOT__PRF__DOT__prf__v83;
@@ -1336,9 +1337,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         VlWide<12>/*370:0*/ __PVT__cpu_execute__DOT__mul_ROB_data_i;
         QData/*57:0*/ __PVT__cpu_execute__DOT__alu_MIDCORE_data_i;
         QData/*57:0*/ __PVT__cpu_execute__DOT__cmp_MIDCORE_data_i;
-        QData/*57:0*/ __PVT__cpu_execute__DOT__mem_MIDCORE_data_i;
     };
     struct {
+        QData/*57:0*/ __PVT__cpu_execute__DOT__mem_MIDCORE_data_i;
         QData/*57:0*/ __PVT__cpu_execute__DOT__jump_MIDCORE_data_i;
         QData/*57:0*/ __PVT__cpu_execute__DOT__mul_MIDCORE_data_i;
         QData/*63:0*/ __PVT__cpu_execute__DOT__mul_unit__DOT__result_ss;
@@ -1402,9 +1403,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         VlUnpacked<VlUnpacked<IData/*31:0*/, 4>, 16> __PVT__cpu_frontend__DOT__branch_predict__DOT__btb__DOT__btb_target;
         VlUnpacked<CData/*2:0*/, 16> __PVT__cpu_frontend__DOT__branch_predict__DOT__btb__DOT__btb_plru;
         VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__alloc_cand_ctr;
-        VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__alloc_ctr;
     };
     struct {
+        VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__alloc_ctr;
         VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__pred_ctr;
         VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__mispred_ctr;
         VlUnpacked<VlWide<3>/*64:0*/, 5> __PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__tag_u_match_ctr;
@@ -1468,9 +1469,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tb_cpu final : public VerilatedModule {
         VlUnpacked<CData/*0:0*/, 16> __PVT__cpu_execute__DOT__lsq__DOT__pr1_ready_next;
         VlUnpacked<CData/*0:0*/, 16> __PVT__cpu_execute__DOT__lsq__DOT__pr2_ready_next;
         VlUnpacked<CData/*3:0*/, 16> __PVT__cpu_execute__DOT__lsq__DOT__exec_entry_age;
-        VlUnpacked<CData/*0:0*/, 4> __PVT__cpu_execute__DOT__mul_rs__DOT__valid;
     };
     struct {
+        VlUnpacked<CData/*0:0*/, 4> __PVT__cpu_execute__DOT__mul_rs__DOT__valid;
         VlUnpacked<VlWide<12>/*370:0*/, 4> __PVT__cpu_execute__DOT__mul_rs__DOT__rob_rs;
         VlUnpacked<QData/*57:0*/, 4> __PVT__cpu_execute__DOT__mul_rs__DOT__midcore_rs;
         VlUnpacked<CData/*0:0*/, 4> __PVT__cpu_execute__DOT__mul_rs__DOT__pr1_ready;

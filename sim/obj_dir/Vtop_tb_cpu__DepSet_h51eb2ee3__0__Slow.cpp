@@ -649,9 +649,10 @@ VL_ATTR_COLD void Vtop_tb_cpu___stl_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vl
     vlSelf->__PVT__cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT__lookup_t4_tag 
         = ((IData)(cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT____VdfgTmp_h7d88657b__0) 
            ^ (IData)(vlSelf->cpu_frontend__DOT__branch_predict__DOT__tage_predictor__DOT____VdfgTmp_h083e6cc3__0));
-    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0 
+    vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0 
         = ((IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i) 
-           & (IData)(vlSymsp->TOP.dmem_resp));
+           & ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush)) 
+              & (IData)(vlSymsp->TOP.dmem_resp)));
     vlSelf->__VdfgTmp_h9e6fb4d7__0[0U] = vlSelf->__PVT__cpu_execute__DOT__mul_rs__DOT__rob_rs
         [vlSelf->__PVT__cpu_execute__DOT__mul_rs__DOT__rd_idx][0U];
     vlSelf->__VdfgTmp_h9e6fb4d7__0[1U] = vlSelf->__PVT__cpu_execute__DOT__mul_rs__DOT__rob_rs
@@ -6017,7 +6018,7 @@ VL_ATTR_COLD void Vtop_tb_cpu___stl_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vl
     vlSelf->__PVT__cpu_execute__DOT__load_valid = (
                                                    (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
                                                    & ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)) 
-                                                      & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0)));
+                                                      & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0)));
     if (vlSelf->__PVT__cpu_execute__DOT__mul_rs__DOT__rd_idx_valid) {
         vlSelf->__PVT__cpu_execute__DOT__mul_ROB_data_i[0U] 
             = vlSelf->__VdfgTmp_h9e6fb4d7__0[0U];
@@ -6534,13 +6535,15 @@ VL_ATTR_COLD void Vtop_tb_cpu___stl_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vl
         = ((IData)(vlSelf->__PVT__cpu_execute__DOT__load_valid) 
            | ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
               & ((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i) 
-                 & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0))));
+                 & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0))));
     vlSelf->__PVT__cpu_execute__DOT__mul_unit__DOT__result_ss 
         = VL_MULS_QQQ(64, VL_EXTENDS_QI(64,32, vlSelf->__PVT__cpu_execute__DOT__lookup_mul_pr1_val), 
                       VL_EXTENDS_QI(64,32, vlSelf->__PVT__cpu_execute__DOT__lookup_mul_pr2_val));
     vlSelf->cpu_execute__DOT__mul_unit__DOT____VdfgTmp_hd48f2dee__0 
         = ((0x80000000U == vlSelf->__PVT__cpu_execute__DOT__lookup_mul_pr1_val) 
            & (0xffffffffU == vlSelf->__PVT__cpu_execute__DOT__lookup_mul_pr2_val));
+    vlSelf->__PVT__dmem_read = ((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)) 
+                                & (IData)(vlSelf->cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0));
     if (vlSelf->cpu_execute__DOT____Vcellinp__PRF__lookup_alu_pr1_valid) {
         vlSelf->__PVT__cpu_execute__DOT__lookup_alu_pr1_val 
             = vlSelf->__PVT__cpu_execute__DOT__PRF__DOT__prf
@@ -8291,18 +8294,20 @@ VL_ATTR_COLD void Vtop_tb_cpu___stl_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vl
                                               & (((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i)
                                                    ? 
                                                   ((IData)(vlSelf->__PVT__cpu_execute__DOT__LDorST_i) 
-                                                   && (((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
-                                                          & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
-                                                             >> 0x12U)) 
-                                                         & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
-                                                        & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed))) 
-                                                       & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match))))
+                                                   && ((((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
+                                                           & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
+                                                              >> 0x12U)) 
+                                                          & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
+                                                         & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_committed))) 
+                                                        & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__store_match))) 
+                                                       & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush))))
                                                    : 
-                                                  ((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
-                                                     & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
-                                                        >> 0x12U)) 
-                                                    & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
-                                                   & (IData)(vlSymsp->TOP.dmem_resp))) 
+                                                  (((((~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem_empty_i)) 
+                                                      & (vlSelf->__PVT__cpu_execute__DOT__mem_ROB_data_i[0xbU] 
+                                                         >> 0x12U)) 
+                                                     & (IData)(vlSelf->__PVT__cpu_execute__DOT__READY_i)) 
+                                                    & (IData)(vlSymsp->TOP.dmem_resp)) 
+                                                   & (~ (IData)(vlSelf->__PVT__cpu_execute__DOT__mem__DOT__flush)))) 
                                                  << 0x11U)));
     vlSelf->__PVT__wb_alu = ((IData)(vlSelf->__PVT__cpu_execute__DOT__alu_valid) 
                              & (vlSelf->__PVT__alu_ROB_exec_o[0xbU] 

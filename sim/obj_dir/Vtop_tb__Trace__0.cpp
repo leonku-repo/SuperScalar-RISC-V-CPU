@@ -1727,7 +1727,7 @@ void Vtop_tb___024root__trace_chg_0_sub_0(Vtop_tb___024root* vlSelf, VerilatedVc
         bufp->chgBit(oldp+608,(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__load_valid));
         bufp->chgBit(oldp+609,(((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__mem_empty_i)) 
                                 & ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__LDorST_i) 
-                                   & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_h7b9661f3__0)))));
+                                   & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_h0030e44f__0)))));
         bufp->chgBit(oldp+610,(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT____Vcellinp__alu_rs__wr_en));
         bufp->chgBit(oldp+611,(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__alu_rs__DOT__valid_next[0]));
         bufp->chgBit(oldp+612,(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__alu_rs__DOT__valid_next[1]));
@@ -3471,8 +3471,7 @@ void Vtop_tb___024root__trace_chg_0_sub_0(Vtop_tb___024root* vlSelf, VerilatedVc
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[2U])) {
         bufp->chgIData(oldp+1290,(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetch__DOT__pc),32);
         bufp->chgIData(oldp+1291,(vlSymsp->TOP__top_tb__dut.__PVT__dmem_addr),32);
-        bufp->chgBit(oldp+1292,(((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__LDorST_i)) 
-                                 & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0))));
+        bufp->chgBit(oldp+1292,(vlSymsp->TOP__top_tb__dut.__PVT__dmem_read));
         bufp->chgBit(oldp+1293,(((IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0) 
                                  & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__mem__DOT__store_match))));
         bufp->chgCData(oldp+1294,(vlSymsp->TOP__top_tb__dut.__PVT__dmem_wmask),4);

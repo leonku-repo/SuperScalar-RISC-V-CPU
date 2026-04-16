@@ -1,5 +1,5 @@
 
-/home/leon/RTL_Design/cpu-design/SuperScalar-RISC-V-CPU/bin/../sim/bin/second_run.elf:     file format elf32-littleriscv
+/home/leon/RTL_Design/SuperScalar-RISC-V-CPU-2.0-early-branch-recovery/bin/../sim/bin/second_run.elf:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
