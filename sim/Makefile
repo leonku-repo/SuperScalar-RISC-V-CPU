@@ -100,7 +100,7 @@ build_golden: gen_svh
 
 build: gen_svh
 	@echo -e "$(BOLD)Step 1/2: Verilator elaboration (--cc --exe)$(RESET)"
-	@verilator -Wall --trace --trace-structs --cc --exe top_tb.cpp \
+	@verilator -Wall --trace --trace-structs --trace-max-array 256 --cc --exe top_tb.cpp \
 	  --top-module $(TB_TOP) \
 	  --unroll-count 256 \
 	  --CFLAGS "-DVL_USER_STOP" \

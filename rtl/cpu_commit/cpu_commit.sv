@@ -14,9 +14,18 @@ import rv32i_types::*;
     input   rob_t                       jump_ROB_exec_i,
     input   rob_t                       mem_ROB_exec_i,
     input   rob_t                       mul_ROB_exec_i,
+    // 6th: store writeback (from lsq.sv via cpu_execute)
+    input   logic                       store_wb_valid_i,
+    input   rob_t                       store_wb_rob_data_i,
+    // 7th: forwarded load writeback (from lsq.sv via cpu_execute)
+    input   logic                       fwd_ROB_exec_valid_i,
+    input   rob_t                       fwd_ROB_exec_i,
     // valid flags for branch_recovery arbitration
     input   logic                       cmp_valid_i,
     input   logic                       jump_valid_i,
+    // spec-load mispredict (from lsq.sv via cpu_execute) — wired into rob.sv
+    input   logic                       spec_load_mispredict_i,
+    input   logic   [ROB_IDX-1:0]       spec_load_rob_idx_i,
 
     output  logic   [ROB_IDX-1:0]       rob_wr_idx,
     output  logic   [ROB_IDX-1:0]       rob_rd_idx,
@@ -48,7 +57,17 @@ import rv32i_types::*;
     output  logic                       commit_mispredict,    // ROB-head mispredict flag at commit; for TAGE pred derivation
     output  logic   [31:0]              commit_target_pc,     // actual target of committing branch; for BTB update
 
-    output  logic   [PRF_IDX-1:0]       arat_o [32]
+    output  logic   [PRF_IDX-1:0]       arat_o [32],
+
+    // Load commit pulse — for lsq.sv LQ slot release and load_checkpoint release
+    output  logic                       load_commit_o,
+    output  logic   [ROB_IDX-1:0]       load_commit_rob_entry_o,
+    output  logic   [31:0]              load_commit_pc_o,
+
+    // Store commit pulse — for lsq.sv SQ committed bit
+    output  logic                       store_commit_o,
+    output  logic   [ROB_IDX-1:0]       store_commit_rob_entry_o,
+    output  logic   [31:0]              store_commit_pc_o
 );
     logic   rob_empty;
 
@@ -59,16 +78,22 @@ import rv32i_types::*;
     ) rob (
         .clk(clk),
         .rst(rst),
-        .wr_en(rob_data_i.valid && !exec_mispredict),
+        .wr_en(rob_data_i.valid && !exec_mispredict && !spec_load_mispredict_i),
         .rd_en(commit),
         .exec_mispredict(exec_mispredict),
         .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+        .spec_load_mispredict(spec_load_mispredict_i),
+        .spec_load_rob_idx(spec_load_rob_idx_i),
         .rob_data_i(rob_data_i),
         .alu_ROB_exec_i(alu_ROB_exec_i),
         .cmp_ROB_exec_i(cmp_ROB_exec_i),
         .jump_ROB_exec_i(jump_ROB_exec_i),
         .mem_ROB_exec_i(mem_ROB_exec_i),
         .mul_ROB_exec_i(mul_ROB_exec_i),
+        .store_wb_valid_i(store_wb_valid_i),
+        .store_wb_rob_data_i(store_wb_rob_data_i),
+        .fwd_ROB_exec_valid_i(fwd_ROB_exec_valid_i),
+        .fwd_ROB_exec_i(fwd_ROB_exec_i),
         .wrPtr_o(rob_wr_idx),
         .rdPtr_o(rob_rd_idx),
         .data_o(commit_rob_o),
@@ -110,5 +135,15 @@ import rv32i_types::*;
         .commit_mispredict(commit_mispredict),
         .commit_target_pc(commit_target_pc)
     );
+
+    // Load commit pulse — released LQ slot + load_checkpoint slot
+    assign load_commit_o           = commit && (commit_rob_o.inst[6:0] == op_load);
+    assign load_commit_rob_entry_o = load_commit_o ? commit_rob_o.rob_entry : '0;
+    assign load_commit_pc_o        = load_commit_o ? commit_rob_o.pc        : '0;
+
+    // Store commit pulse — sets SQ head committed bit so dmem_write can fire
+    assign store_commit_o           = commit && (commit_rob_o.inst[6:0] == op_store);
+    assign store_commit_rob_entry_o = store_commit_o ? commit_rob_o.rob_entry : '0;
+    assign store_commit_pc_o        = store_commit_o ? commit_rob_o.pc        : '0;
 
 endmodule

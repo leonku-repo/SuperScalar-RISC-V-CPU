@@ -18,6 +18,8 @@ static const char* GOLDEN_LOG_PATH = "golden_log.bin";
 #include "Vtop_tb_top_tb.h"
 #include "Vtop_tb_cpu.h"
 #include "Vtop_tb_cpu_midcore.h"
+#include "Vtop_tb_cpu_execute.h"
+#include "Vtop_tb_lsq.h"
 
 // ---------------------------------------------------------------------------
 // Simulation limits
@@ -94,12 +96,32 @@ static std::map<uint32_t, uint32_t> golden_dmem_memory;
 static std::map<uint32_t, uint32_t> initial_dmem_memory;
 
 // ---------------------------------------------------------------------------
-// Configurable memory response delays (in posedge cycles after the request).
-//   IMEM_DELAY / DMEM_DELAY = 0 → resp fires end of posedge N   → CPU sees resp posedge N+1
-//   IMEM_DELAY / DMEM_DELAY = 1 → resp fires end of posedge N+1 → CPU sees resp posedge N+2
+// Memory response delays (posedge cycles after the request).
+//   DELAY = N  →  CPU sees resp N+1 posedges after the request.
+//
+// IMEM: fixed (I-cache always hits for small benchmarks).
+//
+// DMEM: set DMEM_PROBABILISTIC = false to use a flat DMEM_DELAY every
+//       transaction, or true to draw a random latency per transaction:
+//   DMEM_L1_PCT %            → DMEM_L1_DELAY ( 4-cycle total,  L1 hit)
+//   DMEM_L2_PCT %            → DMEM_L2_DELAY (12-cycle total,  L2 hit)
+//   100-L1_PCT-L2_PCT %      → DMEM_MM_DELAY (80-cycle total,  DRAM  )
 // ---------------------------------------------------------------------------
-static int IMEM_DELAY = 1;
-static int DMEM_DELAY = 3;
+static int  IMEM_DELAY         = 1;     // fixed: 2-cycle total
+
+static bool DMEM_PROBABILISTIC = true;  // false = constant delay every txn
+static int  DMEM_DELAY         = 3;     // flat delay  (DMEM_PROBABILISTIC=false)
+static int  DMEM_L1_PCT        = 90,  DMEM_L1_DELAY = 3;   // L1: 90% → 4 cyc
+static int  DMEM_L2_PCT        =  8,  DMEM_L2_DELAY = 11;  // L2:  8% → 12 cyc
+static int                            DMEM_MM_DELAY  = 79;  // MM:  2% → 80 cyc
+
+static int sample_dmem_delay() {
+    if (!DMEM_PROBABILISTIC) return DMEM_DELAY;
+    int r = rand() % 100;
+    if (r < DMEM_L1_PCT)                return DMEM_L1_DELAY;
+    if (r < DMEM_L1_PCT + DMEM_L2_PCT) return DMEM_L2_DELAY;
+    return DMEM_MM_DELAY;
+}
 
 // Set to true to enable random testbench mode.
 // imem returns random valid RV32I instructions for any fetch address.
@@ -132,8 +154,9 @@ static int      imem_counter = 0;
 static uint32_t imem_pdata   = 0xDEADBEEFu;
 
 // dmem pipeline state
-static bool     dmem_pending = false;
-static int      dmem_counter = 0;
+static bool     dmem_pending   = false;
+static int      dmem_counter   = 0;
+static int      dmem_cur_delay = 3;   // sampled per transaction
 static uint32_t dmem_pdata   = 0xDEADBEEFu;
 static bool     dmem_pwrite  = false;
 static uint32_t dmem_pwaddr  = 0;
@@ -291,13 +314,14 @@ static void eval_random_tb()
     bool dmem_resp_ready = false;
 
     if ((dut->dmem_read || dut->dmem_write) && !dmem_pending) {
-        dmem_pwrite  = dut->dmem_write;
-        dmem_pdata   = (uint32_t)rand();   // random read data; writes are discarded
-        dmem_pending = true;
-        dmem_counter = 0;
+        dmem_pwrite     = dut->dmem_write;
+        dmem_pdata      = (uint32_t)rand();   // random read data; writes are discarded
+        dmem_cur_delay  = sample_dmem_delay();
+        dmem_pending    = true;
+        dmem_counter    = 0;
     }
     if (dmem_pending) {
-        if (dmem_counter >= DMEM_DELAY) {
+        if (dmem_counter >= dmem_cur_delay) {
             dmem_resp_ready = true;
             dmem_pending    = false;
             dmem_counter    = 0;
@@ -423,12 +447,13 @@ void eval_magic_mem()
             auto it = dmem_memory.find(dut->dmem_addr >> 2);
             dmem_pdata = (it != dmem_memory.end()) ? it->second : 0u;
         }
-        dmem_pending = true;
-        dmem_counter = 0;
+        dmem_cur_delay = sample_dmem_delay();
+        dmem_pending   = true;
+        dmem_counter   = 0;
     }
 
     if (dmem_pending) {
-        if (dmem_counter >= DMEM_DELAY) {
+        if (dmem_counter >= dmem_cur_delay) {
             dmem_resp_ready = true;
             if (dmem_pwrite) {
                 uint32_t& word = dmem_memory[dmem_pwaddr];
@@ -566,7 +591,12 @@ static void golden_mismatch(uint64_t order, const CommitSnap& d, const CommitSna
     { bool ok = d.rd_addr == g.rd_addr && d.rd_wdata == g.rd_wdata;
       std::cerr << col(ok) << "  rd        DUT=x"  << std::dec << d.rd_addr << "=0x" << std::hex << d.rd_wdata
                            << "  GOLDEN=x" << std::dec << g.rd_addr << "=0x" << std::hex << g.rd_wdata << rst << "\n"; }
-    { bool ok = d.mem_rmask == g.mem_rmask && (d.mem_rmask == 0 || d.mem_rdata == g.mem_rdata);
+    { uint32_t rb = 0;
+      if (d.mem_rmask & 1) rb |= 0x000000FFu;
+      if (d.mem_rmask & 2) rb |= 0x0000FF00u;
+      if (d.mem_rmask & 4) rb |= 0x00FF0000u;
+      if (d.mem_rmask & 8) rb |= 0xFF000000u;
+      bool ok = d.mem_rmask == g.mem_rmask && (d.mem_rmask == 0 || (d.mem_rdata & rb) == (g.mem_rdata & rb));
       std::cerr << col(ok) << "  mem_r     DUT  addr=0x" << d.mem_addr << " rmask=" << d.mem_rmask << " rdata=0x" << d.mem_rdata << "\n"
                            << "            GOLDEN addr=0x" << g.mem_addr << " rmask=" << g.mem_rmask << " rdata=0x" << g.mem_rdata << rst << "\n"; }
     { bool ok = d.mem_wmask == g.mem_wmask && (d.mem_wmask == 0 || (d.mem_addr == g.mem_addr && d.mem_wdata == g.mem_wdata));
@@ -576,7 +606,12 @@ static void golden_mismatch(uint64_t order, const CommitSnap& d, const CommitSna
 
     // If the mismatch is in mem_rdata, scan the golden log backwards to find
     // the most recent store(s) to that address — the divergence originates there.
-    if (d.mem_rmask != 0 && d.mem_rdata != g.mem_rdata) {
+    uint32_t rb_hint = 0;
+    if (d.mem_rmask & 1) rb_hint |= 0x000000FFu;
+    if (d.mem_rmask & 2) rb_hint |= 0x0000FF00u;
+    if (d.mem_rmask & 4) rb_hint |= 0x00FF0000u;
+    if (d.mem_rmask & 8) rb_hint |= 0xFF000000u;
+    if (d.mem_rmask != 0 && (d.mem_rdata & rb_hint) != (g.mem_rdata & rb_hint)) {
         uint32_t addr = g.mem_addr;
         std::cerr << "\033[1;33m  [hint] searching golden log for prior stores to 0x"
                   << std::hex << addr << std::dec << "...\033[0m\n";
@@ -621,12 +656,21 @@ static void compare_dut_commit(uint64_t order, const CommitSnap& d)
     }
     const CommitSnap& g = golden_full_log[order];
 
+    // For loads: only compare the bytes selected by rmask.
+    // OOO execution may cause other bytes in the same word to differ
+    // (e.g. a store to adjacent byte lanes executed after this load).
+    uint32_t rbits = 0;
+    if (d.mem_rmask & 1) rbits |= 0x000000FFu;
+    if (d.mem_rmask & 2) rbits |= 0x0000FF00u;
+    if (d.mem_rmask & 4) rbits |= 0x00FF0000u;
+    if (d.mem_rmask & 8) rbits |= 0xFF000000u;
+
     bool ok = (d.pc       == g.pc)
            && (d.inst     == g.inst)
            && (d.rd_addr  == g.rd_addr)
            && (d.rd_wdata == g.rd_wdata)
            && (d.mem_rmask == g.mem_rmask)
-           && (d.mem_rmask == 0 || d.mem_rdata == g.mem_rdata)
+           && (d.mem_rmask == 0 || (d.mem_rdata & rbits) == (g.mem_rdata & rbits))
            && (d.mem_wmask == g.mem_wmask)
            && (d.mem_wmask == 0 || (d.mem_addr == g.mem_addr && d.mem_wdata == g.mem_wdata));
 
@@ -757,6 +801,7 @@ int main(int argc, char** argv)
     mem_path  = argv[1];
     prog_path = argv[2];
     is_rerun  = (argc == 5);
+    srand(42);   // fixed seed — reproducible runs, fair spec vs non-spec comparison
     initmem(argv[1]);
 
     // Parse optional VCD window
@@ -884,37 +929,71 @@ int main(int argc, char** argv)
 
     do_reset(3);
 
-    uint64_t cpp_commits     = 0;
-    uint64_t cpp_cycles      = 0;
-    uint64_t cpp_branches    = 0;
-    uint64_t cpp_mispredicts = 0;
+    uint64_t cpp_commits          = 0;
+    uint64_t cpp_cycles           = 0;
+    uint64_t cpp_branches         = 0;
+    uint64_t cpp_branch_mispreds  = 0;
+    uint64_t cpp_jumps            = 0;   // JALR only (indirect; JAL never mispredicts)
+    uint64_t cpp_jump_mispreds    = 0;
 
-    uint64_t stall_rob_full  = 0;
-    uint64_t stall_alu_full  = 0;
-    uint64_t stall_cmp_full  = 0;
-    uint64_t stall_load_full = 0;
-    uint64_t stall_store_full= 0;
-    uint64_t stall_jump_full = 0;
-    uint64_t stall_mul_full  = 0;
-    uint64_t stall_no_free_pr= 0;
+    uint64_t stall_rob_full          = 0;
+    uint64_t stall_alu_full          = 0;
+    uint64_t stall_cmp_full          = 0;
+    uint64_t stall_load_full         = 0;   // LQ full
+    uint64_t stall_store_full        = 0;   // SQ full
+    uint64_t stall_jump_full         = 0;
+    uint64_t stall_mul_full          = 0;
+    uint64_t stall_no_free_pr        = 0;
+    uint64_t stall_checkpoint_full   = 0;   // branch/jump checkpoint full
+    uint64_t stall_lc_checkpoint_full= 0;   // load checkpoint full
+
+    uint64_t loads_issued_safe       = 0;
+    uint64_t loads_issued_spec       = 0;
+    uint64_t loads_forwarded         = 0;
+    uint64_t spec_mispredicts        = 0;
+    uint64_t spec_mispr_from_fwd     = 0;
+    uint64_t spec_mispr_from_spec    = 0;
 
     auto print_ipc = [&]() {
-        double ipc          = cpp_cycles   ? (double)cpp_commits     / cpp_cycles   : 0.0;
-        double mispredict_r = cpp_branches ? (double)cpp_mispredicts / cpp_branches : 0.0;
-        std::cout << "[C++ IPC]    commits="     << cpp_commits
-                  << "  cycles="                 << cpp_cycles
-                  << "  IPC="                    << ipc << "\n";
-        std::cout << "[C++ Branch] branches="    << cpp_branches
-                  << "  mispredicts="            << cpp_mispredicts
-                  << "  mispredict_rate="         << mispredict_r << "\n";
-        std::cout << "[C++ Stall]  rob_full="   << stall_rob_full
-                  << "  alu_full="   << stall_alu_full
-                  << "  cmp_full="   << stall_cmp_full
-                  << "  load_full="  << stall_load_full
-                  << "  store_full=" << stall_store_full
-                  << "  jump_full="  << stall_jump_full
-                  << "  mul_full="   << stall_mul_full
-                  << "  no_free_pr=" << stall_no_free_pr << "\n";
+        double ipc           = cpp_cycles   ? (double)cpp_commits         / cpp_cycles   : 0.0;
+        double br_mispr_rate = cpp_branches ? (double)cpp_branch_mispreds / cpp_branches : 0.0;
+        double jmp_mispr_rate= cpp_jumps    ? (double)cpp_jump_mispreds   / cpp_jumps    : 0.0;
+        std::cout << "[IPC]          commits=" << cpp_commits
+                  << "  cycles=" << cpp_cycles
+                  << "  IPC=" << ipc << "\n";
+        std::cout << "[Branch]       count=" << cpp_branches
+                  << "  mispredicts=" << cpp_branch_mispreds
+                  << "  rate=" << br_mispr_rate << "\n";
+        std::cout << "[Jump (JALR)]  count=" << cpp_jumps
+                  << "  mispredicts=" << cpp_jump_mispreds
+                  << "  rate=" << jmp_mispr_rate << "\n";
+        std::cout << "[Stall]        rob_full="    << stall_rob_full
+                  << "  no_free_pr="               << stall_no_free_pr     << "\n";
+        std::cout << "[Stall RS]     alu="         << stall_alu_full
+                  << "  cmp="                      << stall_cmp_full
+                  << "  jump="                     << stall_jump_full
+                  << "  mul="                      << stall_mul_full       << "\n";
+        std::cout << "[Stall LSQ]    lq_full="     << stall_load_full
+                  << "  sq_full="                  << stall_store_full     << "\n";
+        std::cout << "[Stall CP]     br_cp_full="  << stall_checkpoint_full
+                  << "  load_cp_full="             << stall_lc_checkpoint_full << "\n";
+
+        uint64_t total_loads   = loads_issued_safe + loads_issued_spec + loads_forwarded;
+        double   fwd_rate      = total_loads      ? (double)loads_forwarded      / total_loads      : 0.0;
+        double   spec_rate     = total_loads      ? (double)loads_issued_spec    / total_loads      : 0.0;
+        double   mispr_rate    = loads_issued_spec ? (double)spec_mispredicts    / loads_issued_spec : 0.0;
+        double   fwd_mispr_r   = loads_forwarded  ? (double)spec_mispr_from_fwd / loads_forwarded   : 0.0;
+        std::cout << "[Spec Load]    total="       << total_loads
+                  << "  safe="                     << loads_issued_safe
+                  << "  spec="                     << loads_issued_spec
+                  << "  fwd="                      << loads_forwarded            << "\n";
+        std::cout << "               fwd_rate="    << fwd_rate
+                  << "  spec_rate="                << spec_rate                  << "\n";
+        std::cout << "               spec_mispredicts=" << spec_mispredicts
+                  << "  (from_spec="               << spec_mispr_from_spec
+                  << "  from_fwd="                 << spec_mispr_from_fwd        << ")\n";
+        std::cout << "               spec_mispr_rate=" << mispr_rate
+                  << "  fwd_mispr_rate="            << fwd_mispr_r               << "\n";
     };
 
     for (int i = 0; i < MAX_CYCLES; i++) {
@@ -931,21 +1010,36 @@ int main(int argc, char** argv)
         // stall breakdown via verilator public signals
         {
             auto* mc = dut->top_tb->dut->cpu_midcore;
-            if (mc->stall_rob_full   ) stall_rob_full++;
-            if (mc->stall_alu_full   ) stall_alu_full++;
-            if (mc->stall_cmp_full   ) stall_cmp_full++;
-            if (mc->stall_load_full  ) stall_load_full++;
-            if (mc->stall_store_full ) stall_store_full++;
-            if (mc->stall_jump_full  ) stall_jump_full++;
-            if (mc->stall_mul_full   ) stall_mul_full++;
-            if (mc->stall_no_free_pr ) stall_no_free_pr++;
+            if (mc->stall_rob_full          ) stall_rob_full++;
+            if (mc->stall_alu_full          ) stall_alu_full++;
+            if (mc->stall_cmp_full          ) stall_cmp_full++;
+            if (mc->stall_load_full         ) stall_load_full++;
+            if (mc->stall_store_full        ) stall_store_full++;
+            if (mc->stall_jump_full         ) stall_jump_full++;
+            if (mc->stall_mul_full          ) stall_mul_full++;
+            if (mc->stall_no_free_pr        ) stall_no_free_pr++;
+            if (mc->stall_checkpoint_full   ) stall_checkpoint_full++;
+            if (mc->stall_lc_checkpoint_full) stall_lc_checkpoint_full++;
+        }
+        {
+            auto* lsq = dut->top_tb->dut->cpu_execute->lsq;
+            if (lsq->mon_load_issued_safe    ) loads_issued_safe++;
+            if (lsq->mon_load_issued_spec    ) loads_issued_spec++;
+            if (lsq->mon_fwd_fire            ) loads_forwarded++;
+            if (lsq->mon_spec_mispredict     ) spec_mispredicts++;
+            if (lsq->mon_spec_mispredict_fwd ) spec_mispr_from_fwd++;
+            if (lsq->mon_spec_mispredict_spec) spec_mispr_from_spec++;
         }
         if (dut->any_commit && !dut->halt) {
             last_commit_cycle = cycle;
             cpp_commits++;
-            if ((dut->dut_inst & 0x7F) == 0x63) {
-                cpp_branches++;                          // BRANCH opcode
-                if (dut->mispredict_o) cpp_mispredicts++;  // only count branch mispredicts
+            if ((dut->dut_inst & 0x7F) == 0x63) {        // BRANCH (BEQ/BNE/BLT/BGE/BLTU/BGEU)
+                cpp_branches++;
+                if (dut->mispredict_o) cpp_branch_mispreds++;
+            }
+            if ((dut->dut_inst & 0x7F) == 0x67) {        // JALR (indirect jump, can mispredict)
+                cpp_jumps++;
+                if (dut->mispredict_o) cpp_jump_mispreds++;
             }
             CommitSnap s;
             s.pc        = dut->dut_pc;

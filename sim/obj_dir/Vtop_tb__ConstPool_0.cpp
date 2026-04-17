@@ -4,7 +4,28 @@
 
 #include "verilated.h"
 
-extern const VlWide<12>/*383:0*/ Vtop_tb__ConstPool__CONST_h3c5fcb02_0 = {{
+extern const VlWide<18>/*575:0*/ Vtop_tb__ConstPool__CONST_h075ec4d6_0 = {{
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000
+}};
+
+extern const VlWide<12>/*383:0*/ Vtop_tb__ConstPool__CONST_h5ba48564_0 = {{
+    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff,
+    0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff,
+    0xffffffff, 0xffffffff, 0xffffffff, 0x3fffffff
+}};
+
+extern const VlWide<12>/*383:0*/ Vtop_tb__ConstPool__CONST_h7e30f2cb_0 = {{
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000
+}};
+
+extern const VlWide<16>/*511:0*/ Vtop_tb__ConstPool__CONST_hf6506c7a_0 = {{
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000

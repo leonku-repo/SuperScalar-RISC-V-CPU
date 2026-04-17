@@ -17,8 +17,10 @@
 #include "Vtop_tb___024root.h"
 #include "Vtop_tb_top_tb.h"
 #include "Vtop_tb_cpu.h"
+#include "Vtop_tb_cpu_execute.h"
 #include "Vtop_tb_cpu_midcore.h"
 #include "Vtop_tb_mon_itf.h"
+#include "Vtop_tb_lsq.h"
 #include "Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec.h"
 
 // DPI TYPES for DPI Export callbacks (Internal use)
@@ -46,9 +48,12 @@ class alignas(VL_CACHE_LINE_BYTES)Vtop_tb__Syms final : public VerilatedSyms {
     Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec TOP__top_tb__monitor__DOT__monitor__DOT__ch6_isa_spec;
     Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec TOP__top_tb__monitor__DOT__monitor__DOT__ch7_isa_spec;
     Vtop_tb_cpu                    TOP__top_tb__dut;
+    Vtop_tb_cpu_execute            TOP__top_tb__dut__cpu_execute;
+    Vtop_tb_lsq                    TOP__top_tb__dut__cpu_execute__lsq;
     Vtop_tb_cpu_midcore            TOP__top_tb__dut__cpu_midcore;
 
     // SCOPE NAMES
+    VerilatedScope __Vscope_top_tb__dut__cpu_execute__lsq;
     VerilatedScope __Vscope_top_tb__dut__cpu_midcore;
     VerilatedScope __Vscope_top_tb__monitor;
     VerilatedScope __Vscope_top_tb__monitor__monitor;

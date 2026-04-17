@@ -11,14 +11,23 @@ import rv32i_types::*;
     // Execute-time mispredict: partial flush + wrPtr rollback
     input   logic                       exec_mispredict,
     input   logic   [ptr_width-1:0]     exec_mispredict_rob_idx, // ROB slot of mispredicting branch
+    // Spec-load mispredict: partial flush + clear done of mispredicted load
+    input   logic                       spec_load_mispredict,
+    input   logic   [ptr_width-1:0]     spec_load_rob_idx,       // ROB slot of mispredicted load
     // from rename2, to allocate new entry
-    input   rob_t                       rob_data_i, 
+    input   rob_t                       rob_data_i,
     // from write back, update rob when done execution
     input   rob_t                       alu_ROB_exec_i,
     input   rob_t                       cmp_ROB_exec_i,
     input   rob_t                       jump_ROB_exec_i,
     input   rob_t                       mem_ROB_exec_i,
     input   rob_t                       mul_ROB_exec_i,
+    // 6th: store writeback — marks store ROB entry done so it can commit (ROB only; stores have no dest PR)
+    input   logic                       store_wb_valid_i,
+    input   rob_t                       store_wb_rob_data_i,
+    // 7th: forwarded load writeback — marks forwarded load ROB entry done
+    input   logic                       fwd_ROB_exec_valid_i,
+    input   rob_t                       fwd_ROB_exec_i,
 
     // TO MIDCORE
     output  logic   [ptr_width-1:0]     wrPtr_o,
@@ -58,12 +67,19 @@ import rv32i_types::*;
         if (rst) begin
             wrPtr <= '0;
             rdPtr <= '0;
+        end else if (exec_mispredict && spec_load_mispredict) begin
+            // Both fire: pick the older (smaller circular age = more aggressive flush).
+            wrPtr <= (ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0]) <=
+                      ptr_width'(spec_load_rob_idx       - rdPtr[ptr_width-1:0]))
+                     ? rdPtr + {1'b0, ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0])} + 1'b1
+                     : rdPtr + {1'b0, ptr_width'(spec_load_rob_idx       - rdPtr[ptr_width-1:0])} + 1'b1;
+            rdPtr <= rdPtrNext;
         end else if (exec_mispredict) begin
-            // Partial flush: roll wrPtr back to one past the mispredicting branch.
-            // age_m is the circular distance from rdPtr to exec_mispredict_rob_idx;
-            // rdPtr + age_m + 1 gives the correct (ptr_width+1)-bit wrPtr including MSB.
             wrPtr <= rdPtr + {1'b0, ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0])} + 1'b1;
-            rdPtr <= rdPtrNext;  // commit may still drain on the same cycle
+            rdPtr <= rdPtrNext;
+        end else if (spec_load_mispredict) begin
+            wrPtr <= rdPtr + {1'b0, ptr_width'(spec_load_rob_idx - rdPtr[ptr_width-1:0])} + 1'b1;
+            rdPtr <= rdPtrNext;
         end else begin
             wrPtr <= wrPtrNext;
             rdPtr <= rdPtrNext;
@@ -95,7 +111,7 @@ import rv32i_types::*;
         // dispatch: allocate new entry — copy all fields from rob_data_i,
         // then force writeback fields to clean/zero so stale data from the
         // previous occupant cannot cause a spurious commit.
-        if (wr_en && !exec_mispredict) begin : dispatch
+        if (wr_en && !exec_mispredict && !spec_load_mispredict) begin : dispatch
             mem_next[wrPtr[ptr_width-1:0]]            = rob_data_i  ;
             mem_next[wrPtr[ptr_width-1:0]].done       = 1'b0        ;
             mem_next[wrPtr[ptr_width-1:0]].rs1_rdata  = '0          ;
@@ -202,9 +218,50 @@ import rv32i_types::*;
             end
             mem_next[mul_ROB_exec_i.rob_entry].done = 1'b1;
         end : wb_mul
+
+        // 6th: store writeback — mark store ROB entry done so ROB head can commit.
+        // Stores have no dest PR; no PRF/busy_table/RS update needed.
+        if (store_wb_valid_i) begin : wb_store
+            if (!mem[store_wb_rob_data_i.rob_entry].done) begin
+                mem_next[store_wb_rob_data_i.rob_entry].pc_next             = store_wb_rob_data_i.pc_next            ;
+                mem_next[store_wb_rob_data_i.rob_entry].rs1_rdata           = store_wb_rob_data_i.rs1_rdata          ;
+                mem_next[store_wb_rob_data_i.rob_entry].rs2_rdata           = store_wb_rob_data_i.rs2_rdata          ;
+                mem_next[store_wb_rob_data_i.rob_entry].rd_wdata            = store_wb_rob_data_i.rd_wdata           ;
+                mem_next[store_wb_rob_data_i.rob_entry].mem_addr            = store_wb_rob_data_i.mem_addr           ;
+                mem_next[store_wb_rob_data_i.rob_entry].mem_rmask           = store_wb_rob_data_i.mem_rmask          ;
+                mem_next[store_wb_rob_data_i.rob_entry].mem_wmask           = store_wb_rob_data_i.mem_wmask          ;
+                mem_next[store_wb_rob_data_i.rob_entry].mem_rdata           = store_wb_rob_data_i.mem_rdata          ;
+                mem_next[store_wb_rob_data_i.rob_entry].mem_wdata           = store_wb_rob_data_i.mem_wdata          ;
+                mem_next[store_wb_rob_data_i.rob_entry].mispredict          = store_wb_rob_data_i.mispredict         ;
+                mem_next[store_wb_rob_data_i.rob_entry].target_pc           = store_wb_rob_data_i.target_pc          ;
+                mem_next[store_wb_rob_data_i.rob_entry].branch_actual_taken = store_wb_rob_data_i.branch_actual_taken;
+            end
+            mem_next[store_wb_rob_data_i.rob_entry].done = 1'b1;
+        end : wb_store
+
+        // 7th: forwarded load writeback — mark forwarded load ROB entry done.
+        // wb_fwd_rob_data_o from lsq.sv has all RVFI fields filled.
+        if (fwd_ROB_exec_valid_i) begin : wb_fwd
+            if (!mem[fwd_ROB_exec_i.rob_entry].done) begin
+                mem_next[fwd_ROB_exec_i.rob_entry].pc_next             = fwd_ROB_exec_i.pc_next            ;
+                mem_next[fwd_ROB_exec_i.rob_entry].rs1_rdata           = fwd_ROB_exec_i.rs1_rdata          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].rs2_rdata           = fwd_ROB_exec_i.rs2_rdata          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].rd_wdata            = fwd_ROB_exec_i.rd_wdata           ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mem_addr            = fwd_ROB_exec_i.mem_addr           ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mem_rmask           = fwd_ROB_exec_i.mem_rmask          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mem_wmask           = fwd_ROB_exec_i.mem_wmask          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mem_rdata           = fwd_ROB_exec_i.mem_rdata          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mem_wdata           = fwd_ROB_exec_i.mem_wdata          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].mispredict          = fwd_ROB_exec_i.mispredict         ;
+                mem_next[fwd_ROB_exec_i.rob_entry].target_pc           = fwd_ROB_exec_i.target_pc          ;
+                mem_next[fwd_ROB_exec_i.rob_entry].branch_actual_taken = fwd_ROB_exec_i.branch_actual_taken;
+            end
+            mem_next[fwd_ROB_exec_i.rob_entry].done = 1'b1;
+        end : wb_fwd
     end
 
-    assign wb_update = alu_ROB_exec_i.done | cmp_ROB_exec_i.done | jump_ROB_exec_i.done | mem_ROB_exec_i.done | mul_ROB_exec_i.done;
+    assign wb_update = alu_ROB_exec_i.done | cmp_ROB_exec_i.done | jump_ROB_exec_i.done | mem_ROB_exec_i.done | mul_ROB_exec_i.done
+                     | store_wb_valid_i | fwd_ROB_exec_valid_i;
 
     logic   f1, f2, f3;
     // enque data into fifo
@@ -219,7 +276,7 @@ import rv32i_types::*;
             f1 <= '1;
         end else begin
             // Normal dispatch / writeback updates
-            if ((!full_o && wr_en && !exec_mispredict) || wb_update) begin
+            if ((!full_o && wr_en && !exec_mispredict && !spec_load_mispredict) || wb_update) begin
                 for (int i = 0; i < fifo_size; i++) begin : update_rob
                     mem[i] <= mem_next[i];
                 end : update_rob
@@ -232,11 +289,23 @@ import rv32i_types::*;
             // Partial flush: clear every entry younger than exec_mispredict_rob_idx.
             // Placed after the normal update so it takes priority (last assignment wins).
             if (exec_mispredict) begin
-                for (int i = 0; i < fifo_size; i++) begin : partial_flush
+                for (int i = 0; i < fifo_size; i++) begin : partial_flush_exec
                     if (ptr_width'(i - rdPtr[ptr_width-1:0]) >
                         ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0]))
                         mem[i] <= '0;
-                end : partial_flush
+                end : partial_flush_exec
+            end
+
+            // Spec-load mispredict: flush entries younger than spec_load_rob_idx,
+            // and clear the done bit of the mispredicted load so it re-executes.
+            if (spec_load_mispredict) begin
+                for (int i = 0; i < fifo_size; i++) begin : partial_flush_spec
+                    if (ptr_width'(i - rdPtr[ptr_width-1:0]) >
+                        ptr_width'(spec_load_rob_idx - rdPtr[ptr_width-1:0]))
+                        mem[i] <= '0;
+                end : partial_flush_spec
+                // Keep the mispredicted load's entry alive, but reset done so it re-executes.
+                mem[spec_load_rob_idx].done <= 1'b0;
             end
         end
     end
@@ -260,9 +329,12 @@ import rv32i_types::*;
         bt_rebuild_o = '0;
         for (int i = 0; i < fifo_size; i++) begin
             if (mem[i].valid && mem[i].rd_valid && !mem_next[i].done) begin
-                if (!exec_mispredict ||
-                    ptr_width'(i - rdPtr[ptr_width-1:0]) <=
-                    ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0]))
+                if ((!exec_mispredict ||
+                     ptr_width'(i - rdPtr[ptr_width-1:0]) <=
+                     ptr_width'(exec_mispredict_rob_idx - rdPtr[ptr_width-1:0])) &&
+                    (!spec_load_mispredict ||
+                     ptr_width'(i - rdPtr[ptr_width-1:0]) <=
+                     ptr_width'(spec_load_rob_idx - rdPtr[ptr_width-1:0])))
                     bt_rebuild_o[mem[i].new_p] = 1'b1;
             end
         end

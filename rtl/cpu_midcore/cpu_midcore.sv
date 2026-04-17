@@ -16,20 +16,31 @@ import rv32i_types::*;
     input   logic                   clk,
     input   logic                   rst,
 
-    // Execute-time mispredict (replaces old commit-time mispredict)
+    // Execute-time mispredict
     input   logic                   exec_mispredict,
-    input   logic   [ROB_IDX-1:0]   exec_mispredict_rob_idx,   // unused here, threaded via cpu.sv
-    input   logic   [ROB_IDX-1:0]   rdPtr_i,                   // unused here, threaded via cpu.sv
+    input   logic   [ROB_IDX-1:0]   exec_mispredict_rob_idx,   // → srat, free_list age comparison
+    input   logic   [ROB_IDX-1:0]   rdPtr_i,                   // → srat, free_list age comparison
 
-    // Recovery data from checkpoint.sv (instantiated in cpu.sv)
+    // Spec-load mispredict
+    input   logic                   spec_load_mispredict,
+    input   logic   [ROB_IDX-1:0]   spec_load_rob_idx_i,       // → srat, free_list age comparison
+
+    // Recovery data from checkpoint.sv (branch checkpoint, instantiated in cpu.sv)
     input   logic   [PRF_IDX-1:0]   recover_srat_i      [32],  // → srat.recover_srat
     input   logic   [PRF_SIZE-1:0]  recover_alloc_list_i,      // → free_list.recover_alloc_list
+    // Recovery data from load_checkpoint.sv (instantiated in cpu.sv)
+    input   logic   [PRF_IDX-1:0]   spec_load_recover_srat_i      [32],  // → srat.spec_load_recover_srat
+    input   logic   [PRF_SIZE-1:0]  spec_load_recover_alloc_list_i,      // → free_list.spec_load_recover_alloc_list
     // Busy-table rebuild from rob.bt_rebuild_o
     input   logic   [PRF_SIZE-1:0]  bt_rebuild_i,              // → busy_table.bt_rebuild_i
 
-    // Checkpoint allocation (from checkpoint.sv in cpu.sv)
+    // Branch checkpoint allocation (from checkpoint.sv in cpu.sv)
     input   logic                   checkpoint_full,
     input   logic   [CP_IDX-1:0]    cp_checkpoint_id_i,        // slot assigned this dispatch
+
+    // Load checkpoint allocation (from load_checkpoint.sv in cpu.sv)
+    input   logic                   lc_checkpoint_full,
+    input   logic   [LC_IDX-1:0]    lc_checkpoint_id_i,        // slot assigned to dispatching load
 
     // fetch queue
     output  logic                   decode_request,
@@ -54,11 +65,13 @@ import rv32i_types::*;
     input   logic                   wb_jump,
     input   logic                   wb_cmp,
     input   logic                   wb_mul,
+    input   logic                   wb_fwd,
     input   logic   [PRF_IDX-1:0]   wb_alu_pr,
     input   logic   [PRF_IDX-1:0]   wb_load_pr,
     input   logic   [PRF_IDX-1:0]   wb_jump_pr,
     input   logic   [PRF_IDX-1:0]   wb_cmp_pr,
     input   logic   [PRF_IDX-1:0]   wb_mul_pr,
+    input   logic   [PRF_IDX-1:0]   wb_fwd_pr,
 
     // from commit
     input   logic                   commit_update,
@@ -71,12 +84,17 @@ import rv32i_types::*;
     output  rob_t                   ROB_midcore_o,
     output  midcore_t               MIDCORE_midcore_o,
 
-    // Checkpoint dispatch outputs (to checkpoint.sv in cpu.sv)
+    // Branch checkpoint dispatch outputs (to checkpoint.sv in cpu.sv)
     output  logic                   cp_dispatch_valid,
     output  logic   [ROB_IDX-1:0]   cp_dispatch_rob_idx,
     output  logic   [PRF_IDX-1:0]   cp_dispatch_srat    [32],
 
-    // Rename update — forwarded to checkpoint.sv (in cpu.sv) to accumulate alloc_list
+    // Load checkpoint dispatch outputs (to load_checkpoint.sv in cpu.sv)
+    output  logic                   lc_dispatch_valid_o,
+    output  logic   [ROB_IDX-1:0]   lc_dispatch_rob_idx_o,
+    output  logic   [PRF_IDX-1:0]   lc_dispatch_srat_o  [32],
+
+    // Rename update — forwarded to both checkpoint.sv and load_checkpoint.sv for alloc_list accumulation
     output  logic                   cp_rename_update_o,
     output  logic   [PRF_IDX-1:0]   cp_rename_update_pr_o
 );
@@ -116,7 +134,12 @@ assign is_br_or_jump = (MIDCORE_rename2_reg.dispatch_to == 3'd1 ||  // CMP (op_b
                         MIDCORE_rename2_reg.dispatch_to == 3'd4 ||  // Jump (op_jal)
                         MIDCORE_rename2_reg.dispatch_to == 3'd5);   // Jump (op_jalr)
 
+// Whether the instruction in rename2_reg is a load
+logic   is_load;
+assign is_load = (MIDCORE_rename2_reg.dispatch_to == 3'd2);
+
 // Stall conditions
+logic stall_lc_checkpoint_full /*verilator public*/;
 assign stall_rob_full         = rob_full;
 assign stall_alu_full         = alu_full   && (MIDCORE_rename2_reg.dispatch_to == 3'd0);
 assign stall_cmp_full         = cmp_full   && (MIDCORE_rename2_reg.dispatch_to == 3'd1);
@@ -127,23 +150,29 @@ assign stall_jump_full        = jump_full  && (MIDCORE_rename2_reg.dispatch_to =
 assign stall_mul_full         = mul_full   && (MIDCORE_rename2_reg.dispatch_to == 3'd6);
 assign stall_no_free_pr       = ROB_rename2_o.rd_valid && !free_pr_valid;
 assign stall_checkpoint_full  = checkpoint_full && is_br_or_jump;
+assign stall_lc_checkpoint_full = lc_checkpoint_full && is_load;
 
-assign stall = stall_rob_full   | stall_alu_full   | stall_cmp_full   |
-               stall_load_full  | stall_store_full  | stall_jump_full  |
-               stall_mul_full   | stall_no_free_pr  | stall_checkpoint_full |
-               exec_mispredict;
+assign stall = stall_rob_full   | stall_alu_full      | stall_cmp_full   |
+               stall_load_full  | stall_store_full     | stall_jump_full  |
+               stall_mul_full   | stall_no_free_pr     | stall_checkpoint_full |
+               stall_lc_checkpoint_full | exec_mispredict | spec_load_mispredict;
 
 assign decode_request = !stall && !empty_i;
 
 // -----------------------------------------------------------------------
-// Checkpoint dispatch — fires when a branch/jump in rename2_reg dispatches
+// Branch checkpoint dispatch — fires when a branch/jump in rename2_reg dispatches
 // -----------------------------------------------------------------------
 assign cp_dispatch_valid   = !stall && ROB_rename2_reg.valid && is_br_or_jump;
 assign cp_dispatch_rob_idx = ROB_rename2_reg.rob_entry;
-assign cp_dispatch_srat    = srat_o;   // current registered SRAT = post-rename for this branch
+assign cp_dispatch_srat    = srat_o;
 
-// Forward rename activity to checkpoint.sv (cpu.sv) for alloc_list accumulation.
-// Gate with !stall (which includes exec_mispredict) so wrong-path renames are excluded.
+// Load checkpoint dispatch — fires when a load in rename2_reg dispatches
+assign lc_dispatch_valid_o   = !stall && ROB_rename2_reg.valid && is_load;
+assign lc_dispatch_rob_idx_o = ROB_rename2_reg.rob_entry;
+assign lc_dispatch_srat_o    = srat_o;
+
+// Forward rename activity to checkpoint.sv + load_checkpoint.sv for alloc_list accumulation.
+// Gate with !stall (which includes exec_mispredict + spec_load_mispredict).
 assign cp_rename_update_o    = rename_update && !stall;
 assign cp_rename_update_pr_o = rename_update_pr;
 
@@ -159,11 +188,13 @@ always_comb begin
         MIDCORE_midcore_o = MIDCORE_rename2_reg;
         if (is_br_or_jump)
             ROB_midcore_o.checkpoint_id = cp_checkpoint_id_i;
+        if (is_load)
+            ROB_midcore_o.spec_load_cp_id = lc_checkpoint_id_i;
     end
 end
 
 always_ff @( posedge clk ) begin
-    if (rst || exec_mispredict) begin
+    if (rst || exec_mispredict || spec_load_mispredict) begin
         ROB_rename1_reg <= '0;
         ROB_rename2_reg <= '0;
     end
@@ -189,20 +220,22 @@ always_comb begin
             (wb_load && (MIDCORE_rename2_reg.pr1 == wb_load_pr)) ||
             (wb_jump && (MIDCORE_rename2_reg.pr1 == wb_jump_pr)) ||
             (wb_cmp  && (MIDCORE_rename2_reg.pr1 == wb_cmp_pr )) ||
-            (wb_mul  && (MIDCORE_rename2_reg.pr1 == wb_mul_pr ))
+            (wb_mul  && (MIDCORE_rename2_reg.pr1 == wb_mul_pr )) ||
+            (wb_fwd  && (MIDCORE_rename2_reg.pr1 == wb_fwd_pr ))
         )) MIDCORE_rename2_wb_updated.pr1_busy = 1'b0;
         if (MIDCORE_rename2_reg.pr2_valid && (
             (wb_alu  && (MIDCORE_rename2_reg.pr2 == wb_alu_pr )) ||
             (wb_load && (MIDCORE_rename2_reg.pr2 == wb_load_pr)) ||
             (wb_jump && (MIDCORE_rename2_reg.pr2 == wb_jump_pr)) ||
             (wb_cmp  && (MIDCORE_rename2_reg.pr2 == wb_cmp_pr )) ||
-            (wb_mul  && (MIDCORE_rename2_reg.pr2 == wb_mul_pr ))
+            (wb_mul  && (MIDCORE_rename2_reg.pr2 == wb_mul_pr )) ||
+            (wb_fwd  && (MIDCORE_rename2_reg.pr2 == wb_fwd_pr ))
         )) MIDCORE_rename2_wb_updated.pr2_busy = 1'b0;
     end
 end
 
 always_ff @( posedge clk ) begin
-    if (rst || exec_mispredict) begin
+    if (rst || exec_mispredict || spec_load_mispredict) begin
         MIDCORE_rename1_reg <= '0;
         MIDCORE_rename2_reg <= '0;
     end
@@ -241,7 +274,12 @@ srat srat(
     .rename_update_ar(rename_update_ar),
     .rename_update_pr(rename_update_pr),
     .exec_mispredict(exec_mispredict),
+    .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
     .recover_srat(recover_srat_i),
+    .spec_load_mispredict(spec_load_mispredict),
+    .spec_load_rob_idx(spec_load_rob_idx_i),
+    .spec_load_recover_srat(spec_load_recover_srat_i),
+    .rdPtr(rdPtr_i),
     .srat_o(srat_o)
 );
 rename1 rename1(
@@ -273,12 +311,15 @@ busy_table busy_table(
     .wb_jump(wb_jump),
     .wb_cmp(wb_cmp),
     .wb_mul(wb_mul),
+    .wb_fwd(wb_fwd),
     .wb_alu_pr(wb_alu_pr),
     .wb_load_pr(wb_load_pr),
     .wb_jump_pr(wb_jump_pr),
     .wb_cmp_pr(wb_cmp_pr),
     .wb_mul_pr(wb_mul_pr),
+    .wb_fwd_pr(wb_fwd_pr),
     .exec_mispredict(exec_mispredict),
+    .spec_load_mispredict(spec_load_mispredict),
     .bt_rebuild_i(bt_rebuild_i)
 );
 free_list free_list(
@@ -291,7 +332,12 @@ free_list free_list(
     .commit_update(commit_update),
     .commit_update_pr(commit_update_old_p),
     .exec_mispredict(exec_mispredict),
-    .recover_alloc_list(recover_alloc_list_i)
+    .exec_mispredict_rob_idx(exec_mispredict_rob_idx),
+    .recover_alloc_list(recover_alloc_list_i),
+    .spec_load_mispredict(spec_load_mispredict),
+    .spec_load_rob_idx(spec_load_rob_idx_i),
+    .spec_load_recover_alloc_list(spec_load_recover_alloc_list_i),
+    .rdPtr(rdPtr_i)
 );
 rename2 rename2(
     .ROB_rename1_i(ROB_rename1_reg),
@@ -307,11 +353,13 @@ rename2 rename2(
     .wb_jump(wb_jump),
     .wb_cmp(wb_cmp),
     .wb_mul(wb_mul),
+    .wb_fwd(wb_fwd),
     .wb_alu_pr(wb_alu_pr),
     .wb_load_pr(wb_load_pr),
     .wb_jump_pr(wb_jump_pr),
     .wb_cmp_pr(wb_cmp_pr),
     .wb_mul_pr(wb_mul_pr),
+    .wb_fwd_pr(wb_fwd_pr),
     .rename_update(rename_update),
     .rename_update_pr(rename_update_pr),
     .rename_update_ar(rename_update_ar),

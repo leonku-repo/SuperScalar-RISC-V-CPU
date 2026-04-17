@@ -17,7 +17,14 @@ import rv32i_types::*;
     input   logic   [PRF_IDX-1:0]   rename_update_pr,
     // update when execute-time mispredict: restore from checkpoint snapshot
     input   logic                   exec_mispredict,
-    input   logic   [PRF_IDX-1:0]   recover_srat    [32],
+    input   logic   [ROB_IDX-1:0]   exec_mispredict_rob_idx,
+    input   logic   [PRF_IDX-1:0]   recover_srat           [32],
+    // update when spec-load mispredict: restore from load checkpoint snapshot
+    input   logic                   spec_load_mispredict,
+    input   logic   [ROB_IDX-1:0]   spec_load_rob_idx,
+    input   logic   [PRF_IDX-1:0]   spec_load_recover_srat [32],
+    // rdPtr for age comparison when both mispredicts fire simultaneously
+    input   logic   [ROB_IDX-1:0]   rdPtr,
     // full registered SRAT array — forwarded to checkpoint.sv as dispatch_srat
     output  logic   [PRF_IDX-1:0]   srat_o          [32]
 );
@@ -30,8 +37,16 @@ import rv32i_types::*;
                 srat[i] <= i[PRF_IDX-1:0];
             end
         end
+        else if(exec_mispredict && spec_load_mispredict) begin
+            // Both fire: pick the older (smaller circular age from rdPtr).
+            srat <= (ROB_IDX'(exec_mispredict_rob_idx - rdPtr) <= ROB_IDX'(spec_load_rob_idx - rdPtr))
+                    ? recover_srat : spec_load_recover_srat;
+        end
         else if(exec_mispredict) begin
             srat <= recover_srat;
+        end
+        else if(spec_load_mispredict) begin
+            srat <= spec_load_recover_srat;
         end
         else if(rename_update) begin
             srat <= srat_next;

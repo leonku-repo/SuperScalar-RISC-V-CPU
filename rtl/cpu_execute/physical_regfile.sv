@@ -4,22 +4,25 @@ import rv32i_types::*;
     input   logic                       clk,
     input   logic                       rst,
 
-    // update during writeback: alu, cmp, load, jump, mul
+    // update during writeback: alu, cmp, load, jump, mul, fwd (store-to-load forward)
     input   logic                       alu_wb,
     input   logic                       cmp_wb,
     input   logic                       load_wb,
     input   logic                       jump_wb,
     input   logic                       mul_wb,
+    input   logic                       fwd_wb,
     input   logic   [31:0]              alu_val,
     input   logic   [31:0]              cmp_val,
     input   logic   [31:0]              load_val,
     input   logic   [31:0]              jump_val,
     input   logic   [31:0]              mul_val,
+    input   logic   [31:0]              fwd_val,
     input   logic   [PRF_IDX-1:0]       alu_pr,
     input   logic   [PRF_IDX-1:0]       cmp_pr,
     input   logic   [PRF_IDX-1:0]       load_pr,
     input   logic   [PRF_IDX-1:0]       jump_pr,
     input   logic   [PRF_IDX-1:0]       mul_pr,
+    input   logic   [PRF_IDX-1:0]       fwd_pr,
 
     // register value lookup: alu, cmp, jump, lsq, mul
     input   logic   [PRF_IDX-1:0]       lookup_alu_pr1,
@@ -61,7 +64,7 @@ import rv32i_types::*;
         if(rst) begin
             for(int i = 0; i < PRF_SIZE; i++) prf[i] <= '0;
         end
-        else if(alu_wb || cmp_wb || load_wb || jump_wb || mul_wb)
+        else if(alu_wb || cmp_wb || load_wb || jump_wb || mul_wb || fwd_wb)
             prf <= prf_next;
         else
             prf <= prf;
@@ -74,6 +77,7 @@ import rv32i_types::*;
         if (load_wb) prf_next[load_pr] = load_val;
         if (jump_wb) prf_next[jump_pr] = jump_val;
         if (mul_wb)  prf_next[mul_pr]  = mul_val;
+        if (fwd_wb)  prf_next[fwd_pr]  = fwd_val;
         prf_next[0] = '0;
     end
 

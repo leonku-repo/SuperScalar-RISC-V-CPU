@@ -52,10 +52,27 @@ VL_INLINE_OPT void Vtop_tb___024root___ico_sequent__TOP__1(Vtop_tb___024root* vl
     vlSelf->golden_dmem_wdata = vlSymsp->TOP__top_tb.golden_dmem_wdata;
 }
 
+VL_INLINE_OPT void Vtop_tb___024root___ico_sequent__TOP__2(Vtop_tb___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop_tb__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop_tb___024root___ico_sequent__TOP__2\n"); );
+    // Body
+    vlSelf->dmem_read = vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__dmem_read;
+    vlSelf->dmem_addr = vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__dmem_addr;
+}
+
 void Vtop_tb_top_tb___ico_sequent__TOP__top_tb__0(Vtop_tb_top_tb* vlSelf);
 void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vlSelf);
-void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midcore__0(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__0(Vtop_tb_cpu_execute* vlSelf);
+void Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__0(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__1(Vtop_tb_lsq* vlSelf);
 void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__1(Vtop_tb_cpu* vlSelf);
+void Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__1(Vtop_tb_cpu_execute* vlSelf);
+void Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midcore__0(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__2(Vtop_tb_cpu* vlSelf);
+void Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__2(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__3(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__2(Vtop_tb_cpu_execute* vlSelf);
 
 void Vtop_tb___024root___eval_ico(Vtop_tb___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -67,9 +84,18 @@ void Vtop_tb___024root___eval_ico(Vtop_tb___024root* vlSelf) {
         vlSelf->__Vm_traceActivity[1U] = 1U;
         Vtop_tb_top_tb___ico_sequent__TOP__top_tb__0((&vlSymsp->TOP__top_tb));
         Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__0((&vlSymsp->TOP__top_tb__dut));
-        Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midcore__0((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__0((&vlSymsp->TOP__top_tb__dut__cpu_execute));
         Vtop_tb___024root___ico_sequent__TOP__1(vlSelf);
+        Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__0((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__1((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
         Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__1((&vlSymsp->TOP__top_tb__dut));
+        Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__1((&vlSymsp->TOP__top_tb__dut__cpu_execute));
+        Vtop_tb_cpu_midcore___ico_sequent__TOP__top_tb__dut__cpu_midcore__0((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb___024root___ico_sequent__TOP__2(vlSelf);
+        Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__2((&vlSymsp->TOP__top_tb__dut));
+        Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__2((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__3((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_cpu_execute___ico_sequent__TOP__top_tb__dut__cpu_execute__2((&vlSymsp->TOP__top_tb__dut__cpu_execute));
     }
 }
 
@@ -122,8 +148,6 @@ VL_INLINE_OPT void Vtop_tb___024root___nba_sequent__TOP__0(Vtop_tb___024root* vl
     vlSelf->dut_order = vlSymsp->TOP__top_tb__dut.__PVT__order;
     vlSelf->imem_read = (1U & (~ ((IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_frontend__DOT__fetchq_full) 
                                   & (IData)(vlSelf->imem_resp))));
-    vlSelf->dmem_read = ((~ (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__LDorST_i)) 
-                         & (IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0));
 }
 
 VL_INLINE_OPT void Vtop_tb___024root___nba_sequent__TOP__1(Vtop_tb___024root* vlSelf) {
@@ -132,36 +156,34 @@ VL_INLINE_OPT void Vtop_tb___024root___nba_sequent__TOP__1(Vtop_tb___024root* vl
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop_tb___024root___nba_sequent__TOP__1\n"); );
     // Body
     vlSelf->dut_mem_wdata = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
-                              << 0x19U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[1U] 
-                                           >> 7U));
+                              << 0x12U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[1U] 
+                                           >> 0xeU));
     vlSelf->dut_mem_rdata = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                              << 0x19U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
-                                           >> 7U));
+                              << 0x12U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[2U] 
+                                           >> 0xeU));
     vlSelf->dut_mem_wmask = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                                     >> 7U));
+                                     >> 0xeU));
     vlSelf->dut_mem_rmask = (0xfU & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                                     >> 0xbU));
+                                     >> 0x12U));
     vlSelf->dut_mem_addr = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
-                             << 0x11U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
-                                          >> 0xfU));
+                             << 0xaU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[3U] 
+                                         >> 0x16U));
     vlSelf->dut_rd_wdata = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[5U] 
-                             << 0x11U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
-                                          >> 0xfU));
-    vlSelf->dut_inst = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
-                         << 1U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[7U] 
-                                   >> 0x1fU));
-    vlSelf->dut_pc = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
-                       << 1U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
-                                 >> 0x1fU));
+                             << 0xaU) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[4U] 
+                                         >> 0x16U));
+    vlSelf->dut_inst = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[9U] 
+                         << 0x18U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[8U] 
+                                      >> 8U));
+    vlSelf->dut_pc = ((vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xbU] 
+                       << 0x18U) | (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[0xaU] 
+                                    >> 8U));
     vlSelf->mispredict_o = (1U & (vlSymsp->TOP__top_tb__dut.__PVT__commit_rob_o[1U] 
-                                  >> 4U));
+                                  >> 0xbU));
     vlSelf->dut_rd_addr = vlSymsp->TOP__top_tb__dut.__PVT__monitor_rd_addr;
     vlSelf->any_commit = vlSymsp->TOP__top_tb__dut.__PVT__monitor_valid;
-    vlSelf->dmem_write = ((IData)(vlSymsp->TOP__top_tb__dut.cpu_execute__DOT__mem__DOT____VdfgTmp_he05e7ede__0) 
-                          & (IData)(vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__mem__DOT__store_match));
-    vlSelf->dmem_wdata = vlSymsp->TOP__top_tb__dut.__PVT__dmem_wdata;
-    vlSelf->dmem_addr = vlSymsp->TOP__top_tb__dut.__PVT__dmem_addr;
-    vlSelf->dmem_wmask = vlSymsp->TOP__top_tb__dut.__PVT__dmem_wmask;
+    vlSelf->dmem_write = vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__dmem_write;
+    vlSelf->dmem_wmask = vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__dmem_wmask;
+    vlSelf->dmem_wdata = vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__dmem_wdata;
 }
 
 void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* vlSelf);
@@ -170,10 +192,19 @@ void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__0(Vtop_tb_cpu* vlSelf);
 void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__1(Vtop_tb_cpu* vlSelf);
 void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__2(Vtop_tb_cpu* vlSelf);
 void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__0(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__0(Vtop_tb_cpu_execute* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__0(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__1(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__2(Vtop_tb_lsq* vlSelf);
 void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__2(Vtop_tb_top_tb* vlSelf);
 void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__3(Vtop_tb_cpu* vlSelf);
 void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__1(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__1(Vtop_tb_cpu_execute* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__3(Vtop_tb_lsq* vlSelf);
 void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__3(Vtop_tb_top_tb* vlSelf);
+void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__4(Vtop_tb_cpu* vlSelf);
+void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__2(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__2(Vtop_tb_cpu_execute* vlSelf);
 void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch0_isa_spec__0(Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec* vlSelf);
 void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch1_isa_spec__0(Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec* vlSelf);
 void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch2_isa_spec__0(Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec* vlSelf);
@@ -183,6 +214,10 @@ void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__m
 void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch6_isa_spec__0(Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec* vlSelf);
 void Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch7_isa_spec__0(Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec* vlSelf);
 void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__5(Vtop_tb_cpu* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__5(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__6(Vtop_tb_lsq* vlSelf);
+void Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__3(Vtop_tb_cpu_midcore* vlSelf);
+void Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__6(Vtop_tb_cpu* vlSelf);
 
 void Vtop_tb___024root___eval_nba(Vtop_tb___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -197,13 +232,22 @@ void Vtop_tb___024root___eval_nba(Vtop_tb___024root* vlSelf) {
         Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__1((&vlSymsp->TOP__top_tb__dut));
         Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__2((&vlSymsp->TOP__top_tb__dut));
         Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__0((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__0((&vlSymsp->TOP__top_tb__dut__cpu_execute));
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__0((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__1((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__2((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
         Vtop_tb___024root___nba_sequent__TOP__0(vlSelf);
         Vtop_tb_top_tb___nba_sequent__TOP__top_tb__2((&vlSymsp->TOP__top_tb));
         Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__3((&vlSymsp->TOP__top_tb__dut));
         Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__1((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__1((&vlSymsp->TOP__top_tb__dut__cpu_execute));
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__3((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___ico_sequent__TOP__top_tb__dut__cpu_execute__lsq__1((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
         Vtop_tb___024root___nba_sequent__TOP__1(vlSelf);
         Vtop_tb_top_tb___nba_sequent__TOP__top_tb__3((&vlSymsp->TOP__top_tb));
-        Vtop_tb_cpu___ico_sequent__TOP__top_tb__dut__1((&vlSymsp->TOP__top_tb__dut));
+        Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__4((&vlSymsp->TOP__top_tb__dut));
+        Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__2((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb_cpu_execute___nba_sequent__TOP__top_tb__dut__cpu_execute__2((&vlSymsp->TOP__top_tb__dut__cpu_execute));
         Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch0_isa_spec__0((&vlSymsp->TOP__top_tb__monitor__DOT__monitor__DOT__ch0_isa_spec));
         Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch1_isa_spec__0((&vlSymsp->TOP__top_tb__monitor__DOT__monitor__DOT__ch1_isa_spec));
         Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch2_isa_spec__0((&vlSymsp->TOP__top_tb__monitor__DOT__monitor__DOT__ch2_isa_spec));
@@ -213,5 +257,10 @@ void Vtop_tb___024root___eval_nba(Vtop_tb___024root* vlSelf) {
         Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch6_isa_spec__0((&vlSymsp->TOP__top_tb__monitor__DOT__monitor__DOT__ch6_isa_spec));
         Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec___nba_sequent__TOP__top_tb__monitor__DOT__monitor__DOT__ch7_isa_spec__0((&vlSymsp->TOP__top_tb__monitor__DOT__monitor__DOT__ch7_isa_spec));
         Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__5((&vlSymsp->TOP__top_tb__dut));
+        Vtop_tb___024root___ico_sequent__TOP__2(vlSelf);
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__5((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_lsq___nba_sequent__TOP__top_tb__dut__cpu_execute__lsq__6((&vlSymsp->TOP__top_tb__dut__cpu_execute__lsq));
+        Vtop_tb_cpu_midcore___nba_sequent__TOP__top_tb__dut__cpu_midcore__3((&vlSymsp->TOP__top_tb__dut__cpu_midcore));
+        Vtop_tb_cpu___nba_sequent__TOP__top_tb__dut__6((&vlSymsp->TOP__top_tb__dut));
     }
 }

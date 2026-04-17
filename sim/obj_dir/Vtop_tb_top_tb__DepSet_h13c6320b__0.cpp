@@ -3031,16 +3031,16 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
         if (VL_UNLIKELY((0U != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0U]))) {
             VL_WRITEF("FAIL x0/arat    : arat[0] = p%0#  (expected p0)\n",
-                      6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk3__DOT__x0_ok = 0U;
         }
-        if (VL_UNLIKELY((0U != vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+        if (VL_UNLIKELY((0U != vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                          [0U]))) {
             VL_WRITEF("FAIL x0/prf     : prf[0] = 0x%08x  (expected 0)\n",
-                      32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                      32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                       [0U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
@@ -3050,321 +3050,385 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
             VL_WRITEF("PASS x0         : arat[0]=p0, prf[0]=0x00000000\n");
         }
         vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 1U;
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [0U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[0]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [1U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [1U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [1U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[1]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [1U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [2U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [2U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [2U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[2]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [2U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [3U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [3U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [3U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[3]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [3U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [4U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [4U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [4U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[4]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [4U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [5U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [5U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [5U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[5]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [5U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [6U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [6U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [6U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[6]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [6U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [7U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [7U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [7U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[7]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [7U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [8U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [8U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [8U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[8]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [8U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [9U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [9U] >> 5U)] >> (0x1fU 
+                                                 & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                 [9U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[9]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [9U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xaU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xaU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xaU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[10]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xaU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xbU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xbU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xbU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[11]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xbU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xcU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xcU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xcU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[12]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xcU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xdU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xdU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xdU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[13]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xdU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xeU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xeU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xeU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[14]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xeU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0xfU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0xfU] >> 5U)] >> (0x1fU 
+                                                   & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                                   [0xfU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[15]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0xfU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x10U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x10U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x10U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[16]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x10U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x11U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x11U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x11U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[17]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x11U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x12U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x12U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x12U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[18]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x12U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x13U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x13U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x13U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[19]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x13U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x14U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x14U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x14U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[20]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x14U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x15U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x15U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x15U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[21]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x15U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x16U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x16U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x16U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[22]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x16U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x17U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x17U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x17U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[23]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x17U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x18U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x18U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x18U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[24]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x18U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x19U]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x19U] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x19U]))))) {
             VL_WRITEF("FAIL double-alloc: srat[25]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x19U]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1aU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1aU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1aU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[26]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1aU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1bU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1bU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1bU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[27]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1bU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1cU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1cU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1cU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[28]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1cU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1dU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1dU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1dU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[29]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1dU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1eU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1eU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1eU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[30]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1eU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk4__DOT__alloc_ok = 0U;
         }
-        if (VL_UNLIKELY((1U & (IData)((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                                       >> vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                                       [0x1fU]))))) {
+        if (VL_UNLIKELY((1U & (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[
+                               (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1fU] >> 5U)] >> 
+                               (0x1fU & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                                [0x1fU]))))) {
             VL_WRITEF("FAIL double-alloc: srat[31]=p%0# is in free_list\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
                       [0x1fU]);
             vlSelf->__PVT__eoc_checker__DOT__err_cnt 
                 = ((IData)(1U) + vlSelf->__PVT__eoc_checker__DOT__err_cnt);
@@ -3374,8 +3438,10 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
             VL_WRITEF("PASS double-alloc: no srat entry appears in free_list\n");
         }
         vlSelf->__PVT__eoc_checker__DOT__unnamedblk6__DOT__overlap 
-            = (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-               & vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt);
+            = ((((QData)((IData)(vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[1U])) 
+                 << 0x20U) | (QData)((IData)(vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[0U]))) 
+               & (((QData)((IData)(vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[1U])) 
+                   << 0x20U) | (QData)((IData)(vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[0U]))));
         if ((0ULL != vlSelf->__PVT__eoc_checker__DOT__unnamedblk6__DOT__overlap)) {
             VL_WRITEF("FAIL free+busy  : overlap = 0x%016x  (registers both free and busy)\n",
                       64,vlSelf->__PVT__eoc_checker__DOT__unnamedblk6__DOT__overlap);
@@ -3390,8 +3456,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0U]))) {
             VL_WRITEF("  INFO srat[0]=p%0# != arat[0]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3399,8 +3465,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [1U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [1U]))) {
             VL_WRITEF("  INFO srat[1]=p%0# != arat[1]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [1U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [1U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [1U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3408,8 +3474,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [2U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [2U]))) {
             VL_WRITEF("  INFO srat[2]=p%0# != arat[2]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [2U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [2U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [2U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3417,8 +3483,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [3U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [3U]))) {
             VL_WRITEF("  INFO srat[3]=p%0# != arat[3]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [3U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [3U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [3U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3426,8 +3492,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [4U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [4U]))) {
             VL_WRITEF("  INFO srat[4]=p%0# != arat[4]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [4U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [4U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [4U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3435,8 +3501,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [5U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [5U]))) {
             VL_WRITEF("  INFO srat[5]=p%0# != arat[5]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [5U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [5U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [5U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3444,8 +3510,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [6U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [6U]))) {
             VL_WRITEF("  INFO srat[6]=p%0# != arat[6]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [6U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [6U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [6U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3453,8 +3519,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [7U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [7U]))) {
             VL_WRITEF("  INFO srat[7]=p%0# != arat[7]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [7U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [7U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [7U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3462,8 +3528,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [8U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [8U]))) {
             VL_WRITEF("  INFO srat[8]=p%0# != arat[8]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [8U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [8U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [8U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3471,8 +3537,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [9U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [9U]))) {
             VL_WRITEF("  INFO srat[9]=p%0# != arat[9]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [9U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [9U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [9U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3480,8 +3546,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xaU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xaU]))) {
             VL_WRITEF("  INFO srat[10]=p%0# != arat[10]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xaU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xaU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xaU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3489,8 +3555,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xbU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xbU]))) {
             VL_WRITEF("  INFO srat[11]=p%0# != arat[11]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xbU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xbU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xbU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3498,8 +3564,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xcU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xcU]))) {
             VL_WRITEF("  INFO srat[12]=p%0# != arat[12]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xcU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xcU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xcU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3507,8 +3573,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xdU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xdU]))) {
             VL_WRITEF("  INFO srat[13]=p%0# != arat[13]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xdU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xdU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xdU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3516,8 +3582,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xeU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xeU]))) {
             VL_WRITEF("  INFO srat[14]=p%0# != arat[14]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xeU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xeU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xeU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3525,8 +3591,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0xfU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0xfU]))) {
             VL_WRITEF("  INFO srat[15]=p%0# != arat[15]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0xfU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0xfU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0xfU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3534,8 +3600,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x10U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x10U]))) {
             VL_WRITEF("  INFO srat[16]=p%0# != arat[16]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x10U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x10U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x10U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3543,8 +3609,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x11U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x11U]))) {
             VL_WRITEF("  INFO srat[17]=p%0# != arat[17]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x11U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x11U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x11U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3552,8 +3618,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x12U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x12U]))) {
             VL_WRITEF("  INFO srat[18]=p%0# != arat[18]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x12U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x12U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x12U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3561,8 +3627,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x13U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x13U]))) {
             VL_WRITEF("  INFO srat[19]=p%0# != arat[19]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x13U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x13U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x13U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3570,8 +3636,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x14U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x14U]))) {
             VL_WRITEF("  INFO srat[20]=p%0# != arat[20]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x14U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x14U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x14U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3579,8 +3645,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x15U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x15U]))) {
             VL_WRITEF("  INFO srat[21]=p%0# != arat[21]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x15U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x15U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x15U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3588,8 +3654,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x16U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x16U]))) {
             VL_WRITEF("  INFO srat[22]=p%0# != arat[22]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x16U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x16U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x16U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3597,8 +3663,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x17U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x17U]))) {
             VL_WRITEF("  INFO srat[23]=p%0# != arat[23]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x17U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x17U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x17U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3606,8 +3672,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x18U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x18U]))) {
             VL_WRITEF("  INFO srat[24]=p%0# != arat[24]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x18U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x18U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x18U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3615,8 +3681,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x19U] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x19U]))) {
             VL_WRITEF("  INFO srat[25]=p%0# != arat[25]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x19U],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x19U],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x19U]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3624,8 +3690,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1aU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1aU]))) {
             VL_WRITEF("  INFO srat[26]=p%0# != arat[26]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1aU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1aU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1aU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3633,8 +3699,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1bU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1bU]))) {
             VL_WRITEF("  INFO srat[27]=p%0# != arat[27]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1bU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1bU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1bU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3642,8 +3708,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1cU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1cU]))) {
             VL_WRITEF("  INFO srat[28]=p%0# != arat[28]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1cU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1cU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1cU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3651,8 +3717,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1dU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1dU]))) {
             VL_WRITEF("  INFO srat[29]=p%0# != arat[29]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1dU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1dU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1dU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3660,8 +3726,8 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1eU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1eU]))) {
             VL_WRITEF("  INFO srat[30]=p%0# != arat[30]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1eU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1eU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1eU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
@@ -3669,117 +3735,128 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
                          [0x1fU] != vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                          [0x1fU]))) {
             VL_WRITEF("  INFO srat[31]=p%0# != arat[31]=p%0#  (in-flight rename)\n",
-                      6,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
-                      [0x1fU],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                      7,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__srat__DOT__srat
+                      [0x1fU],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                       [0x1fU]);
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained = 0U;
         }
-        if (VL_UNLIKELY((0ULL != vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt))) {
+        if (VL_UNLIKELY((0U != (((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[0U] 
+                                  | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[1U]) 
+                                 | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[2U]) 
+                                | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[3U])))) {
             VL_WRITEF("  INFO busy_table = 0x%016x  (in-flight writes)\n",
-                      64,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt);
+                      128,vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt.data());
         }
         if (VL_LIKELY(((IData)(vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__drained) 
-                       & (0ULL == vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt)))) {
+                       & (0U == (((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[0U] 
+                                   | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[1U]) 
+                                  | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[2U]) 
+                                 | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__busy_table__DOT__bt[3U]))))) {
             vlSelf->__PVT__eoc_checker__DOT__expected_free = 0xffffffffffffffffULL;
             vlSelf->__PVT__eoc_checker__DOT__unnamedblk7__DOT__unnamedblk9__DOT__i = 0x20U;
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [1U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [1U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [2U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [2U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [3U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [3U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [4U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [4U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [5U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [5U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [6U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [6U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [7U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [7U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [8U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [8U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [9U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [9U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xaU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xaU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xbU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xbU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xcU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xcU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xdU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xdU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xeU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xeU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0xfU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0xfU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x10U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x10U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x11U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x11U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x12U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x12U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x13U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x13U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x14U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x14U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x15U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x15U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x16U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x16U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x17U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x17U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x18U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x18U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x19U])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x19U]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1aU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1aU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1bU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1bU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1cU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1cU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1dU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1dU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1eU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1eU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
             vlSelf->__PVT__eoc_checker__DOT__expected_free 
-                = ((~ (1ULL << vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                       [0x1fU])) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
-            if ((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list 
-                 != vlSelf->__PVT__eoc_checker__DOT__expected_free)) {
+                = ((~ (1ULL << (0x3fU & vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                                [0x1fU]))) & vlSelf->__PVT__eoc_checker__DOT__expected_free);
+            if ((0U != ((((vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[0U] 
+                           ^ (IData)(vlSelf->__PVT__eoc_checker__DOT__expected_free)) 
+                          | (vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[1U] 
+                             ^ (IData)((vlSelf->__PVT__eoc_checker__DOT__expected_free 
+                                        >> 0x20U)))) 
+                         | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[2U]) 
+                        | vlSymsp->TOP__top_tb__dut__cpu_midcore.__PVT__free_list__DOT__free_list[3U]))) {
                 VL_WRITEF("  INFO free_list mismatch (unexpected \342\200\224 pipeline appeared drained)\n");
             } else {
                 vlSelf->__PVT__eoc_checker__DOT__free_cnt = 0U;
@@ -4110,169 +4187,169 @@ VL_INLINE_OPT void Vtop_tb_top_tb___nba_sequent__TOP__top_tb__0(Vtop_tb_top_tb* 
             VL_WRITEF("  INFO pipeline not fully drained at halt (normal for OOO)\n");
         }
         VL_WRITEF("\n\342\224\200\342\224\200 Arch register file (via ARAT\342\206\222PRF) \342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\342\224\200\n  x0   (p%-2#) = 0x%08x  (%0d)\n  x1   (p%-2#) = 0x%08x  (%0d)\n  x2   (p%-2#) = 0x%08x  (%0d)\n  x3   (p%-2#) = 0x%08x  (%0d)\n  x4   (p%-2#) = 0x%08x  (%0d)\n  x5   (p%-2#) = 0x%08x  (%0d)\n  x6   (p%-2#) = 0x%08x  (%0d)\n  x7   (p%-2#) = 0x%08x  (%0d)\n  x8   (p%-2#) = 0x%08x  (%0d)\n  x9   (p%-2#) = 0x%08x  (%0d)\n  x10  (p%-2#) = 0x%08x  (%0d)\n  x11  (p%-2#) = 0x%08x  (%0d)\n  x12  (p%-2#) = 0x%08x  (%0d)\n",
-                  6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [1U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [1U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [1U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [1U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [1U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [2U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [1U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [2U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [2U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [2U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [2U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [3U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [2U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [3U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [3U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [3U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [3U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [4U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [3U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [4U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [4U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [4U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [4U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [5U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [4U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [5U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [5U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [5U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [5U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [6U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [5U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [6U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [6U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [6U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [6U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [7U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [6U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [7U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [7U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [7U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [7U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [8U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [7U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [8U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [8U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [8U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [8U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [9U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [8U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [9U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [9U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [9U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [9U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xaU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [9U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xaU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xaU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xaU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xaU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xbU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xaU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xbU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xbU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xbU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xbU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xcU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xbU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xcU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xcU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xcU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                   [0xcU]]);
         VL_WRITEF("  x13  (p%-2#) = 0x%08x  (%0d)\n  x14  (p%-2#) = 0x%08x  (%0d)\n  x15  (p%-2#) = 0x%08x  (%0d)\n  x16  (p%-2#) = 0x%08x  (%0d)\n  x17  (p%-2#) = 0x%08x  (%0d)\n  x18  (p%-2#) = 0x%08x  (%0d)\n  x19  (p%-2#) = 0x%08x  (%0d)\n  x20  (p%-2#) = 0x%08x  (%0d)\n  x21  (p%-2#) = 0x%08x  (%0d)\n  x22  (p%-2#) = 0x%08x  (%0d)\n  x23  (p%-2#) = 0x%08x  (%0d)\n  x24  (p%-2#) = 0x%08x  (%0d)\n  x25  (p%-2#) = 0x%08x  (%0d)\n  x26  (p%-2#) = 0x%08x  (%0d)\n  x27  (p%-2#) = 0x%08x  (%0d)\n  x28  (p%-2#) = 0x%08x  (%0d)\n",
-                  6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xdU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xdU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xdU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xdU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xdU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xeU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xdU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xeU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xeU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xeU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xeU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xfU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xeU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0xfU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xfU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xfU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0xfU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x10U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0xfU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x10U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x10U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x10U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x10U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x11U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x10U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x11U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x11U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x11U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x11U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x12U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x11U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x12U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x12U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x12U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x12U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x13U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x12U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x13U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x13U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x13U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x13U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x14U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x13U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x14U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x14U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x14U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x14U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x15U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x14U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x15U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x15U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x15U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x15U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x16U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x15U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x16U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x16U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x16U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x16U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x17U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x16U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x17U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x17U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x17U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x17U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x18U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x17U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x18U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x18U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x18U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x18U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x19U],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x18U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x19U],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x19U]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x19U]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x19U]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1aU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x19U]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1aU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1aU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1aU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1aU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1bU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1aU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1bU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1bU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1bU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1bU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1cU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1bU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1cU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1cU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1cU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                   [0x1cU]]);
         VL_WRITEF("  x29  (p%-2#) = 0x%08x  (%0d)\n  x30  (p%-2#) = 0x%08x  (%0d)\n  x31  (p%-2#) = 0x%08x  (%0d)\n",
-                  6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1dU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1dU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1dU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1dU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1dU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1eU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1dU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1eU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1eU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1eU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1eU]],6,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1fU],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1eU]],7,vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
+                  [0x1fU],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
-                  [0x1fU]],32,vlSymsp->TOP__top_tb__dut.__PVT__cpu_execute__DOT__PRF__DOT__prf
+                  [0x1fU]],32,vlSymsp->TOP__top_tb__dut__cpu_execute.__PVT__PRF__DOT__prf
                   [vlSymsp->TOP__top_tb__dut.__PVT__cpu_commit__DOT__arat__DOT__arat
                   [0x1fU]]);
     }

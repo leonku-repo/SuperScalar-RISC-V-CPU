@@ -19,27 +19,31 @@ import rv32i_types::*;
     input   logic                       wb_jump,
     input   logic                       wb_cmp,
     input   logic                       wb_mul,
+    input   logic                       wb_fwd,
     input   logic       [PRF_IDX-1:0]   wb_alu_pr,
     input   logic       [PRF_IDX-1:0]   wb_load_pr,
     input   logic       [PRF_IDX-1:0]   wb_jump_pr,
     input   logic       [PRF_IDX-1:0]   wb_cmp_pr,
     input   logic       [PRF_IDX-1:0]   wb_mul_pr,
-    // update when execute-time mispredict: load ROB-derived rebuild vector
+    input   logic       [PRF_IDX-1:0]   wb_fwd_pr,
+    // rebuild on exec_mispredict or spec_load_mispredict: ROB bt_rebuild_o already
+    // accounts for both flush boundaries combinationally, so one input suffices.
     input   logic                   exec_mispredict,
+    input   logic                   spec_load_mispredict,
     input   logic   [PRF_SIZE-1:0]  bt_rebuild_i
 );
     logic   [PRF_SIZE-1:0]  bt, bt_next;
     logic   wb_update;
-    assign wb_update = wb_alu | wb_load | wb_jump | wb_cmp | wb_mul;
+    assign wb_update = wb_alu | wb_load | wb_jump | wb_cmp | wb_mul | wb_fwd;
 
-    always_ff @( posedge clk ) begin 
-        if(rst) 
+    always_ff @( posedge clk ) begin
+        if(rst)
             bt <= '0;
-        else if(exec_mispredict)
+        else if(exec_mispredict || spec_load_mispredict)
             bt <= bt_rebuild_i;
         else if(rename_update || wb_update)
             bt <= bt_next;
-        else    
+        else
             bt <= bt;
     end
 
@@ -51,6 +55,7 @@ import rv32i_types::*;
         if (wb_jump)       bt_next[wb_jump_pr]       = 1'b0;
         if (wb_cmp)        bt_next[wb_cmp_pr]        = 1'b0;
         if (wb_mul)        bt_next[wb_mul_pr]        = 1'b0;
+        if (wb_fwd)        bt_next[wb_fwd_pr]        = 1'b0;
     end
 
     // no bypass needed

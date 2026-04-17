@@ -22,11 +22,13 @@ import rv32i_types::*;
     input   logic                   wb_jump,
     input   logic                   wb_cmp,
     input   logic                   wb_mul,
+    input   logic                   wb_fwd,
     input   logic   [PRF_IDX-1:0]   wb_alu_pr,
     input   logic   [PRF_IDX-1:0]   wb_load_pr,
     input   logic   [PRF_IDX-1:0]   wb_jump_pr,
     input   logic   [PRF_IDX-1:0]   wb_cmp_pr,
     input   logic   [PRF_IDX-1:0]   wb_mul_pr,
+    input   logic   [PRF_IDX-1:0]   wb_fwd_pr,
     // update BT, freelist, SRAT shared signals
     output  logic                   rename_update,
     output  logic   [PRF_IDX-1:0]   rename_update_pr,
@@ -49,6 +51,7 @@ import rv32i_types::*;
                                             || (wb_jump && (MIDCORE_rename1_i.pr1 == wb_jump_pr))
                                             || (wb_cmp  && (MIDCORE_rename1_i.pr1 == wb_cmp_pr ))
                                             || (wb_mul  && (MIDCORE_rename1_i.pr1 == wb_mul_pr ))
+                                            || (wb_fwd  && (MIDCORE_rename1_i.pr1 == wb_fwd_pr ))
                                             )
         ) begin
             pr1_busy_tmp = 1'b0;
@@ -63,6 +66,7 @@ import rv32i_types::*;
                                             || (wb_jump && (MIDCORE_rename1_i.pr2 == wb_jump_pr))
                                             || (wb_cmp  && (MIDCORE_rename1_i.pr2 == wb_cmp_pr ))
                                             || (wb_mul  && (MIDCORE_rename1_i.pr2 == wb_mul_pr ))
+                                            || (wb_fwd  && (MIDCORE_rename1_i.pr2 == wb_fwd_pr ))
                                             )
         ) begin
             pr2_busy_tmp = 1'b0;

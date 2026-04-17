@@ -32,8 +32,21 @@ VM_CLASSES_FAST += \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__1 \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__2 \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__3 \
+	Vtop_tb_cpu__DepSet_h51eb2ee3__4 \
+	Vtop_tb_cpu__DepSet_hc4e33ac7__0 \
+	Vtop_tb_cpu_execute__DepSet_h46bcbcb2__0 \
+	Vtop_tb_cpu_execute__DepSet_h46bcbcb2__1 \
 	Vtop_tb_cpu_midcore__DepSet_h3ea54ecb__0 \
 	Vtop_tb_mon_itf__DepSet_h0df3ada0__0 \
+	Vtop_tb_lsq__DepSet_h77888fb2__0 \
+	Vtop_tb_lsq__DepSet_h77888fb2__1 \
+	Vtop_tb_lsq__DepSet_h77888fb2__2 \
+	Vtop_tb_lsq__DepSet_h77888fb2__3 \
+	Vtop_tb_lsq__DepSet_h77888fb2__4 \
+	Vtop_tb_lsq__DepSet_h77888fb2__5 \
+	Vtop_tb_lsq__DepSet_h77888fb2__6 \
+	Vtop_tb_lsq__DepSet_h77888fb2__7 \
+	Vtop_tb_lsq__DepSet_h77888fb2__8 \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__0 \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__1 \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_hdac61ac8__2 \
@@ -49,13 +62,18 @@ VM_CLASSES_SLOW += \
 	Vtop_tb_top_tb__DepSet_h82b6562f__0__Slow \
 	Vtop_tb_cpu__Slow \
 	Vtop_tb_cpu__DepSet_h51eb2ee3__0__Slow \
-	Vtop_tb_cpu__DepSet_h51eb2ee3__1__Slow \
 	Vtop_tb_cpu__DepSet_hc4e33ac7__0__Slow \
+	Vtop_tb_cpu_execute__Slow \
+	Vtop_tb_cpu_execute__DepSet_h46bcbcb2__0__Slow \
+	Vtop_tb_cpu_execute__DepSet_hae2bc878__0__Slow \
 	Vtop_tb_cpu_midcore__Slow \
 	Vtop_tb_cpu_midcore__DepSet_h3ea54ecb__0__Slow \
 	Vtop_tb_cpu_midcore__DepSet_ha6151aef__0__Slow \
 	Vtop_tb_mon_itf__Slow \
 	Vtop_tb_mon_itf__DepSet_h0df3ada0__0__Slow \
+	Vtop_tb_lsq__Slow \
+	Vtop_tb_lsq__DepSet_h77888fb2__0__Slow \
+	Vtop_tb_lsq__DepSet_hdeffd978__0__Slow \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__Slow \
 	Vtop_tb_riscv_formal_monitor_rv32imc_isa_spec__DepSet_h49b66ef2__0__Slow \
 
@@ -65,6 +83,9 @@ VM_SUPPORT_FAST += \
 	Vtop_tb__Trace__0 \
 	Vtop_tb__Trace__1 \
 	Vtop_tb__Trace__2 \
+	Vtop_tb__Trace__3 \
+	Vtop_tb__Trace__4 \
+	Vtop_tb__Trace__5 \
 
 # Generated support classes, non-fast-path, compile with low/medium optimization
 VM_SUPPORT_SLOW += \
@@ -74,6 +95,9 @@ VM_SUPPORT_SLOW += \
 	Vtop_tb__Trace__1__Slow \
 	Vtop_tb__Trace__2__Slow \
 	Vtop_tb__Trace__3__Slow \
+	Vtop_tb__Trace__4__Slow \
+	Vtop_tb__Trace__5__Slow \
+	Vtop_tb__Trace__6__Slow \
 
 # Global classes, need linked once per executable, fast-path, compile with highest optimization
 VM_GLOBAL_FAST += \

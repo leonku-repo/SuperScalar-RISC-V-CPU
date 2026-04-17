@@ -64,21 +64,27 @@ package rv32i_types;
     import regfilemux::*;
 
     // CPU configuration parameters (previously in cpu_config package)
-    localparam int unsigned FETCH_QUEUE_SIZE = 8;
-    localparam int unsigned PRF_SIZE         = 64;
-    localparam int unsigned ALU_RS_SIZE      = 4;
-    localparam int unsigned CMP_RS_SIZE      = 2;
+    localparam int unsigned ROB_SIZE         = 64;
+    localparam int unsigned FETCH_QUEUE_SIZE = 16;
+    localparam int unsigned PRF_SIZE         = 128;
+    localparam int unsigned ALU_RS_SIZE      = 8;
+    localparam int unsigned CMP_RS_SIZE      = 4;
     localparam int unsigned JUMP_RS_SIZE     = 2;
     localparam int unsigned MUL_RS_SIZE      = 4;
-    localparam int unsigned LS_QUEUE_SIZE    = 16;
+    localparam int unsigned LQ_SIZE          = 64;
+    localparam int unsigned SQ_SIZE          = 64;
+
 
     // DONT TOUCH
     localparam logic [31:0] RESET_PC        = 32'h60000000;
     localparam int unsigned PRF_IDX          = $clog2(PRF_SIZE);
-    localparam int unsigned ROB_SIZE         = 16;
     localparam int unsigned ROB_IDX          = $clog2(ROB_SIZE);
-    localparam int unsigned CP_SIZE          = CMP_RS_SIZE + JUMP_RS_SIZE; // 4 checkpoint slots
-    localparam int unsigned CP_IDX           = $clog2(CP_SIZE);            // 2 bits
+    localparam int unsigned CP_SIZE          = CMP_RS_SIZE + JUMP_RS_SIZE; // 6 checkpoint slots
+    localparam int unsigned CP_IDX           = $clog2(CP_SIZE);            // 3 bits
+    localparam int unsigned LC_SIZE          = LQ_SIZE;   // one load checkpoint per LQ slot
+    localparam int unsigned LQ_IDX           = $clog2(LQ_SIZE);
+    localparam int unsigned SQ_IDX           = $clog2(SQ_SIZE);
+    localparam int unsigned LC_IDX           = $clog2(LC_SIZE);
 
     typedef enum bit [6:0] {
         op_lui   = 7'b0110111, // load upper immediate (U type)
@@ -175,8 +181,70 @@ package rv32i_types;
         logic   [31:0]          target_pc;
         logic                   branch_actual_taken;
         // Checkpoint — written at dispatch, used for early recovery
-        logic   [CP_IDX-1:0]    checkpoint_id;  // which checkpoint slot owns this branch/jump
+        logic   [CP_IDX-1:0]    checkpoint_id;      // which branch checkpoint slot owns this branch/jump
+        // Load checkpoint — written at dispatch for loads only
+        logic   [LC_IDX-1:0]    spec_load_cp_id;    // which load checkpoint slot owns this load
     } rob_t;
+
+    // Load queue state — computed combinationally every cycle per LQ entry (load_state_next),
+    // then registered into lq_t.load_state each clock edge.
+    // Identify-error always uses load_state_next so same-cycle store addr_valid transitions
+    // are caught even if the load is completing (LS_EXECUTED) that same cycle.
+    typedef enum logic [2:0] {
+        LS_IDLE        = 3'd0,  // slot empty or addr not yet computed
+        LS_FORWARDING  = 3'd1,  // youngest older store: addr match + wmask covers rmask + data_ready → bypass mem port
+        LS_SAFE        = 3'd2,  // all older store addrs resolved, none match → go to dmem without risk
+        LS_SPECULATIVE = 3'd3,  // ≥1 older store addr unresolved → proceed, identify-error will catch conflicts
+        LS_STALL       = 3'd4,  // older store addr matches but data not ready OR mask mismatch → wait
+        LS_EXECUTED    = 3'd5   // load has written its value to PRF; stays here until commit or spec mispredict
+    } load_state_t;
+
+    // Load queue entry.
+    // load_state is the registered value (last cycle's decision).
+    // load_state_next is a wire array computed outside this struct each cycle.
+    // Embedded rob_t carries the full ROB snapshot so mem.sv can update the ROB entry
+    // (rd_wdata, mem_addr, mem_rdata, etc.) the same way the old loadstore_queue did.
+    typedef struct packed {
+        logic                   valid;
+        load_state_t            load_state;         // registered; combinational next-state is load_state_next[]
+        logic                   was_forwarded;      // set when load completed via SQ forwarding; used to attribute spec_load_mispredict source
+        // address computation — fields filled as wb signals arrive
+        logic   [PRF_IDX-1:0]   pr1;               // base-address physical register
+        logic                   pr1_ready;
+        logic   [31:0]          pr1_val;            // captured from wb bus when pr1 wb fires
+        logic   [31:0]          imm;                // sign-extended byte offset
+        logic   [31:0]          addr;               // pr1_val + imm, valid when addr_valid=1
+        logic                   addr_valid;
+        logic   [3:0]           rmask;              // read byte mask from funct3 + addr[1:0]
+        logic   [2:0]           funct3;             // lb/lh/lw/lbu/lhu — needed for data formatting on writeback
+        // ROB snapshot — carried for writeback and RVFI
+        rob_t                   rob_data;
+    } lq_t;
+
+    // Store queue entry.
+    // Embedded rob_t for the same reason as lq_t.
+    typedef struct packed {
+        logic                   valid;
+        logic                   committed;          // set when this store commits from ROB; cleared on dmem_resp
+        logic                   rob_wb_sent;        // one-cycle pulse gate: set when store_wb_valid fires; cleared on slot reuse
+        logic                   addr_valid;
+        logic                   data_ready;         // pr2_val captured and wdata formatted
+        // address computation
+        logic   [PRF_IDX-1:0]   pr1;               // base-address physical register
+        logic                   pr1_ready;
+        logic   [31:0]          pr1_val;
+        logic   [31:0]          imm;
+        logic   [31:0]          addr;
+        logic   [3:0]           wmask;              // write byte mask from funct3 + addr[1:0]
+        // store data
+        logic   [PRF_IDX-1:0]   pr2;               // store-data physical register
+        logic                   pr2_ready;
+        logic   [31:0]          pr2_val;
+        logic   [2:0]           funct3;             // sb/sh/sw — needed for wdata byte-lane formatting
+        logic   [31:0]          wdata;              // formatted store data, valid when data_ready=1
+        // ROB snapshot
+        rob_t                   rob_data;
+    } sq_t;
 
     typedef struct packed {
         logic   [31:0]          imm_o;

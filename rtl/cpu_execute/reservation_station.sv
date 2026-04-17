@@ -13,6 +13,9 @@ import rv32i_types::*;
     input   logic                       exec_mispredict,
     input   logic   [ROB_IDX-1:0]       exec_mispredict_rob_idx,
     input   logic   [ROB_IDX-1:0]       rdPtr,
+    // Spec-load mispredict: partial invalidation
+    input   logic                       spec_load_mispredict,
+    input   logic   [ROB_IDX-1:0]       spec_load_rob_idx,
     input   rob_t                       ROB_data_i,
     input   midcore_t                   MIDCORE_data_i,
     // from wb
@@ -21,11 +24,13 @@ import rv32i_types::*;
     input   logic                       wb_jump,
     input   logic                       wb_cmp,
     input   logic                       wb_mul,
+    input   logic                       wb_fwd,
     input   logic       [PRF_IDX-1:0]   wb_alu_pr,
     input   logic       [PRF_IDX-1:0]   wb_load_pr,
     input   logic       [PRF_IDX-1:0]   wb_jump_pr,
     input   logic       [PRF_IDX-1:0]   wb_cmp_pr,
     input   logic       [PRF_IDX-1:0]   wb_mul_pr,
+    input   logic       [PRF_IDX-1:0]   wb_fwd_pr,
     // output
     output  rob_t                       ROB_data_o,
     output  midcore_t                   MIDCORE_data_o,
@@ -88,16 +93,16 @@ import rv32i_types::*;
     // set **_next
     always_comb begin
         valid_next = valid;
-        if (!full_o  && wr_en && wr_idx_valid) valid_next[wr_idx] = 1'b1;
+        if (!full_o  && wr_en && wr_idx_valid && !exec_mispredict && !spec_load_mispredict) valid_next[wr_idx] = 1'b1;
         if (!empty_o && rd_en && rd_idx_valid) valid_next[rd_idx] = 1'b0;
     end
     always_comb begin
         rob_rs_next = rob_rs;
-        if (!full_o && wr_en && wr_idx_valid) rob_rs_next[wr_idx] = ROB_data_i;
+        if (!full_o && wr_en && wr_idx_valid && !exec_mispredict && !spec_load_mispredict) rob_rs_next[wr_idx] = ROB_data_i;
     end
     always_comb begin
         midcore_rs_next = midcore_rs;
-        if (!full_o && wr_en && wr_idx_valid) midcore_rs_next[wr_idx] = MIDCORE_data_i;
+        if (!full_o && wr_en && wr_idx_valid && !exec_mispredict && !spec_load_mispredict) midcore_rs_next[wr_idx] = MIDCORE_data_i;
     end
     // pr1 next
     always_comb begin
@@ -108,18 +113,20 @@ import rv32i_types::*;
                             || (wb_jump && (midcore_rs[i].pr1 == wb_jump_pr))
                             || (wb_cmp  && (midcore_rs[i].pr1 == wb_cmp_pr ))
                             || (wb_mul  && (midcore_rs[i].pr1 == wb_mul_pr ))
+                            || (wb_fwd  && (midcore_rs[i].pr1 == wb_fwd_pr ))
                         )
             ) begin : pr1_wb_match
                 pr1_ready_next[i] = 1'b1;
             end : pr1_wb_match
         end : pr1_wb_loop
-        if (!full_o && wr_en && wr_idx_valid) begin : pr1_dispatch
+        if (!full_o && wr_en && wr_idx_valid && !exec_mispredict && !spec_load_mispredict) begin : pr1_dispatch
             pr1_ready_next[wr_idx] = !MIDCORE_data_i.pr1_busy;
             if(MIDCORE_data_i.pr1_valid && ((wb_alu  && (MIDCORE_data_i.pr1 == wb_alu_pr ))
                                             || (wb_load && (MIDCORE_data_i.pr1 == wb_load_pr))
                                             || (wb_jump && (MIDCORE_data_i.pr1 == wb_jump_pr))
                                             || (wb_cmp  && (MIDCORE_data_i.pr1 == wb_cmp_pr ))
                                             || (wb_mul  && (MIDCORE_data_i.pr1 == wb_mul_pr ))
+                                            || (wb_fwd  && (MIDCORE_data_i.pr1 == wb_fwd_pr ))
                                             )
             ) begin : pr1_dispatch_bypass
                 pr1_ready_next[wr_idx] = 1'b1;
@@ -135,6 +142,7 @@ import rv32i_types::*;
                             || (wb_jump && (midcore_rs[i].pr2 == wb_jump_pr))
                             || (wb_cmp  && (midcore_rs[i].pr2 == wb_cmp_pr ))
                             || (wb_mul  && (midcore_rs[i].pr2 == wb_mul_pr ))
+                            || (wb_fwd  && (midcore_rs[i].pr2 == wb_fwd_pr ))
                         )
             ) begin : pr2_wb_match
                 pr2_ready_next[i] = 1'b1;
@@ -147,6 +155,7 @@ import rv32i_types::*;
                                             || (wb_jump && (MIDCORE_data_i.pr2 == wb_jump_pr))
                                             || (wb_cmp  && (MIDCORE_data_i.pr2 == wb_cmp_pr ))
                                             || (wb_mul  && (MIDCORE_data_i.pr2 == wb_mul_pr ))
+                                            || (wb_fwd  && (MIDCORE_data_i.pr2 == wb_fwd_pr ))
                                             )
             ) begin : pr2_dispatch_bypass
                 pr2_ready_next[wr_idx] = 1'b1;
@@ -165,13 +174,13 @@ import rv32i_types::*;
             end
         end else begin
             // Normal dispatch / issue / wakeup updates
-            if ((!empty_o && rd_en) || (!full_o && wr_en && !exec_mispredict)) begin
+            if ((!empty_o && rd_en) || (!full_o && wr_en && !exec_mispredict && !spec_load_mispredict)) begin
                 valid      <= valid_next;
                 rob_rs     <= rob_rs_next;
                 midcore_rs <= midcore_rs_next;
                 pr1_ready  <= pr1_ready_next;
                 pr2_ready  <= pr2_ready_next;
-            end else if (wb_alu || wb_load || wb_jump || wb_cmp || wb_mul) begin
+            end else if (wb_alu || wb_load || wb_jump || wb_cmp || wb_mul || wb_fwd) begin
                 pr1_ready <= pr1_ready_next;
                 pr2_ready <= pr2_ready_next;
             end
@@ -179,12 +188,22 @@ import rv32i_types::*;
             // Partial invalidation: clear entries younger than exec_mispredict_rob_idx.
             // Placed after normal update so it takes priority (last assignment wins).
             if (exec_mispredict) begin
-                for (int i = 0; i < RS_SIZE; i++) begin : partial_flush
+                for (int i = 0; i < RS_SIZE; i++) begin : partial_flush_exec
                     if (valid[i] &&
                         ROB_IDX'(rob_rs[i].rob_entry - rdPtr) >
                         ROB_IDX'(exec_mispredict_rob_idx - rdPtr))
                         valid[i] <= 1'b0;
-                end : partial_flush
+                end : partial_flush_exec
+            end
+
+            // Spec-load mispredict: clear entries younger than spec_load_rob_idx.
+            if (spec_load_mispredict) begin
+                for (int i = 0; i < RS_SIZE; i++) begin : partial_flush_spec
+                    if (valid[i] &&
+                        ROB_IDX'(rob_rs[i].rob_entry - rdPtr) >
+                        ROB_IDX'(spec_load_rob_idx - rdPtr))
+                        valid[i] <= 1'b0;
+                end : partial_flush_spec
             end
         end
     end

@@ -1,1 +1,0 @@
-lsq 66 exec_new_wrPtr = rdPtr; exec_new_wrPtr = rdPtr_next;

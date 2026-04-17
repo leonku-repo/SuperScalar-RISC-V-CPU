@@ -15,6 +15,13 @@ import rv32i_types::*;
     // Execute-time recovery (PC redirect + pipeline flush)
     input   logic           exec_mispredict,
     input   logic   [31:0]  exec_recover_pc,
+    input   logic   [ROB_IDX-1:0]  exec_mispredict_rob_idx,
+    // Spec-load mispredict recovery
+    input   logic           spec_load_mispredict,
+    input   logic   [31:0]  spec_load_recover_pc,
+    input   logic   [ROB_IDX-1:0]  spec_load_rob_idx,
+    // ROB rdPtr for age comparison
+    input   logic   [ROB_IDX-1:0]  rdPtr_i,
     // Commit-time TAGE/BTB training
     input   logic           commit_mispredict,        // ROB-head mispredict flag; for TAGE pred derivation + flush
     input   logic   [31:0]  commit_target_pc,         // actual target of committing branch; for BTB update_target
@@ -32,6 +39,8 @@ import rv32i_types::*;
     output  logic   [31:0]  inst_o
 );
     logic           fetchq_full;
+    logic           flush_combined;
+    logic   [31:0]  recover_pc_combined;
     logic   [31:0]  branch_target;
     logic           branch_taken;
     logic           branch_valid;
@@ -40,6 +49,19 @@ import rv32i_types::*;
     logic   [31:0]  pc_next_i;
     logic           branch_taken_i;
     logic           valid_fetch;
+
+    assign flush_combined = exec_mispredict || spec_load_mispredict;
+
+    always_comb begin
+        recover_pc_combined = exec_recover_pc;
+        if (exec_mispredict && spec_load_mispredict) begin
+            if (ROB_IDX'(exec_mispredict_rob_idx - rdPtr_i) <= ROB_IDX'(spec_load_rob_idx - rdPtr_i))
+                recover_pc_combined = exec_recover_pc;
+            else
+                recover_pc_combined = spec_load_recover_pc;
+        end else if (spec_load_mispredict)
+            recover_pc_combined = spec_load_recover_pc;
+    end
 
     branch_predict branch_predict(
         .pc_i(pc_i),
@@ -57,8 +79,8 @@ import rv32i_types::*;
 
     fetch fetch (
         // from frontend control signal
-        .recover_pc(exec_recover_pc),
-        .flush(exec_mispredict),
+        .recover_pc(recover_pc_combined),
+        .flush(flush_combined),
         .freeze(fetchq_full),
         // from branch prdictor
         .branch_target(branch_target),
@@ -76,7 +98,7 @@ import rv32i_types::*;
     fetch_queue fetch_queue(
         .wr_en(valid_fetch),
         .rd_en(decode_request),
-        .flush(exec_mispredict),
+        .flush(flush_combined),
         .branch_taken_i(branch_taken_i),
         .pc_i(pc_i),
         .pc_next_i(pc_next_i),

@@ -14,7 +14,13 @@ import rv32i_types::*;
     input   logic   [PRF_IDX-1:0]   commit_update_pr,
     // update when execute-time mispredict: free wrong-path allocated PRs
     input   logic                   exec_mispredict,
-    input   logic   [PRF_SIZE-1:0]  recover_alloc_list
+    input   logic   [ROB_IDX-1:0]   exec_mispredict_rob_idx,
+    input   logic   [PRF_SIZE-1:0]  recover_alloc_list,
+    // update when spec-load mispredict: free wrong-path allocated PRs
+    input   logic                   spec_load_mispredict,
+    input   logic   [ROB_IDX-1:0]   spec_load_rob_idx,
+    input   logic   [PRF_SIZE-1:0]  spec_load_recover_alloc_list,
+    input   logic   [ROB_IDX-1:0]   rdPtr
 );
     // free bit vector
     logic   [PRF_SIZE-1:0]  free_list, free_list_next;
@@ -22,10 +28,18 @@ import rv32i_types::*;
     always_ff @( posedge clk ) begin
         if(rst)
             free_list <= {{(PRF_SIZE-32){1'b1}}, 32'b0};
+        else if(exec_mispredict && spec_load_mispredict)
+            // Both fire: pick the older recovery point's alloc_list (superset of the younger's).
+            free_list <= free_list
+                       | ((ROB_IDX'(exec_mispredict_rob_idx - rdPtr) <= ROB_IDX'(spec_load_rob_idx - rdPtr))
+                          ? recover_alloc_list : spec_load_recover_alloc_list)
+                       | (commit_update ? (PRF_SIZE'(1) << commit_update_pr) : '0);
         else if(exec_mispredict)
             // OR in alloc_list to free every PR stolen by the wrong-path renames.
             // Current free_list already reflects valid commits, so no snapshot needed.
             free_list <= free_list | recover_alloc_list | (commit_update ? (PRF_SIZE'(1) << commit_update_pr) : '0);
+        else if(spec_load_mispredict)
+            free_list <= free_list | spec_load_recover_alloc_list | (commit_update ? (PRF_SIZE'(1) << commit_update_pr) : '0);
         else if(rename_update || commit_update)
             free_list <= free_list_next;
         else
